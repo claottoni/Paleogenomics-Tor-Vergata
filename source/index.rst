@@ -4,11 +4,11 @@
    contain the root `toctree` directive.
 
 
-#############
-Paleogenomics
-#############
+############################
+Paleogenomics at Tor Vergata
+############################
 
-Welcome to the 3rd edition of the "Physalia Paleogenomics" course, online version 16-20 November 2020.
+Tutorial of bioinformatics at the Laboratory of Molecular Anthropology, University of Rome Tor Vergata.  
 
 ********
 Contents
@@ -19,13 +19,14 @@ Contents
    :numbered:
    
    1_ListTools
-   2_ReadsFiltering
-   3_Metagenomics_v2
-   4_ReadsMapping_v2
-   7_VariantsCall
-   8_Filtering_SNPs
-   9_DIY
-   10_old_material
+   2_Useful_commands
+   3_ReadsFiltering
+   4_Metagenomics_v2
+   5_ReadsMapping_v2
+   6_VariantsCall
+   7_Filtering_SNPs
+   8_DIY
+   9_old_material
 
    
 **Course overview**

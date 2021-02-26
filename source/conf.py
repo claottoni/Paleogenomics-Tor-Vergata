@@ -19,8 +19,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Physalia Paleogenomics'
-copyright = '2020, Amine Namouchi & Claudio Ottoni'
+project = 'Paleogenomics at Tor Vergata'
+copyright = '2020, Claudio Ottoni & Amine Namouchi, Physalia Paleogenomics'
 author = 'Claudio Ottoni'
 
 # The short X.Y version

@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Useful commands &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Quality filtering of reads" href="3_ReadsFiltering.html" />
+    <link rel="prev" title="1. List of Tools" href="1_ListTools.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Paleogenomics at Tor Vergata
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Useful commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-fastq-sequencing-data-from-the-sra">2.1. Download FASTQ sequencing data from the SRA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-referece-sequences-from-the-ncbi">2.2. Download referece sequences from the NCBI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">3. Quality filtering of reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">4. Metagenomic screening of shotgun data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">5. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">6. Variant calling and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">7. Filtering, annotating and combining SNPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_DIY.html">8. DO-IT-YOURSELF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">9. Material from previous courses</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Paleogenomics at Tor Vergata</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>Useful commands</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/2_Useful_commands.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="useful-commands">
+<h1><span class="section-number">2. </span>Useful commands<a class="headerlink" href="#useful-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="download-fastq-sequencing-data-from-the-sra">
+<h2><span class="section-number">2.1. </span>Download FASTQ sequencing data from the SRA<a class="headerlink" href="#download-fastq-sequencing-data-from-the-sra" title="Permalink to this headline">¶</a></h2>
+<p>To download <code class="docutils literal notranslate"><span class="pre">fastq</span></code> sequences deposited in the Sequence Read Archive (SRA) of the NCBI we wil use <strong>SRA Tools</strong>. You can install <a class="reference external" href="https://anaconda.org/bioconda/sra-tools">SRA Tools with Conda</a>.</p>
+<p>Go to the <a class="reference external" href="https://www.ncbi.nlm.nih.gov/sra">SRA</a> website and search the accession number of the study you interested in (e.g. PRJEB30331).
+A list of all the sequences deposited under that accession number is returned, click on <strong>Send results to run selector</strong>.
+In the Run Selector all the details associated with the sequencing data are reported and you can select single samples/sequences by ticking the box next to each one.
+If you select any samples, remember to tick also the <strong>Selected</strong> button. Then click on the tab <strong>Metadata</strong></p>
+<img alt="_images/RunSelector.png" src="_images/RunSelector.png" />
+<p>A file <code class="docutils literal notranslate"><span class="pre">SRR_Acc_List.txt</span></code> is downloaded containing the list of samples that you selected (the Run accession number), or the full list if you did not select any samples.
+The <code class="docutils literal notranslate"><span class="pre">sra</span></code> filea are  downloaded in a folder created by SRA Tools which normally has the following path: <strong>~/ncbi/public/sra</strong>.
+To download the sequences type the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">SRR_Acc_List</span><span class="o">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">xargs</span> <span class="o">-</span><span class="n">I</span><span class="p">{}</span> <span class="n">prefetch</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p>To extract the <code class="docutils literal notranslate"><span class="pre">fastq</span></code> sequences from the <code class="docutils literal notranslate"><span class="pre">sra</span></code> file use <strong>fastq-dump</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fastq</span><span class="o">-</span><span class="n">dump</span> <span class="o">--</span><span class="n">split</span><span class="o">-</span><span class="n">files</span> <span class="o">--</span><span class="n">gzip</span> <span class="o">*.</span><span class="n">sra</span>
+</pre></div>
+</div>
+<p>Validate the integrity of the <code class="docutils literal notranslate"><span class="pre">sra</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vdb</span><span class="o">-</span><span class="n">validate</span> <span class="n">SRR061294</span><span class="o">.</span><span class="n">sra</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-referece-sequences-from-the-ncbi">
+<h2><span class="section-number">2.2. </span>Download referece sequences from the NCBI<a class="headerlink" href="#download-referece-sequences-from-the-ncbi" title="Permalink to this headline">¶</a></h2>
+<p>Download the <code class="docutils literal notranslate"><span class="pre">assembly_summary.txt</span></code> file from the RefSeq database for the taxonomic group of interest. You can download assemblies of different groups:</p>
+<p><a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/assembly_summary.txt">ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/assembly_summary.txt</a>
+<a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/assembly_summary.txt">ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/assembly_summary.txt</a>
+<a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/plant/assembly_summary.txt">ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/plant/assembly_summary.txt</a>
+<a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/protozoa/assembly_summary.txt">ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/protozoa/assembly_summary.txt</a>
+<a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/fungi/assembly_summary.txt">ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/fungi/assembly_summary.txt</a>
+<a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/Yersinia_pestis/assembly_summary.txt">ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/Yersinia_pestis/assembly_summary.txt</a></p>
+<p>Keep in mind that the RefSeq content includes assembled genome sequence and annotation data. All RefSeq genomes have annotation. Subdirectories include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>archaea</p></li>
+<li><p>bacteria</p></li>
+<li><p>fungi</p></li>
+<li><p>invertebrate</p></li>
+<li><p>plant</p></li>
+<li><p>protozoa</p></li>
+<li><p>vertebrate_mammalian</p></li>
+<li><p>vertebrate_other</p></li>
+<li><p>viral</p></li>
+<li><p>mitochondrion [Content is from the RefSeq release FTP site.]</p></li>
+<li><p>plasmid [Content is from the RefSeq release FTP site.]</p></li>
+<li><p>plastid [Content is from the RefSeq release FTP site.]</p></li>
+</ul>
+</div></blockquote>
+<p>Once downloaded, we will used this file to retrieve the ftp address that contains the folder with the genome of the species we are looking for, plus many other files.
+You can open the assembly_summary file in a text editor and search the assemblies available the species of interest.
+Otherwise you can  explore the complete genomes and the latest assemblies for a peculiar species by piping <code class="docutils literal notranslate"><span class="pre">grep</span></code> and <code class="docutils literal notranslate"><span class="pre">awk</span></code>. <strong>AWK</strong> is a scripting language for advanced text elaboration. You can find more infos in here (<a class="reference external" href="https://riptutorial.com/awk">italian</a>, <a class="reference external" href="https://noviello.it/come-usare-il-comando-awk-per-elaborare-un-testo-su-linux/">english</a>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span> <span class="s2">&quot;Yersinia pestis&quot;</span> <span class="n">assembly_summary</span><span class="o">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">awk</span> <span class="o">-</span><span class="n">F</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="s1">&#39;$12==&quot;Complete Genome&quot; &amp;&amp; $11==&quot;latest&quot;{print $0}&#39;</span>
+</pre></div>
+</div>
+<p>If too many results are returned you can pipe <code class="docutils literal notranslate"><span class="pre">less</span></code>, and use the option -S to view the lines as unwrapped (they will be truncated if longer than the screen width):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span> <span class="s2">&quot;Yersinia pestis&quot;</span> <span class="n">assembly_summary</span><span class="o">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">awk</span> <span class="o">-</span><span class="n">F</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="s1">&#39;$12==&quot;Complete Genome&quot; &amp;&amp; $11==&quot;latest&quot;{print $0}&#39;</span> <span class="o">|</span> <span class="n">less</span>
+<span class="n">grep</span> <span class="s2">&quot;Yersinia pestis&quot;</span> <span class="n">assembly_summary</span><span class="o">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">awk</span> <span class="o">-</span><span class="n">F</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="s1">&#39;$12==&quot;Complete Genome&quot; &amp;&amp; $11==&quot;latest&quot;{print $0}&#39;</span> <span class="o">|</span> <span class="n">less</span> <span class="o">-</span><span class="n">S</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The print sintax in <code class="docutils literal notranslate"><span class="pre">awk</span></code> determines which column of the text file is displayed based on the column separator, which in turn is defined by the option <code class="docutils literal notranslate"><span class="pre">-F</span></code> (<code class="docutils literal notranslate"><span class="pre">&quot;\t&quot;</span></code> stands for tab-delimited text). To display all the columns use $0, otherwise select the columns based on the order ($1,$2 to display the first two columns).</p>
+</div>
+<p>You can display only the columns corresponding to the ftp directory ($20), the organism name ($8) and the strain ($9), and copy the ftp path to the species directory of interest (this will be used in the <code class="docutils literal notranslate"><span class="pre">rsync</span></code> command below).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span> <span class="s2">&quot;Yersinia pestis&quot;</span> <span class="n">assembly_summary</span><span class="o">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">awk</span> <span class="o">-</span><span class="n">F</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="s1">&#39;$12==&quot;Complete Genome&quot; &amp;&amp; $11==&quot;latest&quot;{print $8,$9,$20}&#39;</span> <span class="o">|</span> <span class="n">less</span>
+</pre></div>
+</div>
+<p>If you want, you can also redirect the output to a file (called here <code class="docutils literal notranslate"><span class="pre">ftpdirpaths.txt</span></code>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span> <span class="s2">&quot;Yersinia pestis&quot;</span> <span class="n">assembly_summary</span><span class="o">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">awk</span> <span class="o">-</span><span class="n">F</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="s1">&#39;$12==&quot;Complete Genome&quot; &amp;&amp; $11==&quot;latest&quot;{print $8,$9,$20}&#39;</span> <span class="o">|</span> <span class="n">ftpdirpaths</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>In this example, the ftp path of the species of interest looks like this:
+<strong>ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/717/545/GCF_001717545.1_ASM171754v1</strong></p>
+<p>To download the ftp directory containing the reference sequence, we will use <a class="reference external" href="https://linux.die.net/man/1/rsync">rsync</a>, a versatile file copying tool that can copy locally, to/from another host over any remote shell. Paste the ftp path to the following command to download the sequence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rsync</span> <span class="o">--</span><span class="n">copy</span><span class="o">-</span><span class="n">links</span> <span class="o">--</span><span class="n">recursive</span> <span class="o">--</span><span class="n">times</span> <span class="o">--</span><span class="n">verbose</span> <span class="n">rsync</span><span class="p">:</span><span class="o">//</span><span class="n">ftp</span><span class="o">.</span><span class="n">ncbi</span><span class="o">.</span><span class="n">nlm</span><span class="o">.</span><span class="n">nih</span><span class="o">.</span><span class="n">gov</span><span class="o">/</span><span class="n">genomes</span><span class="o">/</span><span class="nb">all</span><span class="o">/</span><span class="n">GCF</span><span class="o">/</span><span class="mi">001</span><span class="o">/</span><span class="mi">717</span><span class="o">/</span><span class="mi">545</span><span class="o">/</span><span class="n">GCF_001717545</span><span class="o">.</span><span class="mi">1</span><span class="n">_ASM171754v1</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>Inside the folder, the reference sequence that you will use for the alignment of your reads has the suffix <code class="docutils literal notranslate"><span class="pre">_genomic.fna.gz</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="3_ReadsFiltering.html" class="btn btn-neutral float-right" title="3. Quality filtering of reads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="1_ListTools.html" class="btn btn-neutral float-left" title="1. List of Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Claudio Ottoni &amp; Amine Namouchi, Physalia Paleogenomics
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

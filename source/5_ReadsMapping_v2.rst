@@ -156,15 +156,36 @@ Once added the Read Group tags, we index again the bam file:
 
 Marking and removing duplicates
 *******************************
-Amplification through PCR of genomic libraries leads to duplication formation, hence reads originating from a single fragment of DNA. The ``MarkDuplicates`` tool of Picard marks the reads as duplicates when the 5'-end positions of both reads and read-pairs match. A metric file with various statistics is created, and reads are removed from the bam file by using the ``REMOVE_DUPLICATES=True`` option (the default option is ``False``, which simply 'marks' duplicate reads keep them in the ``bam`` file).
+Amplification through PCR of genomic libraries leads to duplication formation (reads originating from a single fragment of DNA). 
+To remove duplicates we will use DeDup, which is specifically designed for ultra-short DNA (e.g. ancient DNA) paired-end and merged sequence data. 
+The issue with ultra-short DNA is that during the typical sequencing chemistry cycles the entire molecule will be sequenced and therefore we will find both ends.
+Compared to typical deduplication tools, that only look for reads with the same starting position at the 5' end of a read, DeDup will remove 'true' duplicates using BOTH (5' and 3') ends of the reads. This can help increase coverage in low-preservation samples such used in ancient DNA by being more exact as to what are duplicates or not.
+DeDup generates a ``bam`` file with the suffix ``_rmdup.bam``
+::
+
+  dedup -i filename.RG.bam -o folder_name -m -u
+
+=================================== ========
+Option                              Function
+=================================== ========
+**-h**                  			Shows the help page
+**-i** *string*                		Select your input, otherwise you may use pipes to pipe in your data
+**-m**             					The input only contains merged reads - don't care about missing prefixes for merged/reverse/forward reads
+**-o** *string*           			output folder
+**-u**								Do not automatically sort the output
+=================================== ========
+
+
+Alternatively, you can use the ``MarkDuplicates`` tool of Picard, which marks the reads as duplicates when the 5'-end positions of both reads and read-pairs match. A metric file with various statistics is created, and reads are removed from the bam file by using the ``REMOVE_DUPLICATES=True`` option (the default option is ``False``, which simply 'marks' duplicate reads keep them in the ``bam`` file).
 :: 
 
   picard MarkDuplicates I= filename.RG.bam O= filename.DR.bam M=output_metrics.txt REMOVE_DUPLICATES=True VALIDATION_STRINGENCY=LENIENT &> logFile.log
 
-Once removed the duplicates, we index again the bam file:
+Once removed the duplicates with DeDup, we index again the bam file:
 ::
 
-  samtools index filename.DR.bam
+  samtools index filename.RG_rmdup.bam
+
 
 
 Local realignment of reads

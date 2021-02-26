@@ -58,7 +58,7 @@ To run the normalization type the command:
 R session
 *********
 
-Now can download the normalized table in your local machine (e.g. with ´´scp´´) and open R. 
+Now can download the normalized table in your local machine (e.g. with ``scp``) and open R. 
 
 .. highlight:: r
 
@@ -127,7 +127,7 @@ The following commands are used to merge the two tables, the dental calculus dat
 UPGMA
 =====
 
-Once generated the final including both datasets (dental calculus and other microbiomes), we run an UPGMA cluster analysis. We must first install the ``vegan`` and `ape`` package in R.
+Once generated the final including both datasets (dental calculus and other microbiomes), we run an UPGMA cluster analysis. We must first install the ``vegan`` and ``ape`` package in R.
 ::
 
   install.packages("vegan")
