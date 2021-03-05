@@ -87,7 +87,7 @@ Option           Function
 Once obtained the ``sai`` file, we align the reads (``fastq`` file) to the reference (``fasta`` file) using ``BWA samse``, to generate the alignment file ``sam``.
 ::
 
-  bwa samse reference.fasta filename.sai filename.fastq.gz -f filename.sam
+  bwa samse reference.fasta filename.sai filename.fastq.gz > filename.sam
 
 
 Converting sam file to bam file
