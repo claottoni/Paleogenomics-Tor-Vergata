@@ -320,6 +320,10 @@ Here, in order to obtain an optimal coverage for the subsequent variant call, we
 <li><p>Read Groups may be also added during the alignment with <code class="docutils literal notranslate"><span class="pre">BWA</span></code> using the option <code class="docutils literal notranslate"><span class="pre">-R</span></code>.</p></li>
 </ul>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the analysis is stopped due to a “Java Runtime Environment” try to add to the command the options <code class="docutils literal notranslate"><span class="pre">USE_JDK_DEFLATER=true</span> <span class="pre">USE_JDK_INFLATER=true</span></code></p>
+</div>
 <p>Once added the Read Group tags, we index again the bam file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">index</span> <span class="n">filename</span><span class="o">.</span><span class="n">RG</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
@@ -363,8 +367,12 @@ DeDup generates a <code class="docutils literal notranslate"><span class="pre">b
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The output can be put in a separate folder (<code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">folder_name</span></code>), or more simply if you are working in the folder containing the input <code class="docutils literal notranslate"><span class="pre">bam</span></code>, use <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">.</span></code> to have the output in that same location.</p>
+</div>
 <p>Alternatively, you can use the <code class="docutils literal notranslate"><span class="pre">MarkDuplicates</span></code> tool of Picard, which marks the reads as duplicates when the 5’-end positions of both reads and read-pairs match. A metric file with various statistics is created, and reads are removed from the bam file by using the <code class="docutils literal notranslate"><span class="pre">REMOVE_DUPLICATES=True</span></code> option (the default option is <code class="docutils literal notranslate"><span class="pre">False</span></code>, which simply ‘marks’ duplicate reads keep them in the <code class="docutils literal notranslate"><span class="pre">bam</span></code> file).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">picard</span> <span class="n">MarkDuplicates</span> <span class="n">I</span><span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">RG</span><span class="o">.</span><span class="n">bam</span> <span class="n">O</span><span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">DR</span><span class="o">.</span><span class="n">bam</span> <span class="n">M</span><span class="o">=</span><span class="n">output_metrics</span><span class="o">.</span><span class="n">txt</span> <span class="n">REMOVE_DUPLICATES</span><span class="o">=</span><span class="kc">True</span> <span class="n">VALIDATION_STRINGENCY</span><span class="o">=</span><span class="n">LENIENT</span> <span class="o">&amp;&gt;</span> <span class="n">logFile</span><span class="o">.</span><span class="n">log</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">picard</span> <span class="n">MarkDuplicates</span> <span class="n">I</span><span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">RG</span><span class="o">.</span><span class="n">bam</span> <span class="n">O</span><span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">DR</span><span class="o">.</span><span class="n">bam</span> <span class="n">M</span><span class="o">=</span><span class="n">output_metrics</span><span class="o">.</span><span class="n">txt</span> <span class="n">REMOVE_DUPLICATES</span><span class="o">=</span><span class="kc">True</span> <span class="n">VALIDATION_STRINGENCY</span><span class="o">=</span><span class="n">LENIENT</span>
 </pre></div>
 </div>
 <p>Once removed the duplicates with DeDup, we index again the bam file:</p>
@@ -375,7 +383,7 @@ DeDup generates a <code class="docutils literal notranslate"><span class="pre">b
 <div class="section" id="local-realignment-of-reads">
 <h3><span class="section-number">5.2.6. </span>Local realignment of reads<a class="headerlink" href="#local-realignment-of-reads" title="Permalink to this headline">¶</a></h3>
 <p>The presence of insertions or deletions (indels) in the genome may be responsible of misalignments and bases mismatches that are easily mistaken as SNPs. For this reason, we locally realign reads to minimize the number of mispatches around the indels. The realignment process is done in two steps using two different tools of GATK called with the -T option. We first detect the intervals which need to be realigned with the <code class="docutils literal notranslate"><span class="pre">GATK</span> <span class="pre">RealignerTargetCreator</span></code>, and save the list of these intevals in a file that we name <code class="docutils literal notranslate"><span class="pre">target.intervals</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gatk</span> <span class="o">-</span><span class="n">T</span> <span class="n">RealignerTargetCreator</span> <span class="o">-</span><span class="n">R</span> <span class="n">reference</span><span class="o">.</span><span class="n">fasta</span> <span class="o">-</span><span class="n">I</span> <span class="n">filename</span><span class="o">.</span><span class="n">DR</span><span class="o">.</span><span class="n">bam</span> <span class="o">-</span><span class="n">o</span> <span class="n">target</span><span class="o">.</span><span class="n">intervals</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gatk</span> <span class="o">-</span><span class="n">T</span> <span class="n">RealignerTargetCreator</span> <span class="o">-</span><span class="n">R</span> <span class="n">reference</span><span class="o">.</span><span class="n">fasta</span> <span class="o">-</span><span class="n">I</span> <span class="n">filename_rmdup</span><span class="o">.</span><span class="n">bam</span> <span class="o">-</span><span class="n">o</span> <span class="n">target</span><span class="o">.</span><span class="n">intervals</span>
 </pre></div>
 </div>
 <div class="admonition note">

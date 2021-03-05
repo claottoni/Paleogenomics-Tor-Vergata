@@ -148,6 +148,10 @@ A number of predefined tags may be appropriately assigned to specific set of rea
   - In some instances, Picard may stop running and return error messages due to conflicts with ``sam`` specifications produced by ``BWA`` (e.g. "MAPQ should be 0 for unmapped reads"). To suppress this error and allow Picard to continue, we pass the ``VALIDATION_STRINGENCY=LENIENT`` options (default is ``STRICT``).
   - Read Groups may be also added during the alignment with ``BWA`` using the option ``-R``. 
 
+.. warning::
+  
+  If the analysis is stopped due to a "Java Runtime Environment" try to add to the command the options ``USE_JDK_DEFLATER=true USE_JDK_INFLATER=true``
+
 Once added the Read Group tags, we index again the bam file:
 :: 
 
@@ -175,11 +179,15 @@ Option                              Function
 **-u**								Do not automatically sort the output
 =================================== ========
 
+.. note::
+
+  The output can be put in a separate folder (``-o folder_name``), or more simply if you are working in the folder containing the input ``bam``, use ``-o .`` to have the output in that same location.  
+
 
 Alternatively, you can use the ``MarkDuplicates`` tool of Picard, which marks the reads as duplicates when the 5'-end positions of both reads and read-pairs match. A metric file with various statistics is created, and reads are removed from the bam file by using the ``REMOVE_DUPLICATES=True`` option (the default option is ``False``, which simply 'marks' duplicate reads keep them in the ``bam`` file).
 :: 
 
-  picard MarkDuplicates I= filename.RG.bam O= filename.DR.bam M=output_metrics.txt REMOVE_DUPLICATES=True VALIDATION_STRINGENCY=LENIENT &> logFile.log
+  picard MarkDuplicates I= filename.RG.bam O= filename.DR.bam M=output_metrics.txt REMOVE_DUPLICATES=True VALIDATION_STRINGENCY=LENIENT
 
 Once removed the duplicates with DeDup, we index again the bam file:
 ::
@@ -193,7 +201,7 @@ Local realignment of reads
 The presence of insertions or deletions (indels) in the genome may be responsible of misalignments and bases mismatches that are easily mistaken as SNPs. For this reason, we locally realign reads to minimize the number of mispatches around the indels. The realignment process is done in two steps using two different tools of GATK called with the -T option. We first detect the intervals which need to be realigned with the ``GATK RealignerTargetCreator``, and save the list of these intevals in a file that we name ``target.intervals``:
 ::
 
-  gatk -T RealignerTargetCreator -R reference.fasta -I filename.DR.bam -o target.intervals
+  gatk -T RealignerTargetCreator -R reference.fasta -I filename_rmdup.bam -o target.intervals
 
 .. note::
 
