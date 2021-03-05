@@ -217,7 +217,7 @@ The presence of insertions or deletions (indels) in the genome may be responsibl
 Then, we realign the reads over the intervals listed in the ``target.intervals`` file with the option ``-targetIntervals`` of the tool ``IndelRealigner`` in GATK:
 ::
 
-  java -jar ~/Share/tools/GenomeAnalysisTK.jar	 -T IndelRealigner -R reference.fasta -I filename.RG.DR.bam -targetIntervals target.intervals -o filename.final.bam --filter_bases_not_stored
+  java -jar ~/GenomeAnalysisTK-3.8/GenomeAnalysisTK.jar -T IndelRealigner -R reference.fasta -I filename.RG.DR.bam -targetIntervals target.intervals -o filename.final.bam --filter_bases_not_stored
 
 .. note::
 
