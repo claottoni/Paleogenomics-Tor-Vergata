@@ -192,7 +192,7 @@ Alternatively, you can use the ``MarkDuplicates`` tool of Picard, which marks th
 Once removed the duplicates with DeDup, we index again the bam file:
 ::
 
-  samtools index filename.RG_rmdup.bam
+  samtools index filename_rmdup.bam
 
 
 
@@ -205,10 +205,10 @@ The presence of insertions or deletions (indels) in the genome may be responsibl
 
 .. note::
 
-  Like Picard, in some server environment you can call GATK just by typing the program name. In other environments (also in this server) you have to call GATK by providing the full path to the java ``jar`` file. Here, the absolute path to the file is ``~/Share/Paleogenomics/programs/GenomeAnalysisTK.jar``:
+  Like Picard, in some server environment you can call GATK just by typing the program name. In other environments (or in your local computer) you have to call GATK by providing the full path to the java ``jar`` file. For example, if it's in a folder named ``GenomeAnalysisTK-3.8`` in the home of your computer the absolute path to the file is ``~/GenomeAnalysisTK-3.8/GenomeAnalysisTK.jar``:
   ::
 
-    java -jar ~/Share/tools/GenomeAnalysisTK.jar -T RealignerTargetCreator -h
+    java -jar ~/GenomeAnalysisTK-3.8/GenomeAnalysisTK.jar -T RealignerTargetCreator -h
 
 .. warning::
   

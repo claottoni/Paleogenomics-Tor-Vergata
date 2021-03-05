@@ -376,7 +376,7 @@ DeDup generates a <code class="docutils literal notranslate"><span class="pre">b
 </pre></div>
 </div>
 <p>Once removed the duplicates with DeDup, we index again the bam file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">index</span> <span class="n">filename</span><span class="o">.</span><span class="n">RG_rmdup</span><span class="o">.</span><span class="n">bam</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">index</span> <span class="n">filename_rmdup</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
 </div>
 </div>
@@ -388,8 +388,8 @@ DeDup generates a <code class="docutils literal notranslate"><span class="pre">b
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Like Picard, in some server environment you can call GATK just by typing the program name. In other environments (also in this server) you have to call GATK by providing the full path to the java <code class="docutils literal notranslate"><span class="pre">jar</span></code> file. Here, the absolute path to the file is <code class="docutils literal notranslate"><span class="pre">~/Share/Paleogenomics/programs/GenomeAnalysisTK.jar</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="o">~/</span><span class="n">Share</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">GenomeAnalysisTK</span><span class="o">.</span><span class="n">jar</span> <span class="o">-</span><span class="n">T</span> <span class="n">RealignerTargetCreator</span> <span class="o">-</span><span class="n">h</span>
+<p>Like Picard, in some server environment you can call GATK just by typing the program name. In other environments (or in your local computer) you have to call GATK by providing the full path to the java <code class="docutils literal notranslate"><span class="pre">jar</span></code> file. For example, if it’s in a folder named <code class="docutils literal notranslate"><span class="pre">GenomeAnalysisTK-3.8</span></code> in the home of your computer the absolute path to the file is <code class="docutils literal notranslate"><span class="pre">~/GenomeAnalysisTK-3.8/GenomeAnalysisTK.jar</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="o">~/</span><span class="n">GenomeAnalysisTK</span><span class="o">-</span><span class="mf">3.8</span><span class="o">/</span><span class="n">GenomeAnalysisTK</span><span class="o">.</span><span class="n">jar</span> <span class="o">-</span><span class="n">T</span> <span class="n">RealignerTargetCreator</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
 </div>
