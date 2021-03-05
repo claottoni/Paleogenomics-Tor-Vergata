@@ -93,7 +93,7 @@ You can display only the columns corresponding to the ftp directory ($20), the o
 If you want, you can also redirect the output to a file (called here ``ftpdirpaths.txt``). 
 ::
 
-  grep "Yersinia pestis" assembly_summary.txt | awk -F "\t" '$12=="Complete Genome" && $11=="latest"{print $8,$9,$20}' | ftpdirpaths.txt
+  grep "Yersinia pestis" assembly_summary.txt | awk -F "\t" '$12=="Complete Genome" && $11=="latest"{print $8,$9,$20}' > ftpdirpaths.txt
 
 In this example, the ftp path of the species of interest looks like this: 
 **ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/717/545/GCF_001717545.1_ASM171754v1**

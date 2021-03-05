@@ -232,7 +232,7 @@ Otherwise you can  explore the complete genomes and the latest assemblies for a 
 </pre></div>
 </div>
 <p>If you want, you can also redirect the output to a file (called here <code class="docutils literal notranslate"><span class="pre">ftpdirpaths.txt</span></code>).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span> <span class="s2">&quot;Yersinia pestis&quot;</span> <span class="n">assembly_summary</span><span class="o">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">awk</span> <span class="o">-</span><span class="n">F</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="s1">&#39;$12==&quot;Complete Genome&quot; &amp;&amp; $11==&quot;latest&quot;{print $8,$9,$20}&#39;</span> <span class="o">|</span> <span class="n">ftpdirpaths</span><span class="o">.</span><span class="n">txt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span> <span class="s2">&quot;Yersinia pestis&quot;</span> <span class="n">assembly_summary</span><span class="o">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">awk</span> <span class="o">-</span><span class="n">F</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="s1">&#39;$12==&quot;Complete Genome&quot; &amp;&amp; $11==&quot;latest&quot;{print $8,$9,$20}&#39;</span> <span class="o">&gt;</span> <span class="n">ftpdirpaths</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 <p>In this example, the ftp path of the species of interest looks like this:
