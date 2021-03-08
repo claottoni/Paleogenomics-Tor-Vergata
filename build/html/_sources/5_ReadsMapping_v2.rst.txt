@@ -184,15 +184,18 @@ Option                              Function
   The output can be put in a separate folder (``-o folder_name``), or more simply if you are working in the folder containing the input ``bam``, use ``-o .`` to have the output in that same location.  
 
 
-Alternatively, you can use the ``MarkDuplicates`` tool of Picard, which marks the reads as duplicates when the 5'-end positions of both reads and read-pairs match. A metric file with various statistics is created, and reads are removed from the bam file by using the ``REMOVE_DUPLICATES=True`` option (the default option is ``False``, which simply 'marks' duplicate reads keep them in the ``bam`` file).
-:: 
+.. note::
 
-  picard MarkDuplicates I= filename.RG.bam O= filename.DR.bam M=output_metrics.txt REMOVE_DUPLICATES=True VALIDATION_STRINGENCY=LENIENT
+  Alternatively, you can use the ``MarkDuplicates`` tool of Picard, which marks the reads as duplicates when the 5'-end positions of both reads and read-pairs match. A metric file with various statistics is created, and reads are removed from the bam file by using the ``REMOVE_DUPLICATES=True`` option (the default option is ``False``, which simply 'marks' duplicate reads keep them in the ``bam`` file).
+  :: 
+  
+    picard MarkDuplicates I= filename.RG.bam O= filename.DR.bam M=output_metrics.txt REMOVE_DUPLICATES=True VALIDATION_STRINGENCY=LENIENT
 
-Once removed the duplicates with DeDup, we index again the bam file:
+Once removed the duplicates with DeDup, we sort the reads and index the bam file:
 ::
-
-  samtools index filename_rmdup.bam
+  
+  samtools sort filename_rmdup.bam -o filename_rmdup_sort.bam
+  samtools index filename_rmdup_sort.bam
 
 
 
@@ -217,7 +220,7 @@ The presence of insertions or deletions (indels) in the genome may be responsibl
 Then, we realign the reads over the intervals listed in the ``target.intervals`` file with the option ``-targetIntervals`` of the tool ``IndelRealigner`` in GATK:
 ::
 
-  java -jar ~/GenomeAnalysisTK-3.8/GenomeAnalysisTK.jar -T IndelRealigner -R reference.fasta -I filename.RG.DR.bam -targetIntervals target.intervals -o filename.final.bam --filter_bases_not_stored
+  java -jar ~/GenomeAnalysisTK-3.8/GenomeAnalysisTK.jar -T IndelRealigner -R reference.fasta -I filename_rmdup.bam -targetIntervals target.intervals -o filename.final.bam --filter_bases_not_stored
 
 .. note::
 
