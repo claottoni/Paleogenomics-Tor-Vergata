@@ -17,10 +17,11 @@ Reads alignment and variants calling
   * gatk: https://software.broadinstitute.org/gatk/ 
   * samtools: http://www.htslib.org/
   * bcftools: http://www.htslib.org/
+  * CircularMapper: https://github.com/apeltzer/CircularMapper/blob/master/docs/contents/userguide.rst
 
 Filtering and manipulating bam files
   * picard: https://broadinstitute.github.io/picard/
-  * dedup: https://github.com/apeltzer/DeDup
+  * DeDup: https://github.com/apeltzer/DeDup
 
 aDNA deamination detection and rescalinghttps://github.com/Amine-Namouchi/snpToolkit
   * mapDamage: https://ginolhac.github.io/mapDamage/

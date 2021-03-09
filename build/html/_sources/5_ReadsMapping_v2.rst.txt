@@ -158,8 +158,8 @@ Once added the Read Group tags, we index again the bam file:
   samtools index filename.RG.bam
 
 
-Marking and removing duplicates
-*******************************
+Removing duplicates
+*******************
 Amplification through PCR of genomic libraries leads to duplication formation (reads originating from a single fragment of DNA). 
 To remove duplicates we will use DeDup, which is specifically designed for ultra-short DNA (e.g. ancient DNA) paired-end and merged sequence data. 
 The issue with ultra-short DNA is that during the typical sequencing chemistry cycles the entire molecule will be sequenced and therefore we will find both ends.
@@ -261,7 +261,7 @@ Once generated the final ``bam`` file,  you can compare the ``bam`` files before
 Create mapping summary reports
 ******************************
 
-We will use ``Qualimap`` to create summary reports from the generated ``bam`` files. As mentioned in the website, ``Qualimap`` examines sequencing alignment data in ``sam/bam`` files according to the features of the mapped reads and provides an overall view of the data that helps to detect biases in the sequencing and/or mapping of the data and eases decision-making for further analysis. 
+We will use ``Qualimap`` to create summary reports from the generated ``bam`` files. As mentioned in the website, ``Qualimap`` examines sequencing alignment data in ``sam/bam`` files according to the features of the mapped reads and provides an overall view of the data that helps to detect biases in the sequencing and/or mapping of the data and eases decision-making for further analysis.
 ::
 
   qualimap bamqc -c -bam input.bam 
@@ -282,6 +282,71 @@ Multiqc will create a summary report in ``html`` format that will let you compar
 
 .. image:: images/multiqc.png
 
+
+
+************************************************
+Alignment of reads to circular reference genomes
+************************************************
+
+The mtDNA and most of the bacterial genomes are circular. However, their sequence is represented as linear when the alignment of reads is done. This poses limitations to our ability of mapping the reads at the two ends of the linearized genome. 
+The tool `CircularMapper`_ circumvents these limitations by extending the end of the linearized reference genome by a number of nucleotides from the beginning of the sequence. This 'simulates' the contiguity of the circular sequence at the two ends of the linearized genome, facilitating the alignment of the reads in those regions and consequently achieving more even coverages at the two ends. 
+You can install `CircularMapper with Conda`_
+
+  .. _CircularMapper: https://github.com/apeltzer/CircularMapper/blob/master/docs/contents/userguide.rst
+  .. _CircularMapper with Conda: https://anaconda.org/bioconda/circularmapper
+
+
+Create an extended reference sequence
+*************************************
+
+You can first check the header of your referece sequence (e.g. the human mtDNA reference sequence), to copy the name reported in the header (right after the ``>`` symbol, in this example NC_012920.1).
+If you are using the full human genome, you can grep the headers of the various chromosomes and refer specifically to the mtDNA to extend its sequence, as named in the fasta file (e.g. use the option ``-e chrMT``).
+::
+
+  head human_mt.fasta
+  grep ">" human_mt.fasta
+
+Then, you can run the ``circulargenerator`` command of CircularMapper to extend the end of the reference sequence with 200 nucleotides from its beginning. A file ``human_mt_200.fasta`` will be generated.
+::
+
+  circulargenerator -e 200 -i human_mt.fasta †
+
+
+=================================== ========
+Option                              Function
+=================================== ========
+**-e** *digit*                 		Elongation factor (number of nucleotides copied from the beginning and pasted at the end of the reference sequence)
+**-i** *string*                		Input reference sequence name
+**-s** *string*          			Name of the reference sequence as reported in the header of the fasta file.
+=================================== ========
+
+
+Realign reads to original reference sequence
+********************************************
+
+Once generated the extended reference sequence, you can use it to align the reads with ``bwa aln`` and ``bwa samse`` as described in the section `Alignment of pre-processed reads to the reference genome with BWA aln`_. To keep note of the fact that an extended reference is used, you could include in the name of the sam file the elongation factor (e.g. ``filename_elongated200.bam``, or similar)
+After running ``bwa samse`` and once obtained the ``sam`` alignment file, you must readjust the mapped reads (which now span the circular portion of the genome) to the original reference sequence (the not-extended file) by running the ``realignsamfile`` command of CircularMapper.
+::
+
+  realignsamfile -e 200 -i filename.sam -r human_mt.fasta
+
+=================================== ========
+Option                              Function
+=================================== ========
+**-e** *digit*                 		Elongation factor (number of nucleotides copied from the beginning and pasted at the end of the reference sequence)
+**-i** *string*                		Input sam file 
+**-r** *string*                		Input reference fasta file (original, not extended) 
+**-f** *true/false*          		Filter the reads that don't map to a circular identifier, e.g. when using the full human genome (default: false).
+**-x** *true/false*          		Filter the sequence identifiers that are not circular identifiers, e.g. when using the full human genome (default: false). 
+=================================== ========
+
+The command above will generate a `filename_realigned.bam` file, which must be sorted and indexed, as usual 
+::
+
+    samtools sort filename_realigned.bam -o filename_realigned.sort.bam
+    samtools index filename_realigned.sort.bam
+
+You can then move forward with the other steps described for bam refinement from the step `Adding Read Group tags and indexing bam files`_
 
 *****************************************************
 Damage analysis and quality rescaling of the BAM file

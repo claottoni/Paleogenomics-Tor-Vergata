@@ -99,15 +99,20 @@
 <li class="toctree-l3"><a class="reference internal" href="#converting-sam-file-to-bam-file">5.2.2. Converting sam file to bam file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sorting-and-indexing-the-bam-file">5.2.3. Sorting and indexing the bam file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#adding-read-group-tags-and-indexing-bam-files">5.2.4. Adding Read Group tags and indexing bam files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#marking-and-removing-duplicates">5.2.5. Marking and removing duplicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#removing-duplicates">5.2.5. Removing duplicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#local-realignment-of-reads">5.2.6. Local realignment of reads</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generate-flagstat-file">5.2.7. Generate flagstat file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#visualization-of-reads-alignment">5.2.8. Visualization of reads alignment</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#create-mapping-summary-reports">5.3. Create mapping summary reports</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#damage-analysis-and-quality-rescaling-of-the-bam-file">5.4. Damage analysis and quality rescaling of the BAM file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#edit-distance">5.5. Edit Distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alignment-of-reads-to-circular-reference-genomes">5.4. Alignment of reads to circular reference genomes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-an-extended-reference-sequence">5.4.1. Create an extended reference sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#realign-reads-to-original-reference-sequence">5.4.2. Realign reads to original reference sequence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#damage-analysis-and-quality-rescaling-of-the-bam-file">5.5. Damage analysis and quality rescaling of the BAM file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#edit-distance">5.6. Edit Distance</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">6. Variant calling and visualization</a></li>
@@ -329,8 +334,8 @@ Here, in order to obtain an optimal coverage for the subsequent variant call, we
 </pre></div>
 </div>
 </div>
-<div class="section" id="marking-and-removing-duplicates">
-<h3><span class="section-number">5.2.5. </span>Marking and removing duplicates<a class="headerlink" href="#marking-and-removing-duplicates" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="removing-duplicates">
+<h3><span class="section-number">5.2.5. </span>Removing duplicates<a class="headerlink" href="#removing-duplicates" title="Permalink to this headline">¶</a></h3>
 <p>Amplification through PCR of genomic libraries leads to duplication formation (reads originating from a single fragment of DNA).
 To remove duplicates we will use DeDup, which is specifically designed for ultra-short DNA (e.g. ancient DNA) paired-end and merged sequence data.
 The issue with ultra-short DNA is that during the typical sequencing chemistry cycles the entire molecule will be sequenced and therefore we will find both ends.
@@ -457,8 +462,93 @@ DeDup generates a <code class="docutils literal notranslate"><span class="pre">b
 <p>Multiqc will create a summary report in <code class="docutils literal notranslate"><span class="pre">html</span></code> format that will let you compare all the summary reports for each of your samples:</p>
 <img alt="_images/multiqc.png" src="_images/multiqc.png" />
 </div>
+<div class="section" id="alignment-of-reads-to-circular-reference-genomes">
+<h2><span class="section-number">5.4. </span>Alignment of reads to circular reference genomes<a class="headerlink" href="#alignment-of-reads-to-circular-reference-genomes" title="Permalink to this headline">¶</a></h2>
+<p>The mtDNA and most of the bacterial genomes are circular. However, their sequence is represented as linear when the alignment of reads is done. This poses limitations to our ability of mapping the reads at the two ends of the linearized genome.
+The tool <a class="reference external" href="https://github.com/apeltzer/CircularMapper/blob/master/docs/contents/userguide.rst">CircularMapper</a> circumvents these limitations by extending the end of the linearized reference genome by a number of nucleotides from the beginning of the sequence. This ‘simulates’ the contiguity of the circular sequence at the two ends of the linearized genome, facilitating the alignment of the reads in those regions and consequently achieving more even coverages at the two ends.
+You can install <a class="reference external" href="https://anaconda.org/bioconda/circularmapper">CircularMapper with Conda</a></p>
+<blockquote>
+<div></div></blockquote>
+<div class="section" id="create-an-extended-reference-sequence">
+<h3><span class="section-number">5.4.1. </span>Create an extended reference sequence<a class="headerlink" href="#create-an-extended-reference-sequence" title="Permalink to this headline">¶</a></h3>
+<p>You can first check the header of your referece sequence (e.g. the human mtDNA reference sequence), to copy the name reported in the header (right after the <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> symbol, in this example NC_012920.1).
+If you are using the full human genome, you can grep the headers of the various chromosomes and refer specifically to the mtDNA to extend its sequence, as named in the fasta file (e.g. use the option <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">chrMT</span></code>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">head</span> <span class="n">human_mt</span><span class="o">.</span><span class="n">fasta</span>
+<span class="n">grep</span> <span class="s2">&quot;&gt;&quot;</span> <span class="n">human_mt</span><span class="o">.</span><span class="n">fasta</span>
+</pre></div>
+</div>
+<p>Then, you can run the <code class="docutils literal notranslate"><span class="pre">circulargenerator</span></code> command of CircularMapper to extend the end of the reference sequence with 200 nucleotides from its beginning. A file <code class="docutils literal notranslate"><span class="pre">human_mt_200.fasta</span></code> will be generated.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>circulargenerator -e 200 -i human_mt.fasta †
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>-e</strong> <em>digit</em></p></td>
+<td><p>Elongation factor (number of nucleotides copied from the beginning and pasted at the end of the reference sequence)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>-i</strong> <em>string</em></p></td>
+<td><p>Input reference sequence name</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>-s</strong> <em>string</em></p></td>
+<td><p>Name of the reference sequence as reported in the header of the fasta file.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="realign-reads-to-original-reference-sequence">
+<h3><span class="section-number">5.4.2. </span>Realign reads to original reference sequence<a class="headerlink" href="#realign-reads-to-original-reference-sequence" title="Permalink to this headline">¶</a></h3>
+<p>Once generated the extended reference sequence, you can use it to align the reads with <code class="docutils literal notranslate"><span class="pre">bwa</span> <span class="pre">aln</span></code> and <code class="docutils literal notranslate"><span class="pre">bwa</span> <span class="pre">samse</span></code> as described in the section <a class="reference internal" href="#alignment-of-pre-processed-reads-to-the-reference-genome-with-bwa-aln">Alignment of pre-processed reads to the reference genome with BWA aln</a>. To keep note of the fact that an extended reference is used, you could include in the name of the sam file the elongation factor (e.g. <code class="docutils literal notranslate"><span class="pre">filename_elongated200.bam</span></code>, or similar)
+After running <code class="docutils literal notranslate"><span class="pre">bwa</span> <span class="pre">samse</span></code> and once obtained the <code class="docutils literal notranslate"><span class="pre">sam</span></code> alignment file, you must readjust the mapped reads (which now span the circular portion of the genome) to the original reference sequence (the not-extended file) by running the <code class="docutils literal notranslate"><span class="pre">realignsamfile</span></code> command of CircularMapper.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">realignsamfile</span> <span class="o">-</span><span class="n">e</span> <span class="mi">200</span> <span class="o">-</span><span class="n">i</span> <span class="n">filename</span><span class="o">.</span><span class="n">sam</span> <span class="o">-</span><span class="n">r</span> <span class="n">human_mt</span><span class="o">.</span><span class="n">fasta</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>-e</strong> <em>digit</em></p></td>
+<td><p>Elongation factor (number of nucleotides copied from the beginning and pasted at the end of the reference sequence)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>-i</strong> <em>string</em></p></td>
+<td><p>Input sam file</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>-r</strong> <em>string</em></p></td>
+<td><p>Input reference fasta file (original, not extended)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>-f</strong> <em>true/false</em></p></td>
+<td><p>Filter the reads that don’t map to a circular identifier, e.g. when using the full human genome (default: false).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>-x</strong> <em>true/false</em></p></td>
+<td><p>Filter the sequence identifiers that are not circular identifiers, e.g. when using the full human genome (default: false).</p></td>
+</tr>
+</tbody>
+</table>
+<p>The command above will generate a <cite>filename_realigned.bam</cite> file, which must be sorted and indexed, as usual</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">sort</span> <span class="n">filename_realigned</span><span class="o">.</span><span class="n">bam</span> <span class="o">-</span><span class="n">o</span> <span class="n">filename_realigned</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">bam</span>
+<span class="n">samtools</span> <span class="n">index</span> <span class="n">filename_realigned</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">bam</span>
+</pre></div>
+</div>
+<p>You can then move forward with the other steps described for bam refinement from the step <a class="reference internal" href="#adding-read-group-tags-and-indexing-bam-files">Adding Read Group tags and indexing bam files</a></p>
+</div>
+</div>
 <div class="section" id="damage-analysis-and-quality-rescaling-of-the-bam-file">
-<h2><span class="section-number">5.4. </span>Damage analysis and quality rescaling of the BAM file<a class="headerlink" href="#damage-analysis-and-quality-rescaling-of-the-bam-file" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.5. </span>Damage analysis and quality rescaling of the BAM file<a class="headerlink" href="#damage-analysis-and-quality-rescaling-of-the-bam-file" title="Permalink to this headline">¶</a></h2>
 <p>To authenticate our analysis we will assess the <em>post-mortem</em> damage of the reads aligned to the reference sequence. We can track the <em>post-portem</em> damage accumulated by DNA molecules in the form of fragmentation due to depurination and cytosine deamination, which generates the typical pattern of <strong>C-&gt;T</strong> and <strong>G-&gt;A</strong> variation at the 5’- and 3’-end of the DNA molecules. To assess the <em>post-mortem</em> damage patterns in our <code class="docutils literal notranslate"><span class="pre">bam</span></code> file we will use <code class="docutils literal notranslate"><span class="pre">mapDamage</span></code>, which analyses the size distribution of the reads and the base composition of the genomic regions located up- and downstream of each read, generating various plots and summary tables. To start the analysis we need the final <code class="docutils literal notranslate"><span class="pre">bam</span></code> and the reference sequence:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mapDamage</span> <span class="o">-</span><span class="n">i</span> <span class="n">filename</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">bam</span> <span class="o">-</span><span class="n">r</span> <span class="n">reference</span><span class="o">.</span><span class="n">fasta</span>
 </pre></div>
@@ -484,7 +574,7 @@ A new rescaled <code class="docutils literal notranslate"><span class="pre">bam<
 </div>
 </div>
 <div class="section" id="edit-distance">
-<h2><span class="section-number">5.5. </span>Edit Distance<a class="headerlink" href="#edit-distance" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.6. </span>Edit Distance<a class="headerlink" href="#edit-distance" title="Permalink to this headline">¶</a></h2>
 <p>The edit distance defines the number of nucleotide changes that have to be made to one read sequence for it to be identical to the reference sequence.
 To be more confident about the quality and authenticity of your sequencing data, you need to align your reads againt your reference sequence and the genome of a closely related species.
 Here we will align our <code class="docutils literal notranslate"><span class="pre">fastq</span></code> file against the <a class="reference external" href="https://www.ncbi.nlm.nih.gov/genome/?term=Yersinia+pseudotuberculosis">Yersinia pseudotuberculosis</a> genome, following all the steps from 4.1 to 4.4.
