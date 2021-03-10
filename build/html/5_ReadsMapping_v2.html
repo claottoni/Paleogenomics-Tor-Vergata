@@ -472,13 +472,13 @@ You can install <a class="reference external" href="https://anaconda.org/biocond
 <div class="section" id="create-an-extended-reference-sequence">
 <h3><span class="section-number">5.4.1. </span>Create an extended reference sequence<a class="headerlink" href="#create-an-extended-reference-sequence" title="Permalink to this headline">¶</a></h3>
 <p>You can first check the header of your referece sequence (e.g. the human mtDNA reference sequence), to copy the name reported in the header (right after the <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> symbol, in this example NC_012920.1).
-If you are using the full human genome, you can grep the headers of the various chromosomes and refer specifically to the mtDNA to extend its sequence, as named in the fasta file (e.g. use the option <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">chrMT</span></code>).</p>
+If you are using the full human genome, you can grep the headers of the various chromosomes and refer specifically to the name of the mtDNA to extend its sequence (e.g. use the option <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">chrMT</span></code>).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">head</span> <span class="n">human_mt</span><span class="o">.</span><span class="n">fasta</span>
 <span class="n">grep</span> <span class="s2">&quot;&gt;&quot;</span> <span class="n">human_mt</span><span class="o">.</span><span class="n">fasta</span>
 </pre></div>
 </div>
 <p>Then, you can run the <code class="docutils literal notranslate"><span class="pre">circulargenerator</span></code> command of CircularMapper to extend the end of the reference sequence with 200 nucleotides from its beginning. A file <code class="docutils literal notranslate"><span class="pre">human_mt_200.fasta</span></code> will be generated.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>circulargenerator -e 200 -i human_mt.fasta †
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circulargenerator</span> <span class="o">-</span><span class="n">e</span> <span class="mi">200</span> <span class="o">-</span><span class="n">i</span> <span class="n">human_mt</span><span class="o">.</span><span class="n">fasta</span> <span class="o">-</span><span class="n">s</span> <span class="n">NC_012920</span><span class="o">.</span><span class="mi">1</span>
 </pre></div>
 </div>
 <table class="docutils align-default">

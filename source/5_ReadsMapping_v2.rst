@@ -300,7 +300,7 @@ Create an extended reference sequence
 *************************************
 
 You can first check the header of your referece sequence (e.g. the human mtDNA reference sequence), to copy the name reported in the header (right after the ``>`` symbol, in this example NC_012920.1).
-If you are using the full human genome, you can grep the headers of the various chromosomes and refer specifically to the name of the mtDNA to extend its sequence (e.g. use the option ``-e chrMT``).
+If you are using the full human genome, you can grep the headers of the various chromosomes and refer specifically to the name of the mtDNA to extend its sequence (e.g. use the option ``-s chrMT``).
 ::
 
   head human_mt.fasta
@@ -309,7 +309,7 @@ If you are using the full human genome, you can grep the headers of the various 
 Then, you can run the ``circulargenerator`` command of CircularMapper to extend the end of the reference sequence with 200 nucleotides from its beginning. A file ``human_mt_200.fasta`` will be generated.
 ::
 
-  circulargenerator -e 200 -i human_mt.fasta
+  circulargenerator -e 200 -i human_mt.fasta -s NC_012920.1 
 
 
 =================================== ========
