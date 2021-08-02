@@ -97,6 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#r-session">8.2.2. R session</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#import-files-and-prepare-the-abundance-tables">8.2.2.1. Import files and prepare the abundance tables</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#upgma">8.2.2.2. UPGMA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pca">8.2.2.3. PCA</a></li>
 </ul>
 </li>
 </ul>
@@ -194,7 +195,7 @@
 </div>
 <div class="section" id="hands-on-2-ancient-human-dental-calculus">
 <h2><span class="section-number">8.2. </span>Hands-on 2: ancient human dental calculus<a class="headerlink" href="#hands-on-2-ancient-human-dental-calculus" title="Permalink to this headline">¶</a></h2>
-<p>In this hands-on you will use a sequence dataset of ancient dental calculus from a recent study by <a class="reference external" href="https://link.springer.com/article/10.1186/s40168-019-0717-3">Velsko et al.</a> (Microbiome, 2019), which consists of paired-end sequence data.
+<p>In this hands-on you will use a sequence dataset of ancient dental calculus from a recent study by <a class="reference external" href="https://link.springer.com/article/10.1186/s40168-019-0717-3">Velsko et al. 2019</a> (Microbiome, 2019), which consists of paired-end sequence data.
 After filtering and collapsing the reads, classify the reads of each sample with Kraken2 and estimate the abudances with Bracken.</p>
 <blockquote>
 <div></div></blockquote>
@@ -287,7 +288,7 @@ To do that, we wil repeat all the steps described above. Note that there is no n
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You can merge datasets only if they were generated with the same taxonomy database (here the Minikraken 8Gb database). If not, you’ll have to run all the samples from the literature with the same database that you used to analyse your samples.</p>
+<p>You can merge datasets only if they were generated with the same taxonomy database (here the Minikraken 8Gb database). If not, you will have to run all the samples from the literature with the same database that you used to analyse your samples.</p>
 </div>
 </div>
 <div class="section" id="upgma">
@@ -325,7 +326,7 @@ For example, for the literature samples, we generate the following vector of met
 </pre></div>
 </div>
 <p>Create a vector with labels corresponding to the samples that you analysed. Always make sure to follow the order of the samples if you use more than one label.
-For example, the metadata of a table from Velsko’s dataset containing ancient samples in the first five rows, and modern samples in the following five rows, will be represented by this vector:</p>
+For example, the metadata of a table from dataset of Velsko containing ancient samples in the first five rows, and modern samples in the following five rows, will be represented by this vector:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">labels_Velsko</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Velsko_ancient&quot;</span><span class="p">,</span><span class="s">&quot;Velsko_ancient&quot;</span><span class="p">,</span><span class="s">&quot;Velsko_ancient&quot;</span><span class="p">,</span><span class="s">&quot;Velsko_ancient&quot;</span><span class="p">,</span><span class="s">&quot;Velsko_ancient&quot;</span><span class="p">,</span>
                       <span class="s">&quot;Velsko_modern&quot;</span><span class="p">,</span><span class="s">&quot;Velsko_modern&quot;</span><span class="p">,</span><span class="s">&quot;Velsko_modern&quot;</span><span class="p">,</span><span class="s">&quot;Velsko_modern&quot;</span><span class="p">,</span><span class="s">&quot;Velsko_modern&quot;</span><span class="p">)</span>
 </pre></div>
@@ -357,6 +358,55 @@ For example, the metadata of a table from Velsko’s dataset containing ancient 
 </div>
 <p>And we can add a legend:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">)),</span> <span class="n">bty</span> <span class="o">=</span> <span class="s">&quot;n&quot;</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">coul</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="m">19</span><span class="p">,</span> <span class="n">pt.cex</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.6</span><span class="p">,</span> <span class="n">pt.lwd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pca">
+<h4><span class="section-number">8.2.2.3. </span>PCA<a class="headerlink" href="#pca" title="Permalink to this headline">¶</a></h4>
+<p>Microbiome data are considered as compositional (see <a class="reference external" href="https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full">Gloor et al. 2017</a>), for this reason we will apply the Centered-Log-Ratio (CLR) normalization with the library <code class="docutils literal notranslate"><span class="pre">composition</span></code> and the package <code class="docutils literal notranslate"><span class="pre">mixOmics</span></code>. We will use also the library <code class="docutils literal notranslate"><span class="pre">ape</span></code>.
+To install mixOmics follow the <a class="reference external" href="http://mixomics.org/install/">instructions</a>.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;compositions&quot;</span><span class="p">)</span>              <span class="c1">#do it only if the package is not installed yet</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;shape&quot;</span><span class="p">)</span>             <span class="c1">#do it only if the package is not installed yet</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">compositions</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ape</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">mixOmics</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Compositional data methods depend on logarithms that do not compute for <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6755255/">zeros</a>, for this reason they have to be removed from the dataset. We will account for that by using an offset, e.g. by adding one count (+1) to the entire abundance table. Pay attention to the order of magnitude of your data and choose the offset accordingly (the offset must represent a very small fraction of the smallest values observed in the table). To do that, we will convert the table in counts per milion (<a href="#id1"><span class="problematic" id="id2">*</span></a>1000000), and use the offset +1.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">table.total.final.off</span><span class="o">=</span><span class="p">(</span><span class="n">table.total.final</span><span class="o">*</span><span class="m">1000000</span><span class="p">)</span><span class="m">+1</span>
+<span class="nf">sum</span><span class="p">(</span><span class="nf">which</span><span class="p">(</span><span class="n">table.total.final.off</span> <span class="o">==</span> <span class="m">0</span><span class="p">))</span>                <span class="c1"># to check if any zero is left</span>
+</pre></div>
+</div>
+<p>We can now run the PCA with <code class="docutils literal notranslate"><span class="pre">tune.pca</span></code> from mixOmics, using the CLR normalization and setting 10 compoments. You can find more detailed instructions in the mixOmics <a class="reference external" href="http://mixomics.org/methods/pca/">website</a>.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tune.pca</span><span class="p">(</span><span class="n">table.total.final.off</span><span class="p">,</span> <span class="n">ncomp</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">center</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">logratio</span> <span class="o">=</span> <span class="s">&#39;CLR&#39;</span><span class="p">)</span>
+<span class="n">pca.res</span> <span class="o">&lt;-</span> <span class="nf">pca</span><span class="p">(</span><span class="n">table.total.final.off</span><span class="p">,</span> <span class="n">ncomp</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">center</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">logratio</span> <span class="o">=</span> <span class="s">&#39;CLR&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can investigate and plot the loadings of the PCA with the following commands:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">pca.res</span><span class="o">$</span><span class="n">sdev</span><span class="o">^</span><span class="m">2</span>
+<span class="n">pca.res</span><span class="o">$</span><span class="n">rotation</span>
+<span class="n">X</span> <span class="o">&lt;-</span> <span class="n">pca.res</span><span class="o">$</span><span class="n">rotation</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">asp</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">)</span>              <span class="c1"># To plot the frame</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;grey&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;grey&quot;</span><span class="p">)</span>
+<span class="nf">Arrows</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">X</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span> <span class="n">X</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">arr.length</span> <span class="o">=</span> <span class="m">0.15</span><span class="p">,</span> <span class="n">arr.width</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span> <span class="n">arr.type</span><span class="o">=</span><span class="s">&quot;triangle&quot;</span><span class="p">)</span>   <span class="c1"># To plot the arrows: see ?arrows for the syntax</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">1.06</span><span class="o">*</span><span class="n">X</span><span class="p">,</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">xpd</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>          <span class="c1"># To label the arrows</span>
+</pre></div>
+</div>
+<p>To plot the PCA in a two-dimensional plot use the following commands:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>          <span class="c1">#set the window for the chart (single chart, so 1 column and 1 row)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">pca.res</span><span class="o">$</span><span class="n">x</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span> <span class="n">pca.res</span><span class="o">$</span><span class="n">x</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;PCA&quot;</span><span class="p">,</span> <span class="n">cex.axis</span><span class="o">=</span><span class="m">0.75</span><span class="p">,</span> <span class="n">cex.lab</span><span class="o">=</span><span class="m">0.75</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;grey&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;grey&quot;</span><span class="p">)</span>
+<span class="nf">points</span><span class="p">(</span><span class="n">pca.res</span><span class="o">$</span><span class="n">x</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span> <span class="n">pca.res</span><span class="o">$</span><span class="n">x</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span> <span class="n">cex</span><span class="o">=</span><span class="m">1.2</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">coul</span><span class="p">[</span><span class="nf">factor</span><span class="p">(</span><span class="n">labels</span><span class="p">)],</span> <span class="n">bg</span> <span class="o">=</span> <span class="n">coul</span><span class="p">[</span><span class="nf">factor</span><span class="p">(</span><span class="n">labels</span><span class="p">)],</span> <span class="n">pch</span><span class="o">=</span><span class="m">19</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">0.7</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">)),</span> <span class="n">bty</span> <span class="o">=</span> <span class="s">&quot;n&quot;</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">coul</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="m">19</span><span class="p">,</span> <span class="n">pt.cex</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.6</span><span class="p">,</span> <span class="n">pt.lwd</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

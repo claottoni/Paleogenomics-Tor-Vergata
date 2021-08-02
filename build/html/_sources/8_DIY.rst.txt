@@ -29,10 +29,10 @@ After reads pre-processing it is up to you whether first aliging the reads or sc
 Hands-on 2: ancient human dental calculus
 *****************************************
 
-In this hands-on you will use a sequence dataset of ancient dental calculus from a recent study by `Velsko et al.`_ (Microbiome, 2019), which consists of paired-end sequence data. 
+In this hands-on you will use a sequence dataset of ancient dental calculus from a recent study by `Velsko et al. 2019`_ (Microbiome, 2019), which consists of paired-end sequence data. 
 After filtering and collapsing the reads, classify the reads of each sample with Kraken2 and estimate the abudances with Bracken. 
 
-  .. _Velsko et al.: https://link.springer.com/article/10.1186/s40168-019-0717-3
+  .. _Velsko et al. 2019: https://link.springer.com/article/10.1186/s40168-019-0717-3
 
 After that, you can use R to run analyses and create charts from the abundance tables generated with Bracken.
 
@@ -143,7 +143,7 @@ The following commands are used to finalize the table:
  
 .. note:: 
 
-  You can merge datasets only if they were generated with the same taxonomy database (here the Minikraken 8Gb database). If not, you'll have to run all the samples from the literature with the same database that you used to analyse your samples. 
+  You can merge datasets only if they were generated with the same taxonomy database (here the Minikraken 8Gb database). If not, you will have to run all the samples from the literature with the same database that you used to analyse your samples. 
 
 
 UPGMA
@@ -186,7 +186,7 @@ For example, for the literature samples, we generate the following vector of met
 					"Plaque","Plaque")
 
 Create a vector with labels corresponding to the samples that you analysed. Always make sure to follow the order of the samples if you use more than one label. 
-For example, the metadata of a table from Velsko's dataset containing ancient samples in the first five rows, and modern samples in the following five rows, will be represented by this vector: 
+For example, the metadata of a table from dataset of Velsko containing ancient samples in the first five rows, and modern samples in the following five rows, will be represented by this vector: 
 ::
 
   labels_Velsko = c("Velsko_ancient","Velsko_ancient","Velsko_ancient","Velsko_ancient","Velsko_ancient",
@@ -225,6 +225,67 @@ And finally, we plot the dendrogram by customizing the tips with the color-coded
 And we can add a legend:
 ::
 
+  legend("topleft", legend = sort(unique(labels)), bty = "n", col = coul, pch = 19, pt.cex=1, cex=0.6, pt.lwd=1)
+
+PCA
+===
+Microbiome data are considered as compositional (see `Gloor et al. 2017`_), for this reason we will apply the Centered-Log-Ratio (CLR) normalization with the library ``composition`` and the package ``mixOmics``. We will use also the library ``ape``.
+To install mixOmics follow the `instructions`_.
+
+  .. _Gloor et al. 2017: https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full
+  .. _instructions: http://mixomics.org/install/
+
+::
+
+  install.packages("compositions")		#do it only if the package is not installed yet
+  install.packages("shape")		#do it only if the package is not installed yet
+  library(compositions)
+  library(ape)
+  library(mixOmics)
+  library(shape)
+
+
+Compositional data methods depend on logarithms that do not compute for `zeros`_, for this reason they have to be removed from the dataset. We will account for that by using an offset, e.g. by adding one count (+1) to the entire abundance table. Pay attention to the order of magnitude of your data and choose the offset accordingly (the offset must represent a very small fraction of the smallest values observed in the table). To do that, we will convert the table in counts per milion (*1000000), and use the offset +1.
+
+  .. _zeros: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6755255/
+
+::
+
+  table.total.final.off=(table.total.final*1000000)+1
+  sum(which(table.total.final.off == 0))		# to check if any zero is left
+
+We can now run the PCA with ``tune.pca`` from mixOmics, using the CLR normalization and setting 10 compoments. You can find more detailed instructions in the mixOmics `website`_. 
+
+  .. _website: http://mixomics.org/methods/pca/
+
+::
+
+  tune.pca(table.total.final.off, ncomp = 10, center = TRUE, scale = FALSE, logratio = 'CLR')
+  pca.res <- pca(table.total.final.off, ncomp = 10, center = TRUE, scale = FALSE, logratio = 'CLR')
+
+You can investigate and plot the loadings of the PCA with the following commands: 
+
+::
+
+  pca.res$sdev^2
+  pca.res$rotation
+  X <- pca.res$rotation
+  plot(X, asp=1, type="n")		# To plot the frame
+  abline(v=0, lty=3, col="grey")
+  abline(h=0, lty=3, col="grey")
+  Arrows(0, 0, X[,1], X[,2], col="red", code=2, arr.length = 0.15, arr.width = 0.1, arr.type="triangle")   # To plot the arrows: see ?arrows for the syntax
+  text(1.06*X, rownames(X), col="red", xpd=T, cex=0.5)		# To label the arrows
+
+
+To plot the PCA in a two-dimensional plot use the following commands: 
+
+::
+
+  par(mfrow = c(1, 1))		#set the window for the chart (single chart, so 1 column and 1 row)
+  plot(pca.res$x[,1], pca.res$x[,2], type="n", main="PCA", cex.axis=0.75, cex.lab=0.75, xlab="", ylab="")
+  abline(v=0, lty=3, col="grey")
+  abline(h=0, lty=3, col="grey")
+  points(pca.res$x[,1], pca.res$x[,2], cex=1.2, col = coul[factor(labels)], bg = coul[factor(labels)], pch=19, lwd=0.7)      
   legend("topleft", legend = sort(unique(labels)), bty = "n", col = coul, pch = 19, pt.cex=1, cex=0.6, pt.lwd=1)
 
 
