@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>9. Material from previous courses &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+  <title>10. Material from previous courses &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="8. DO-IT-YOURSELF" href="8_DIY.html" /> 
+    <link rel="prev" title="9. Hands-on" href="8_HandsOn.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,19 +84,20 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">2. Useful commands</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">3. Quality filtering of reads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">4. Metagenomic screening of shotgun data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">5. Alignment of reads to a reference genome</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">6. Variant calling and visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">7. Filtering, annotating and combining SNPs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="8_DIY.html">8. DO-IT-YOURSELF</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Material from previous courses</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#kraken">9.1. Kraken</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#minikraken">9.1.1. Minikraken</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-report-files">9.1.2. Create report files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#building-a-kraken-standard-database-on-hpc-clusters">9.1.3. Building a Kraken standard database (on HPC clusters)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#building-a-kraken-custom-database-on-hpc-clusters">9.1.4. Building a Kraken custom database (on HPC clusters)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#taxonomic-assignation-with-kraken-custom-database">9.1.5. Taxonomic assignation with Kraken custom database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">3. Working on HPC with Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">4. Quality filtering of reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">5. Metagenomic screening of shotgun data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">6. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">7. Variant calling and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">8. Filtering, annotating and combining SNPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">9. Hands-on</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Material from previous courses</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kraken">10.1. Kraken</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#minikraken">10.1.1. Minikraken</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-report-files">10.1.2. Create report files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-a-kraken-standard-database-on-hpc-clusters">10.1.3. Building a Kraken standard database (on HPC clusters)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-a-kraken-custom-database-on-hpc-clusters">10.1.4. Building a Kraken custom database (on HPC clusters)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#taxonomic-assignation-with-kraken-custom-database">10.1.5. Taxonomic assignation with Kraken custom database</a></li>
 </ul>
 </li>
 </ul>
@@ -147,7 +148,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">9. </span>Material from previous courses</li>
+      <li><span class="section-number">10. </span>Material from previous courses</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,9 +168,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="material-from-previous-courses">
-<h1><span class="section-number">9. </span>Material from previous courses<a class="headerlink" href="#material-from-previous-courses" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">10. </span>Material from previous courses<a class="headerlink" href="#material-from-previous-courses" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="kraken">
-<span id="kraken-label"></span><h2><span class="section-number">9.1. </span>Kraken<a class="headerlink" href="#kraken" title="Permalink to this headline">¶</a></h2>
+<span id="kraken-label"></span><h2><span class="section-number">10.1. </span>Kraken<a class="headerlink" href="#kraken" title="Permalink to this headline">¶</a></h2>
 <p>In this hands-on session we will use <a class="reference external" href="http://ccb.jhu.edu/software/kraken/">Kraken</a> to screen the metagenomic content of a DNA extract after shotgun sequencing.
 A Kraken database is a directory containing at least 4 files:</p>
 <blockquote>
@@ -181,7 +182,7 @@ A Kraken database is a directory containing at least 4 files:</p>
 </ul>
 </div></blockquote>
 <div class="section" id="minikraken">
-<h3><span class="section-number">9.1.1. </span>Minikraken<a class="headerlink" href="#minikraken" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.1.1. </span>Minikraken<a class="headerlink" href="#minikraken" title="Permalink to this headline">¶</a></h3>
 <p>We will first use a pre-built 8 GB Kraken database, called <a class="reference external" href="https://ccb.jhu.edu/software/kraken/">Minikraken</a>, constructed from complete dusted bacterial, archaeal, and viral genomes in RefSeq (as of October 2017).
 You can download the pre-built Minikraken database from the website with <code class="docutils literal notranslate"><span class="pre">wget</span></code>, and extract the archive content with <code class="docutils literal notranslate"><span class="pre">tar</span></code>:</p>
 <blockquote>
@@ -228,7 +229,7 @@ You can download the pre-built Minikraken database from the website with <code c
 </table>
 </div>
 <div class="section" id="create-report-files">
-<h3><span class="section-number">9.1.2. </span>Create report files<a class="headerlink" href="#create-report-files" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.1.2. </span>Create report files<a class="headerlink" href="#create-report-files" title="Permalink to this headline">¶</a></h3>
 <p>In Kraken 1, report files are generated with a specific command, after the classification (section 3.1.2: <a class="reference internal" href="#create-report-files">Create report files</a>). Once the taxonomic assignation is done, from the Kraken output file we create a report of the analysis by running the <code class="docutils literal notranslate"><span class="pre">kraken-report</span></code> script. Note that the database used must be the same as the one used to generate the output file in the command above. The output file is a tab-delimited file with the following fields, from left to right:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -260,7 +261,7 @@ done
 <p>To visualize the results of the classification in multi-layerd pie charts, use <code class="docutils literal notranslate"><span class="pre">Krona</span></code>, as described in the section 3.1.2 (see <a class="reference internal" href="4_Metagenomics_v2.html#krona-label"><span class="std std-ref">Visualization of data with Krona</span></a>).</p>
 </div>
 <div class="section" id="building-a-kraken-standard-database-on-hpc-clusters">
-<h3><span class="section-number">9.1.3. </span>Building a Kraken standard database (on HPC clusters)<a class="headerlink" href="#building-a-kraken-standard-database-on-hpc-clusters" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.1.3. </span>Building a Kraken standard database (on HPC clusters)<a class="headerlink" href="#building-a-kraken-standard-database-on-hpc-clusters" title="Permalink to this headline">¶</a></h3>
 <p>The pre-built Minikraken database is useful for a quick metagenomic screening of shotgun data. However, by building larger databases (i.e. a larger set of k-mers gathered) we may increase the sensitivity of the analysis.
 One option is to build the Kraken standard database. To create this database we use the command <code class="docutils literal notranslate"><span class="pre">kraken-build</span></code>, which downlads the <code class="docutils literal notranslate"><span class="pre">RefSeq</span></code> complete genomes for the bacterial, archaeal, and viral domains, and builds the database.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kraken</span><span class="o">-</span><span class="n">build</span> <span class="o">--</span><span class="n">standard</span> <span class="o">--</span><span class="n">db</span> <span class="n">standardkraken</span><span class="o">.</span><span class="n">folder</span>
@@ -280,7 +281,7 @@ During the database building process some intermediate file are created that may
 </div>
 </div>
 <div class="section" id="building-a-kraken-custom-database-on-hpc-clusters">
-<h3><span class="section-number">9.1.4. </span>Building a Kraken custom database (on HPC clusters)<a class="headerlink" href="#building-a-kraken-custom-database-on-hpc-clusters" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.1.4. </span>Building a Kraken custom database (on HPC clusters)<a class="headerlink" href="#building-a-kraken-custom-database-on-hpc-clusters" title="Permalink to this headline">¶</a></h3>
 <p>Building kraken custum databases is computationally intensive. You will find a ready to use database.
 Kraken also allows creation of customized databases, where we can choose which sequences to include and the final size of the database. For example if you do not have the computational resources to build and run analyses with a full database of bacterial genomes (or you don’t need to), you may want to build a custom database with only the genomes needed for your application.</p>
 <ol class="arabic">
@@ -377,7 +378,7 @@ We can choose the size of our custom database (hence the number of k-mers includ
 </ol>
 </div>
 <div class="section" id="taxonomic-assignation-with-kraken-custom-database">
-<h3><span class="section-number">9.1.5. </span>Taxonomic assignation with Kraken custom database<a class="headerlink" href="#taxonomic-assignation-with-kraken-custom-database" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.1.5. </span>Taxonomic assignation with Kraken custom database<a class="headerlink" href="#taxonomic-assignation-with-kraken-custom-database" title="Permalink to this headline">¶</a></h3>
 <p>Once our custom database is built we can run the command for taxonomic assignation of DNA reads agaisnt the custom database, as in section 1.1 and 1.2.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kraken</span> <span class="o">--</span><span class="n">db</span> <span class="n">CustomDB</span> <span class="o">--</span><span class="n">fastq</span><span class="o">-</span><span class="nb">input</span> <span class="n">merged</span><span class="o">.</span><span class="n">fastq</span><span class="o">.</span><span class="n">gz</span> <span class="o">--</span><span class="n">gzip</span><span class="o">-</span><span class="n">compressed</span> <span class="o">--</span><span class="n">output</span> <span class="n">sample</span><span class="o">.</span><span class="n">kraken</span>
 <span class="n">kraken</span><span class="o">-</span><span class="n">report</span> <span class="o">--</span><span class="n">db</span> <span class="n">CustomDB</span> <span class="n">sample</span><span class="o">.</span><span class="n">kraken</span> <span class="o">&gt;</span> <span class="n">sample</span><span class="o">.</span><span class="n">kraken</span><span class="o">.</span><span class="n">report</span>
@@ -407,7 +408,7 @@ done
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="8_DIY.html" class="btn btn-neutral float-left" title="8. DO-IT-YOURSELF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="8_HandsOn.html" class="btn btn-neutral float-left" title="9. Hands-on" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -417,7 +418,7 @@ done
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Claudio Ottoni &amp; Amine Namouchi, Physalia Paleogenomics
+        &copy; Copyright 2021, Claudio Ottoni
 
     </p>
   </div>

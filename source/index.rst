@@ -20,12 +20,13 @@ Contents
    
    1_ListTools
    2_Useful_commands
+   3_Slurm_HPC
    3_ReadsFiltering
    4_Metagenomics_v2
    5_ReadsMapping_v2
    6_VariantsCall
    7_Filtering_SNPs
-   8_DIY
+   8_HandsOn
    9_old_material
 
    

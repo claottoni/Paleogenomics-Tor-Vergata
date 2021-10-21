@@ -1,6 +1,6 @@
-##############
-DO-IT-YOURSELF
-##############
+########
+Hands-on
+########
 
 
 *************************************
@@ -243,7 +243,6 @@ To install mixOmics follow the `instructions`_.
   library(ape)
   library(mixOmics)
   library(shape)
-
 
 Compositional data methods depend on logarithms that do not compute for `zeros`_, for this reason they have to be removed from the dataset. We will account for that by using an offset, e.g. by adding one count (+1) to the entire abundance table. Pay attention to the order of magnitude of your data and choose the offset accordingly (the offset must represent a very small fraction of the smallest values observed in the table). To do that, we will convert the table in counts per milion (*1000000), and use the offset +1.
 

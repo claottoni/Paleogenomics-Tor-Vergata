@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>7. Filtering, annotating and combining SNPs &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+  <title>8. Filtering, annotating and combining SNPs &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="8. DO-IT-YOURSELF" href="8_DIY.html" />
-    <link rel="prev" title="6. Variant calling and visualization" href="6_VariantsCall.html" /> 
+    <link rel="next" title="9. Hands-on" href="8_HandsOn.html" />
+    <link rel="prev" title="7. Variant calling and visualization" href="6_VariantsCall.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,18 +85,19 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">2. Useful commands</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">3. Quality filtering of reads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">4. Metagenomic screening of shotgun data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">5. Alignment of reads to a reference genome</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">6. Variant calling and visualization</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Filtering, annotating and combining SNPs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#snps-filtering-and-annotion">7.1. SNPs filtering and annotion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#compare-and-combine-multiple-annotation-files">7.2. Compare and combine multiple annotation files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#phylogenetic-tree-reconstruction">7.3. Phylogenetic tree reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">3. Working on HPC with Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">4. Quality filtering of reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">5. Metagenomic screening of shotgun data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">6. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">7. Variant calling and visualization</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Filtering, annotating and combining SNPs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#snps-filtering-and-annotion">8.1. SNPs filtering and annotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compare-and-combine-multiple-annotation-files">8.2. Compare and combine multiple annotation files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phylogenetic-tree-reconstruction">8.3. Phylogenetic tree reconstruction</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="8_DIY.html">8. DO-IT-YOURSELF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">9. Material from previous courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">9. Hands-on</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">10. Material from previous courses</a></li>
 </ul>
 
             
@@ -143,7 +144,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">7. </span>Filtering, annotating and combining SNPs</li>
+      <li><span class="section-number">8. </span>Filtering, annotating and combining SNPs</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -163,7 +164,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="filtering-annotating-and-combining-snps">
-<h1><span class="section-number">7. </span>Filtering, annotating and combining SNPs<a class="headerlink" href="#filtering-annotating-and-combining-snps" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8. </span>Filtering, annotating and combining SNPs<a class="headerlink" href="#filtering-annotating-and-combining-snps" title="Permalink to this headline">¶</a></h1>
 <p>To investigate the genetic variants in the <code class="docutils literal notranslate"><span class="pre">vcf</span></code> files we will use the program <a class="reference external" href="https://github.com/Amine-Namouchi/snpToolkit">snpToolkit</a>.
 The <code class="docutils literal notranslate"><span class="pre">-h</span></code> option will display the following message:</p>
 <blockquote>
@@ -189,7 +190,7 @@ optional arguments:
 </div>
 <p>Five options are possible: <code class="docutils literal notranslate"><span class="pre">explore</span></code>, <code class="docutils literal notranslate"><span class="pre">annotate</span></code>, <code class="docutils literal notranslate"><span class="pre">combine</span></code>, <code class="docutils literal notranslate"><span class="pre">viz</span></code>, <code class="docutils literal notranslate"><span class="pre">expand</span></code>.</p>
 <div class="section" id="snps-filtering-and-annotion">
-<h2><span class="section-number">7.1. </span>SNPs filtering and annotion<a class="headerlink" href="#snps-filtering-and-annotion" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1. </span>SNPs filtering and annotion<a class="headerlink" href="#snps-filtering-and-annotion" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">snpToolkit</span> <span class="pre">annotate</span></code> command will display general information about the usage of the program:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snptoolkit annotate -h
 usage: snptoolkit annotate <span class="o">[</span>-h<span class="o">]</span> -i IDENTIFIER -g GENBANK <span class="o">[</span>-p PROCESSORS<span class="o">]</span> <span class="o">[</span>-f EXCLUDECLOSESNPS<span class="o">]</span> <span class="o">[</span>-q QUALITY<span class="o">]</span> <span class="o">[</span>-d DEPTH<span class="o">]</span> <span class="o">[</span>-r RATIO<span class="o">]</span> <span class="o">[</span>-e EXCLUDE<span class="o">]</span>
@@ -321,7 +322,7 @@ The SNPs annotation is organized in tab delimited table. The columns of this tab
 </table>
 </div>
 <div class="section" id="compare-and-combine-multiple-annotation-files">
-<h2><span class="section-number">7.2. </span>Compare and combine multiple annotation files<a class="headerlink" href="#compare-and-combine-multiple-annotation-files" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.2. </span>Compare and combine multiple annotation files<a class="headerlink" href="#compare-and-combine-multiple-annotation-files" title="Permalink to this headline">¶</a></h2>
 <p>After generating a set of output files, you can run <code class="docutils literal notranslate"><span class="pre">snpToolkit</span> <span class="pre">combine</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ snptoolkit combine  -h
 usage: snptoolkit combine [-h] --location LOCATION [-r RATIO] [--bam BAMFILTER BAMFILTER BAMFILTER] [--snps {ns,s,all,inter}] [-e EXCLUDE]
@@ -445,7 +446,7 @@ ATCGGGTATGCCAATGCGT
 <p>The <code class="docutils literal notranslate"><span class="pre">fasta</span></code> output file will be used to generate a maximum likelihood tree using <code class="docutils literal notranslate"><span class="pre">IQ-TREE</span></code></p>
 </div>
 <div class="section" id="phylogenetic-tree-reconstruction">
-<h2><span class="section-number">7.3. </span>Phylogenetic tree reconstruction<a class="headerlink" href="#phylogenetic-tree-reconstruction" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.3. </span>Phylogenetic tree reconstruction<a class="headerlink" href="#phylogenetic-tree-reconstruction" title="Permalink to this headline">¶</a></h2>
 <p>There are several tools to build phylogenetic trees. All of these tools, use an alignment file as input file. Now that we have generated an alignment file in <code class="docutils literal notranslate"><span class="pre">fasta</span></code> format, we will use <code class="docutils literal notranslate"><span class="pre">IQ-TREE</span></code> to build a maximum likelihood tree.
 We use <code class="docutils literal notranslate"><span class="pre">IQ-TREE</span></code> for several reasons:</p>
 <ul class="simple">
@@ -493,10 +494,10 @@ We use <code class="docutils literal notranslate"><span class="pre">IQ-TREE</spa
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="8_DIY.html" class="btn btn-neutral float-right" title="8. DO-IT-YOURSELF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="8_HandsOn.html" class="btn btn-neutral float-right" title="9. Hands-on" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="6_VariantsCall.html" class="btn btn-neutral float-left" title="6. Variant calling and visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="6_VariantsCall.html" class="btn btn-neutral float-left" title="7. Variant calling and visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -506,7 +507,7 @@ We use <code class="docutils literal notranslate"><span class="pre">IQ-TREE</spa
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Claudio Ottoni &amp; Amine Namouchi, Physalia Paleogenomics
+        &copy; Copyright 2021, Claudio Ottoni
 
     </p>
   </div>

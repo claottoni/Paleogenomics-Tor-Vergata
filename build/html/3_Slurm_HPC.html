@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Working on HPC with Slurm &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Quality filtering of reads" href="3_ReadsFiltering.html" />
+    <link rel="prev" title="2. Useful commands" href="2_Useful_commands.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Paleogenomics at Tor Vergata
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">2. Useful commands</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Working on HPC with Slurm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#connect-to-the-hpc-cluster">3.1. Connect to the HPC cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-jobs-with-slurm">3.2. Run jobs with SLURM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#environments-modules-and-variable">3.2.1. Environments modules and variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preparation-of-slurm-scripts">3.2.2. Preparation of Slurm scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">4. Quality filtering of reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">5. Metagenomic screening of shotgun data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">6. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">7. Variant calling and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">8. Filtering, annotating and combining SNPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">9. Hands-on</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">10. Material from previous courses</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Paleogenomics at Tor Vergata</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>Working on HPC with Slurm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/3_Slurm_HPC.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="working-on-hpc-with-slurm">
+<h1><span class="section-number">3. </span>Working on HPC with Slurm<a class="headerlink" href="#working-on-hpc-with-slurm" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="connect-to-the-hpc-cluster">
+<h2><span class="section-number">3.1. </span>Connect to the HPC cluster<a class="headerlink" href="#connect-to-the-hpc-cluster" title="Permalink to this headline">¶</a></h2>
+<p>An High Performance Computing (HPC) cluster is a collection of many separate servers (computers), called <strong>nodes</strong>.
+HPC clusters are normally organized in:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>login node, where users login when connecting remotely</p></li>
+<li><p>compute nodes, where the majority of computations is run</p></li>
+<li><p>“fat” compute nodes, which provide more RAM (1Tb or more)</p></li>
+<li><p>GPU nodes, where computations can be run on both on CPU cores and on a Graphical Processing Unit</p></li>
+</ul>
+</div></blockquote>
+<p>All cluster nodes have the same components as a laptop or desktop: CPU cores, memory and disk space. The difference between personal computer and a cluster node is in quantity, quality and power of the components.</p>
+<p>The HPC cluster used here is called <a class="reference external" href="https://www.hpc.cineca.it/hardware/galileo100">Galileo100</a></p>
+<blockquote>
+<div></div></blockquote>
+<p>To login to Galileo the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> command (Secure Shell), a cryptographic network protocol for operating network services securely over an unsecured network.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">username</span><span class="nd">@login</span><span class="o">.</span><span class="n">galileo</span><span class="o">.</span><span class="n">cineca</span><span class="o">.</span><span class="n">it</span>
+</pre></div>
+</div>
+<p>You will be asked to insert your password, and after that you will be connected to the login node.</p>
+<p>Whenever you want to download a file from the HPC cluster in your local machine, you can do that with the command <code class="docutils literal notranslate"><span class="pre">scp</span></code> (Secure Copy), which allows files to be copied to, from, or between different hosts. It uses ssh for data transfer and provides the same authentication and same level of security as ssh. For example, to copy from a remote host (our server) to your computer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="n">username</span><span class="nd">@login</span><span class="o">.</span><span class="n">galileo</span><span class="o">.</span><span class="n">cineca</span><span class="o">.</span><span class="n">it</span><span class="p">:</span><span class="o">/</span><span class="n">full_path_to_file</span> <span class="o">/</span><span class="n">some</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">directory</span>
+</pre></div>
+</div>
+<p>To copy a folder you need to call the option <code class="docutils literal notranslate"><span class="pre">-r</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="n">username</span><span class="nd">@login</span><span class="o">.</span><span class="n">galileo</span><span class="o">.</span><span class="n">cineca</span><span class="o">.</span><span class="n">it</span><span class="p">:</span><span class="o">/</span><span class="n">full_path_to_file</span> <span class="o">/</span><span class="n">some</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">directory</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using a <code class="docutils literal notranslate"><span class="pre">pem</span></code> file to connect to the server, you have to use in order to download the files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">i</span> <span class="n">filename</span><span class="o">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">r</span> <span class="n">username</span><span class="nd">@remotehost</span><span class="p">:</span><span class="o">/</span><span class="n">full_path_to_file</span> <span class="o">/</span><span class="n">some</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">directory</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run-jobs-with-slurm">
+<h2><span class="section-number">3.2. </span>Run jobs with SLURM<a class="headerlink" href="#run-jobs-with-slurm" title="Permalink to this headline">¶</a></h2>
+<p>In a HPC clusters you can either work interactively (not included here), or submit jobs via a workload manager/job scheduler.
+<a class="reference external" href="https://hpc-wiki.info/hpc/SLURM">SLURM</a> is a workload manager/job scheduler that is widely used to submit jobs in HPC clusters.
+To execute some commands (or also a script or a program) using SLURM you must prepare a Bash job-script that follows this scheme:</p>
+<blockquote>
+<div></div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <strong>shebang</strong> line <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code></p></li>
+<li><p>The SLURM directives identified with <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code></p></li>
+<li><p>list of environment <strong>modules</strong> activated</p></li>
+<li><p>list of environment <strong>variables</strong></p></li>
+<li><p>execution line (the full list of commands or the name of a script to execute)</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="environments-modules-and-variable">
+<h3><span class="section-number">3.2.1. </span>Environments modules and variable<a class="headerlink" href="#environments-modules-and-variable" title="Permalink to this headline">¶</a></h3>
+<p>Many commonly used programs have been pre-installed on the cluster and can be used by everyone through a system called <strong>environment modules</strong>.
+Software packages can be loaded in your HPC work environment through the command <code class="docutils literal notranslate"><span class="pre">module</span></code>. Software packages are installed in a central, read-only location by the HPC support team and when you load a specific module a modulefile for the corresponding software is built and modifies your environment, so that the software becomes usable to you.
+This system makes it easy for everyone to find and load pre-built software into their environment to use with their programs.</p>
+<p>Modules are organized in functional categories (compilers, libraries, tools, applications…). A set of multiples modules (so libraries and tools) are collected in pre-organized <code class="docutils literal notranslate"><span class="pre">profiles</span></code> (they are created by the HPC support team).
+In Galileo we distinguish <strong>programming profiles</strong>, which contain only compilers, libraries and tools modules used for compilation, debugging, profiling and pre-processing activity:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>profile/base: this is the default profile that you find once logged in. Basic compilers, libraries and tools (gnu, intel, intelmpi, openmpi–gnu, math libraries, profiling and debugging tools, rcm,…)</p></li>
+<li><p>profile/advanced: Advanced compilers, libraries and tools (pgi, openmpi–intel, etc.)</p></li>
+<li><p>profile/archive: this contains all old versions of applications and tools and the old versions of compilers and libraries not used by other modules</p></li>
+</ul>
+</div></blockquote>
+<p>and <strong>production profiles</strong>, which contain only libraries, tools and applications modules used for production activity of specific fields of research. For example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>profile/chem: chemistry applications</p></li>
+<li><p>profile/phys: physics applications</p></li>
+<li><p>profile/lifesc: life science applications</p></li>
+<li><p>profile/bioinf: bioinformatic applications</p></li>
+</ul>
+</div></blockquote>
+<p>To load and unload a profile or a specific module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">profile</span> <span class="n">bioinf</span>
+<span class="n">module</span> <span class="n">unload</span> <span class="n">profile</span> <span class="n">bioinf</span>
+</pre></div>
+</div>
+<p>To list the modules loaded in the environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">avail</span>
+</pre></div>
+</div>
+<p>To clean the environment from all the loaded modules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">purge</span>
+</pre></div>
+</div>
+<p>A series of general useful commands to explore modules available on Galileo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">modmap</span> <span class="o">-</span><span class="n">categories</span>    <span class="c1"># to see all functional categories</span>
+<span class="n">modmap</span> <span class="o">-</span><span class="n">c</span> <span class="n">libraries</span>   <span class="c1">#Prints all modules available for the selected category (compilers, libraries, tools, applications)</span>
+<span class="n">modmap</span> <span class="o">-</span><span class="nb">all</span>           <span class="c1"># to print the full modules map: all profiles, all categories defined for each profile, all modules available for each category</span>
+<span class="n">modmap</span> <span class="o">-</span><span class="n">profiles</span>      <span class="c1"># prints all profiles available</span>
+<span class="n">modmap</span> <span class="o">-</span><span class="n">p</span> <span class="n">bioinf</span>      <span class="c1"># prints all modules available for a profile</span>
+<span class="n">modmap</span> <span class="o">-</span><span class="n">m</span> <span class="n">samtools</span>    <span class="c1"># Prints all versions of the selected module and the profile/s where they are located. Usually, the default module is the latest version.</span>
+</pre></div>
+</div>
+<p>To show all the variables of a module and its prerequisites (compilers and libraries) and conflict:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">show</span> <span class="n">samtools</span>
+</pre></div>
+</div>
+<p>Prerequisites of a module can be loaded ahead separately, otherwise you can use the command <code class="docutils literal notranslate"><span class="pre">autoload</span></code> to load the module and all the prerequisites:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">autoload</span> <span class="n">samtools</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="line-block">
+<div class="line"><strong>Environments variables</strong></div>
+<div class="line">Loading a module means that a series of useful <strong>shell environment variables</strong> will be set. An environment variable is a variable whose value is set outside of a program. A name (string) or a value (number) is assigned to the variable, and is available as reference for running a program or a script. To see what a module actually is doing you can use <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">show</span> <span class="pre">&lt;module</span> <span class="pre">name&gt;</span></code>. Modules typically load and append things to key environment variables like <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>, <code class="docutils literal notranslate"><span class="pre">$LD_LIBRARY_PATH</span></code> and so on. The variables can be used both in scripts and in the command line. They are usually referenced by putting the special symbols in front of or around the variable name. For instance, to display the user home directory, in most scripting environments, the user has to type:</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>echo $HOME
+echo $CINECA_SCRATCH
+</pre></div>
+</div>
+<p>More in general, to create a variable in the environment where you are working:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export CHR_1=&quot;chr1.fa&quot;      # to assign a value (a filename here) to the variable CHR_1 (the name of the variable is arbitrary)
+echo $CHR_1                 # to visualize the value assigned
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Multiple profiles can be loaded at the same time. Keep in mind that to use a module placed under other profiles, you have to load the corresponding profile ahead.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">autoload</span> <span class="n">r</span>      <span class="c1"># this returns an error (+(0):ERROR:0: Unable to locate a modulefile for &#39;r&#39;) without having previously loaded profile/bioinf, where r is located</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">profile</span><span class="o">/</span><span class="n">bioinf</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">autoload</span> <span class="n">r</span>      <span class="c1"># r is now loaded without errors</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="preparation-of-slurm-scripts">
+<h3><span class="section-number">3.2.2. </span>Preparation of Slurm scripts<a class="headerlink" href="#preparation-of-slurm-scripts" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned earlier, the Slurm script starts with a <strong>shebang</strong> header, followed by the <a class="reference external" href="https://slurm.schedmd.com/sbatch.html">SLURM directives</a>. Here is a standard configuration to run FastQC for example:</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Slurm directives</span>
+<span class="c1">#SBATCH --job-name=fastqc                     # Arbitrary name assigned to job to be executed</span>
+<span class="c1">#SBATCH -N 1                                  # (--nodes) number of computational nodes allocated to this job (min-max number may also be allocated)</span>
+<span class="c1">#SBATCH -n 1                                  # (--ntasks) this allocates the cpus. The controller will allocate one cpu per task. To use for multithreading operations</span>
+<span class="c1">#SBATCH --partition=gll_usr_prod              # the partition in which the job is executed</span>
+<span class="c1">#SBATCH --mem=10GB                            # Specify the real memory required per node. Default units are megabytes. Different units can be specified using the suffix [K|M|G|T].</span>
+<span class="c1">#SBATCH --time=02:00:00                       # minimum time limit on the job allocation.</span>
+<span class="c1">#SBATCH --account=project_account             # name of the project account with computational hours allocated</span>
+<span class="c1">#SBATCH --mail-type=ALL                       # to receive notifications about the job change of status</span>
+<span class="c1">#SBATCH --mail-user=youremail                 # email address to receive notifications</span>
+</pre></div>
+</div>
+<p>Then we continue by activating the modules necessary to run the job:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Module(s) loading</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">autoload</span> <span class="n">profile</span><span class="o">/</span><span class="n">bioinf</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">autoload</span> <span class="n">fastqc</span>
+</pre></div>
+</div>
+<p>After that we can define specific variables, for example to define the samples that will be processed. Once the variable is assigned at this initial stage, we can use that all over the commands and the scripts that compose the slurm job (in this case a very easy fastqc command).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setting variables</span>
+<span class="n">SAMPLE</span><span class="o">=</span><span class="s2">&quot;SRR5956372&quot;</span>
+</pre></div>
+</div>
+<p>Finally we type the commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Commands
+mkdir fastqc_output
+fastqc nogroup extract ${SAMPLE}_R1.fastq.gz -o fastqc_output
+fastqc nogroup extract ${SAMPLE}_R2.fastq.gz -o fastqc_output
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="3_ReadsFiltering.html" class="btn btn-neutral float-right" title="4. Quality filtering of reads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="2_Useful_commands.html" class="btn btn-neutral float-left" title="2. Useful commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2021, Claudio Ottoni
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

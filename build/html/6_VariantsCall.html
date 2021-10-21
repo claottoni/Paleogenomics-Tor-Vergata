@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6. Variant calling and visualization &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+  <title>7. Variant calling and visualization &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="7. Filtering, annotating and combining SNPs" href="7_Filtering_SNPs.html" />
-    <link rel="prev" title="5. Alignment of reads to a reference genome" href="5_ReadsMapping_v2.html" /> 
+    <link rel="next" title="8. Filtering, annotating and combining SNPs" href="7_Filtering_SNPs.html" />
+    <link rel="prev" title="6. Alignment of reads to a reference genome" href="5_ReadsMapping_v2.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,17 +85,18 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">2. Useful commands</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">3. Quality filtering of reads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">4. Metagenomic screening of shotgun data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">5. Alignment of reads to a reference genome</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Variant calling and visualization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#variants-calling">6.1. Variants calling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#variants-visualization">6.2. Variants visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">3. Working on HPC with Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">4. Quality filtering of reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">5. Metagenomic screening of shotgun data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">6. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Variant calling and visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#variants-calling">7.1. Variants calling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variants-visualization">7.2. Variants visualization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">7. Filtering, annotating and combining SNPs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="8_DIY.html">8. DO-IT-YOURSELF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">9. Material from previous courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">8. Filtering, annotating and combining SNPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">9. Hands-on</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">10. Material from previous courses</a></li>
 </ul>
 
             
@@ -142,7 +143,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">6. </span>Variant calling and visualization</li>
+      <li><span class="section-number">7. </span>Variant calling and visualization</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -162,10 +163,10 @@
            <div itemprop="articleBody">
             
   <div class="section" id="variant-calling-and-visualization">
-<h1><span class="section-number">6. </span>Variant calling and visualization<a class="headerlink" href="#variant-calling-and-visualization" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">7. </span>Variant calling and visualization<a class="headerlink" href="#variant-calling-and-visualization" title="Permalink to this headline">¶</a></h1>
 <p>Once the reads are aligned and the data authenticated through <em>post-mortem</em> damage analysis, we can analyse the variant positions in the samples against the reference sequence.</p>
 <div class="section" id="variants-calling">
-<h2><span class="section-number">6.1. </span>Variants calling<a class="headerlink" href="#variants-calling" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.1. </span>Variants calling<a class="headerlink" href="#variants-calling" title="Permalink to this headline">¶</a></h2>
 <p>We will use two common tools for variants calling: Samtools, in particular <code class="docutils literal notranslate"><span class="pre">samtools</span> <span class="pre">mpileup</span></code>, in combination with <code class="docutils literal notranslate"><span class="pre">bcftools</span> <span class="pre">call</span></code> of the program <a class="reference external" href="http://www.htslib.org/">BCFtools</a>.</p>
 <blockquote>
 <div></div></blockquote>
@@ -284,7 +285,7 @@
 <p>Now that you have your <code class="docutils literal notranslate"><span class="pre">vcf</span></code> file, you can open the file (use <code class="docutils literal notranslate"><span class="pre">nano</span></code> or <code class="docutils literal notranslate"><span class="pre">vim</span></code> in the server, or download the file in your laptop with <code class="docutils literal notranslate"><span class="pre">scp</span></code> and open it in a text editor) and try to search diagnostic variants (e.g. for classification). You can also visualize the variants in a specific program, as described below.</p>
 </div>
 <div class="section" id="variants-visualization">
-<h2><span class="section-number">6.2. </span>Variants visualization<a class="headerlink" href="#variants-visualization" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2. </span>Variants visualization<a class="headerlink" href="#variants-visualization" title="Permalink to this headline">¶</a></h2>
 <p>To be able to visualize the variants in the <code class="docutils literal notranslate"><span class="pre">vcf</span></code> files, you can use the program <code class="docutils literal notranslate"><span class="pre">IGV</span></code>, which accepts multiple input files formats eg. <code class="docutils literal notranslate"><span class="pre">fasta</span></code>, <code class="docutils literal notranslate"><span class="pre">bam</span></code>, <code class="docutils literal notranslate"><span class="pre">vcf</span></code> and <code class="docutils literal notranslate"><span class="pre">gff</span></code>. After loading your <code class="docutils literal notranslate"><span class="pre">bam</span></code> file(s) and the corrsponding <code class="docutils literal notranslate"><span class="pre">vcf</span></code> file(s), you will see something likt that:</p>
 <img alt="_images/igv-bam_vcf.png" src="_images/igv-bam_vcf.png" />
 <p>In this figure, we observe in the <code class="docutils literal notranslate"><span class="pre">bam</span></code> alignment file a T-&gt;C transition in the corresponding position.</p>
@@ -299,10 +300,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="7_Filtering_SNPs.html" class="btn btn-neutral float-right" title="7. Filtering, annotating and combining SNPs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="7_Filtering_SNPs.html" class="btn btn-neutral float-right" title="8. Filtering, annotating and combining SNPs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="5_ReadsMapping_v2.html" class="btn btn-neutral float-left" title="5. Alignment of reads to a reference genome" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="5_ReadsMapping_v2.html" class="btn btn-neutral float-left" title="6. Alignment of reads to a reference genome" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -312,7 +313,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Claudio Ottoni &amp; Amine Namouchi, Physalia Paleogenomics
+        &copy; Copyright 2021, Claudio Ottoni
 
     </p>
   </div>
