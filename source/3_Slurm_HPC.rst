@@ -23,7 +23,7 @@ The HPC cluster used here is called `Galileo100`_
 To login to Galileo the ``ssh`` command (Secure Shell), a cryptographic network protocol for operating network services securely over an unsecured network.
 ::
 
-  ssh username@login.galileo.cineca.it
+  ssh username@login.g100.cineca.it
 
 You will be asked to insert your password, and after that you will be connected to the login node. 
 
