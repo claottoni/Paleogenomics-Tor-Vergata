@@ -30,12 +30,12 @@ You will be asked to insert your password, and after that you will be connected 
 Whenever you want to download a file from the HPC cluster in your local machine, you can do that with the command ``scp`` (Secure Copy), which allows files to be copied to, from, or between different hosts. It uses ssh for data transfer and provides the same authentication and same level of security as ssh. For example, to copy from a remote host (our server) to your computer:
 ::
 
-  scp username@login.galileo.cineca.it:/full_path_to_file /some/local/directory
+  scp username@login.g100.cineca.it:/full_path_to_file /some/local/directory
 
 To copy a folder you need to call the option ``-r``
 ::
 
-  scp -r username@login.galileo.cineca.it:/full_path_to_file /some/local/directory
+  scp -r username@login.g100.cineca.it:/full_path_to_file /some/local/directory
 
 .. note::
 
