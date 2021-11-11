@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. Working on HPC with Slurm &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+  <title>4. Working on HPC with Slurm &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Quality filtering of reads" href="3_ReadsFiltering.html" />
-    <link rel="prev" title="2. Useful commands" href="2_Useful_commands.html" /> 
+    <link rel="next" title="5. Quality filtering of reads" href="3_ReadsFiltering.html" />
+    <link rel="prev" title="3. Useful commands" href="2_Useful_commands.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,23 +84,24 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">2. Useful commands</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Working on HPC with Slurm</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#connect-to-the-hpc-cluster">3.1. Connect to the HPC cluster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-jobs-with-slurm">3.2. Run jobs with SLURM</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#environments-modules-and-variable">3.2.1. Environments modules and variable</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#preparation-of-slurm-scripts">3.2.2. Preparation of Slurm scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Terminal_setup.html">2. First step to set-up your machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">3. Useful commands</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Working on HPC with Slurm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#connect-to-the-hpc-cluster">4.1. Connect to the HPC cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-jobs-with-slurm">4.2. Run jobs with SLURM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#environments-modules-and-variable">4.2.1. Environments modules and variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preparation-of-slurm-scripts">4.2.2. Preparation of Slurm scripts</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">4. Quality filtering of reads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">5. Metagenomic screening of shotgun data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">6. Alignment of reads to a reference genome</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">7. Variant calling and visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">8. Filtering, annotating and combining SNPs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">9. Hands-on</a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">10. Material from previous courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">5. Quality filtering of reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">6. Metagenomic screening of shotgun data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">7. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">8. Variant calling and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">9. Filtering, annotating and combining SNPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">10. Hands-on</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">11. Material from previous courses</a></li>
 </ul>
 
             
@@ -147,7 +148,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">3. </span>Working on HPC with Slurm</li>
+      <li><span class="section-number">4. </span>Working on HPC with Slurm</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,9 +168,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="working-on-hpc-with-slurm">
-<h1><span class="section-number">3. </span>Working on HPC with Slurm<a class="headerlink" href="#working-on-hpc-with-slurm" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4. </span>Working on HPC with Slurm<a class="headerlink" href="#working-on-hpc-with-slurm" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="connect-to-the-hpc-cluster">
-<h2><span class="section-number">3.1. </span>Connect to the HPC cluster<a class="headerlink" href="#connect-to-the-hpc-cluster" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.1. </span>Connect to the HPC cluster<a class="headerlink" href="#connect-to-the-hpc-cluster" title="Permalink to this headline">¶</a></h2>
 <p>An High Performance Computing (HPC) cluster is a collection of many separate servers (computers), called <strong>nodes</strong>.
 HPC clusters are normally organized in:</p>
 <blockquote>
@@ -185,16 +186,16 @@ HPC clusters are normally organized in:</p>
 <blockquote>
 <div></div></blockquote>
 <p>To login to Galileo the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> command (Secure Shell), a cryptographic network protocol for operating network services securely over an unsecured network.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">username</span><span class="nd">@login</span><span class="o">.</span><span class="n">galileo</span><span class="o">.</span><span class="n">cineca</span><span class="o">.</span><span class="n">it</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">username</span><span class="nd">@login</span><span class="o">.</span><span class="n">g100</span><span class="o">.</span><span class="n">cineca</span><span class="o">.</span><span class="n">it</span>
 </pre></div>
 </div>
 <p>You will be asked to insert your password, and after that you will be connected to the login node.</p>
 <p>Whenever you want to download a file from the HPC cluster in your local machine, you can do that with the command <code class="docutils literal notranslate"><span class="pre">scp</span></code> (Secure Copy), which allows files to be copied to, from, or between different hosts. It uses ssh for data transfer and provides the same authentication and same level of security as ssh. For example, to copy from a remote host (our server) to your computer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="n">username</span><span class="nd">@login</span><span class="o">.</span><span class="n">galileo</span><span class="o">.</span><span class="n">cineca</span><span class="o">.</span><span class="n">it</span><span class="p">:</span><span class="o">/</span><span class="n">full_path_to_file</span> <span class="o">/</span><span class="n">some</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">directory</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="n">username</span><span class="nd">@login</span><span class="o">.</span><span class="n">g100</span><span class="o">.</span><span class="n">cineca</span><span class="o">.</span><span class="n">it</span><span class="p">:</span><span class="o">/</span><span class="n">full_path_to_file</span> <span class="o">/</span><span class="n">some</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">directory</span>
 </pre></div>
 </div>
 <p>To copy a folder you need to call the option <code class="docutils literal notranslate"><span class="pre">-r</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="n">username</span><span class="nd">@login</span><span class="o">.</span><span class="n">galileo</span><span class="o">.</span><span class="n">cineca</span><span class="o">.</span><span class="n">it</span><span class="p">:</span><span class="o">/</span><span class="n">full_path_to_file</span> <span class="o">/</span><span class="n">some</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">directory</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="n">username</span><span class="nd">@login</span><span class="o">.</span><span class="n">g100</span><span class="o">.</span><span class="n">cineca</span><span class="o">.</span><span class="n">it</span><span class="p">:</span><span class="o">/</span><span class="n">full_path_to_file</span> <span class="o">/</span><span class="n">some</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">directory</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -206,7 +207,7 @@ HPC clusters are normally organized in:</p>
 </div>
 </div>
 <div class="section" id="run-jobs-with-slurm">
-<h2><span class="section-number">3.2. </span>Run jobs with SLURM<a class="headerlink" href="#run-jobs-with-slurm" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.2. </span>Run jobs with SLURM<a class="headerlink" href="#run-jobs-with-slurm" title="Permalink to this headline">¶</a></h2>
 <p>In a HPC clusters you can either work interactively (not included here), or submit jobs via a workload manager/job scheduler.
 <a class="reference external" href="https://hpc-wiki.info/hpc/SLURM">SLURM</a> is a workload manager/job scheduler that is widely used to submit jobs in HPC clusters.
 To execute some commands (or also a script or a program) using SLURM you must prepare a Bash job-script that follows this scheme:</p>
@@ -222,7 +223,7 @@ To execute some commands (or also a script or a program) using SLURM you must pr
 </ul>
 </div></blockquote>
 <div class="section" id="environments-modules-and-variable">
-<h3><span class="section-number">3.2.1. </span>Environments modules and variable<a class="headerlink" href="#environments-modules-and-variable" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.2.1. </span>Environments modules and variable<a class="headerlink" href="#environments-modules-and-variable" title="Permalink to this headline">¶</a></h3>
 <p>Many commonly used programs have been pre-installed on the cluster and can be used by everyone through a system called <strong>environment modules</strong>.
 Software packages can be loaded in your HPC work environment through the command <code class="docutils literal notranslate"><span class="pre">module</span></code>. Software packages are installed in a central, read-only location by the HPC support team and when you load a specific module a modulefile for the corresponding software is built and modifies your environment, so that the software becomes usable to you.
 This system makes it easy for everyone to find and load pre-built software into their environment to use with their programs.</p>
@@ -301,7 +302,7 @@ echo $CHR_1                 # to visualize the value assigned
 </div>
 </div>
 <div class="section" id="preparation-of-slurm-scripts">
-<h3><span class="section-number">3.2.2. </span>Preparation of Slurm scripts<a class="headerlink" href="#preparation-of-slurm-scripts" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.2.2. </span>Preparation of Slurm scripts<a class="headerlink" href="#preparation-of-slurm-scripts" title="Permalink to this headline">¶</a></h3>
 <p>As mentioned earlier, the Slurm script starts with a <strong>shebang</strong> header, followed by the <a class="reference external" href="https://slurm.schedmd.com/sbatch.html">SLURM directives</a>. Here is a standard configuration to run FastQC for example:</p>
 <blockquote>
 <div></div></blockquote>
@@ -348,10 +349,10 @@ fastqc nogroup extract ${SAMPLE}_R2.fastq.gz -o fastqc_output
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="3_ReadsFiltering.html" class="btn btn-neutral float-right" title="4. Quality filtering of reads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="3_ReadsFiltering.html" class="btn btn-neutral float-right" title="5. Quality filtering of reads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="2_Useful_commands.html" class="btn btn-neutral float-left" title="2. Useful commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="2_Useful_commands.html" class="btn btn-neutral float-left" title="3. Useful commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

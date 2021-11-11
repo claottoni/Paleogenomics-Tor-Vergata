@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>5. Metagenomic screening of shotgun data &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+  <title>6. Metagenomic screening of shotgun data &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Alignment of reads to a reference genome" href="5_ReadsMapping_v2.html" />
-    <link rel="prev" title="4. Quality filtering of reads" href="3_ReadsFiltering.html" /> 
+    <link rel="next" title="7. Alignment of reads to a reference genome" href="5_ReadsMapping_v2.html" />
+    <link rel="prev" title="5. Quality filtering of reads" href="3_ReadsFiltering.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,30 +84,31 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">2. Useful commands</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">3. Working on HPC with Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">4. Quality filtering of reads</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Metagenomic screening of shotgun data</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#kraken-2">5.1. Kraken 2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#minikraken2">5.1.1. Minikraken2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#visualization-of-data-with-krona">5.1.2. Visualization of data with Krona</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#kraken-2-custom-database">5.1.3. Kraken 2 Custom Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Terminal_setup.html">2. First step to set-up your machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">3. Useful commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">4. Working on HPC with Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">5. Quality filtering of reads</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Metagenomic screening of shotgun data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kraken-2">6.1. Kraken 2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#minikraken2">6.1.1. Minikraken2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualization-of-data-with-krona">6.1.2. Visualization of data with Krona</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kraken-2-custom-database">6.1.3. Kraken 2 Custom Database</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#bracken">5.2. Bracken</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#bracken-from-minikraken-2">5.2.1. Bracken from Minikraken 2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bracken-from-custom-databases">5.2.2. Bracken from Custom databases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bracken">6.2. Bracken</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bracken-from-minikraken-2">6.2.1. Bracken from Minikraken 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bracken-from-custom-databases">6.2.2. Bracken from Custom databases</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#mataphlan-3">5.3. Mataphlan 3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#other-tools">5.4. Other tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mataphlan-3">6.3. Mataphlan 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-tools">6.4. Other tools</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">6. Alignment of reads to a reference genome</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">7. Variant calling and visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">8. Filtering, annotating and combining SNPs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">9. Hands-on</a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">10. Material from previous courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">7. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">8. Variant calling and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">9. Filtering, annotating and combining SNPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">10. Hands-on</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">11. Material from previous courses</a></li>
 </ul>
 
             
@@ -154,7 +155,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">5. </span>Metagenomic screening of shotgun data</li>
+      <li><span class="section-number">6. </span>Metagenomic screening of shotgun data</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -174,9 +175,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="metagenomic-screening-of-shotgun-data">
-<h1><span class="section-number">5. </span>Metagenomic screening of shotgun data<a class="headerlink" href="#metagenomic-screening-of-shotgun-data" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">6. </span>Metagenomic screening of shotgun data<a class="headerlink" href="#metagenomic-screening-of-shotgun-data" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="kraken-2">
-<h2><span class="section-number">5.1. </span>Kraken 2<a class="headerlink" href="#kraken-2" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.1. </span>Kraken 2<a class="headerlink" href="#kraken-2" title="Permalink to this headline">¶</a></h2>
 <p>In this hands-on session we will use Kraken 2 to screen the metagenomic content of an ancient sample. The first version of Kraken (see <a class="reference internal" href="9_old_material.html#kraken-label"><span class="std std-ref">Kraken</span></a>) uses a large indexed and sorted list of k-mer/LCA pairs as its database, which may be problematic for users due to the large memory requirements. For this reason <a class="reference external" href="https://ccb.jhu.edu/software/kraken2/index.shtml">Kraken 2</a> was developed.
 Kraken 2 is fast and requires less memory, BUT false positive errors occur in less than 1% of queries (confidence scoring thresholds can be used to call out to detect them).
 The default (or standard) database size is 29 GB (as of Jan. 2018, in Kraken 1 the standard database is about 200 GB!), and you will need slightly more than that in RAM if you want to build it.
@@ -193,7 +194,7 @@ By default, Kraken 2 will attempt to use the dustmasker or  segmasker programs p
 <blockquote>
 <div></div></blockquote>
 <div class="section" id="minikraken2">
-<h3><span class="section-number">5.1.1. </span>Minikraken2<a class="headerlink" href="#minikraken2" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">6.1.1. </span>Minikraken2<a class="headerlink" href="#minikraken2" title="Permalink to this headline">¶</a></h3>
 <p>We will first use a pre-built 8 GB Kraken database, called <a class="reference external" href="https://ccb.jhu.edu/software/kraken2/index.shtml?t=downloads">Minikraken2</a>, constructed from complete dusted bacterial, archaeal, and viral genomes in RefSeq.
 You can download the pre-built <a class="reference external" href="https://ccb.jhu.edu/software/kraken2/index.shtml?t=downloads">Minikraken2</a> database from the program’s website with <code class="docutils literal notranslate"><span class="pre">wget</span></code>, and extract the archive content with <code class="docutils literal notranslate"><span class="pre">tar</span></code>:</p>
 <blockquote>
@@ -258,7 +259,7 @@ grandparent taxon is at the genus rank.</p></li>
 </div></blockquote>
 </div>
 <div class="section" id="visualization-of-data-with-krona">
-<span id="krona-label"></span><h3><span class="section-number">5.1.2. </span>Visualization of data with Krona<a class="headerlink" href="#visualization-of-data-with-krona" title="Permalink to this headline">¶</a></h3>
+<span id="krona-label"></span><h3><span class="section-number">6.1.2. </span>Visualization of data with Krona<a class="headerlink" href="#visualization-of-data-with-krona" title="Permalink to this headline">¶</a></h3>
 <p>Finally, we can visualize the results of the Kraken2 analysis with <a class="reference external" href="https://github.com/marbl/Krona/wiki">Krona</a>, which disaplys hierarchical data (like taxonomic assignation) in multi-layerd pie charts.
 The interactive charts created by Krona are in the <code class="docutils literal notranslate"><span class="pre">html</span></code> format and can be viewed with any web browser.
 We will convert the kraken output in html format using the program <code class="docutils literal notranslate"><span class="pre">ktImportTaxonomy</span></code>, which parses the information relative to the query ID and the taxonomy ID.</p>
@@ -300,7 +301,7 @@ We will convert the kraken output in html format using the program <code class="
 <img alt="_images/krona.png" src="_images/krona.png" />
 </div>
 <div class="section" id="kraken-2-custom-database">
-<h3><span class="section-number">5.1.3. </span>Kraken 2 Custom Database<a class="headerlink" href="#kraken-2-custom-database" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">6.1.3. </span>Kraken 2 Custom Database<a class="headerlink" href="#kraken-2-custom-database" title="Permalink to this headline">¶</a></h3>
 <p>We have already created a custom database to use in this hands-on session so we can go straight to the classification (step 4). However, we report here all the commands to build a Kraken2 database (steps 1-3).</p>
 <ol class="arabic">
 <li><p>The first step is to create a new folder that will contain your custom database (choose an appropriate name for the folder-database, here we will call it <code class="docutils literal notranslate"><span class="pre">CustomDB</span></code>).
@@ -386,12 +387,12 @@ On various test datasets, KrakenUniq gives better recall and precision than othe
 </div>
 </div>
 <div class="section" id="bracken">
-<h2><span class="section-number">5.2. </span>Bracken<a class="headerlink" href="#bracken" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.2. </span>Bracken<a class="headerlink" href="#bracken" title="Permalink to this headline">¶</a></h2>
 <p>Kraken and Kraken 2 classify reads to the best matching location in the taxonomic tree, but they do not estimate abundances of species.
 To do that we will use Bracken (Bayesian Reestimation of Abundance with KrakEN), which estimates the number of reads originating from each species present in a sample. Bracken computes probabilities that describe how much sequence from each genome in the Kraken database is identical to other genomes in the database, and combine this information with the assignments for a particular sample to estimate abundance at the species level, the genus level, or above.
 Bracken is compatible with both Kraken 1 and Kraken 2 (just note that the default kmer length is different, 31 in Kraken, 35 in Kraken 2).</p>
 <div class="section" id="bracken-from-minikraken-2">
-<h3><span class="section-number">5.2.1. </span>Bracken from Minikraken 2<a class="headerlink" href="#bracken-from-minikraken-2" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">6.2.1. </span>Bracken from Minikraken 2<a class="headerlink" href="#bracken-from-minikraken-2" title="Permalink to this headline">¶</a></h3>
 <p>Prior to abundance estimation with Bracken, each reference genome contained in the Kraken database is divided into “read-length kmers”, and each of these read-length kmers are classified. To do that, we need the <strong>library</strong> and <strong>taxonomy</strong> folders of the kraken database that we used for classification. This will generate a kmer distribution file, for examples for read-length kmers of 100 nucleotides: <code class="docutils literal notranslate"><span class="pre">database100mers.kmer_distrib</span></code>.
 The kmer distribution file will be used for the following bracken analysis.
 As pre-built database, Minikraken already contains three kmer distribution files built at 100, 150, 200 kmers.</p>
@@ -456,7 +457,7 @@ done
 </div></blockquote>
 </div>
 <div class="section" id="bracken-from-custom-databases">
-<h3><span class="section-number">5.2.2. </span>Bracken from Custom databases<a class="headerlink" href="#bracken-from-custom-databases" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">6.2.2. </span>Bracken from Custom databases<a class="headerlink" href="#bracken-from-custom-databases" title="Permalink to this headline">¶</a></h3>
 <p>The Minikraken database is available with all the files needed to run Bracken. If you used a custom database you must generate yourself the <code class="docutils literal notranslate"><span class="pre">kmer_distrib</span></code> file and the other Bracken database files with <code class="docutils literal notranslate"><span class="pre">bracken-build</span></code>.
 To do that, we need the <strong>library</strong> and <strong>taxonomy</strong> folders of the kraken database that we used for classification. These are big size folders, but do not delete them if you plan to generate Braken databases in the future at different “read-length kmers”.
 You can select the “read-length kmers” that is most suitable for your samples (namely the average insert size of your library, e.g. 60 bp for ancient libraries).
@@ -467,7 +468,7 @@ You can find all the steps for generating the Bracken database files in the <a c
 </div>
 </div>
 <div class="section" id="mataphlan-3">
-<h2><span class="section-number">5.3. </span>Mataphlan 3<a class="headerlink" href="#mataphlan-3" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.3. </span>Mataphlan 3<a class="headerlink" href="#mataphlan-3" title="Permalink to this headline">¶</a></h2>
 <p>MetaPhlAn is a computational tool that relies on ~1.1M unique clade-specific <a class="reference external" href="https://www.dropbox.com/sh/7qze7m7g9fe2xjg/AAAlyQITZuUCtBUJxpxhIroIa/mpa_v30_CHOCOPhlAn_201901_marker_info.txt.bz2?dl=1">marker genes</a> identified from ~100,000 reference genomes (~99,500 bacterial and archaeal and ~500 eukaryotic) to conduct taxonomic profiling of microbial communities (Bacteria, Archaea and Eukaryotes) from metagenomic shotgun sequencing data. MetaPhlAn allows:</p>
 <blockquote>
 <div><ul class="simple">
@@ -504,7 +505,7 @@ You can find all the steps for generating the Bracken database files in the <a c
 </div>
 </div>
 <div class="section" id="other-tools">
-<h2><span class="section-number">5.4. </span>Other tools<a class="headerlink" href="#other-tools" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.4. </span>Other tools<a class="headerlink" href="#other-tools" title="Permalink to this headline">¶</a></h2>
 <p>We remind you that there are several metagenomic classifiers, all with their pros and cons, as discussed in the lecture.
 Other tools that we want to suggest are MALT (and the <a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1903-0">HOPS</a> pipeline to analyse the data), and <a class="reference external" href="https://ccb.jhu.edu/software/centrifuge/manual.shtml">Centrifuge</a>, which both implement alignment-based methods to classify the reads.</p>
 <blockquote>
@@ -520,10 +521,10 @@ Other tools that we want to suggest are MALT (and the <a class="reference extern
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="5_ReadsMapping_v2.html" class="btn btn-neutral float-right" title="6. Alignment of reads to a reference genome" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="5_ReadsMapping_v2.html" class="btn btn-neutral float-right" title="7. Alignment of reads to a reference genome" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="3_ReadsFiltering.html" class="btn btn-neutral float-left" title="4. Quality filtering of reads" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="3_ReadsFiltering.html" class="btn btn-neutral float-left" title="5. Quality filtering of reads" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

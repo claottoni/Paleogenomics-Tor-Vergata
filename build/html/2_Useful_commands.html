@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2. Useful commands &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+  <title>3. Useful commands &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Working on HPC with Slurm" href="3_Slurm_HPC.html" />
-    <link rel="prev" title="1. List of Tools" href="1_ListTools.html" /> 
+    <link rel="next" title="4. Working on HPC with Slurm" href="3_Slurm_HPC.html" />
+    <link rel="prev" title="2. First step to set-up your machine" href="2_Terminal_setup.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,19 +84,20 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Useful commands</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#download-fastq-sequencing-data-from-the-sra">2.1. Download FASTQ sequencing data from the SRA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#download-referece-sequences-from-the-ncbi">2.2. Download referece sequences from the NCBI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Terminal_setup.html">2. First step to set-up your machine</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Useful commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-fastq-sequencing-data-from-the-sra">3.1. Download FASTQ sequencing data from the SRA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-referece-sequences-from-the-ncbi">3.2. Download referece sequences from the NCBI</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">3. Working on HPC with Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">4. Quality filtering of reads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">5. Metagenomic screening of shotgun data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">6. Alignment of reads to a reference genome</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">7. Variant calling and visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">8. Filtering, annotating and combining SNPs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">9. Hands-on</a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">10. Material from previous courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">4. Working on HPC with Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">5. Quality filtering of reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">6. Metagenomic screening of shotgun data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">7. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">8. Variant calling and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">9. Filtering, annotating and combining SNPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">10. Hands-on</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">11. Material from previous courses</a></li>
 </ul>
 
             
@@ -143,7 +144,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">2. </span>Useful commands</li>
+      <li><span class="section-number">3. </span>Useful commands</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -163,9 +164,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="useful-commands">
-<h1><span class="section-number">2. </span>Useful commands<a class="headerlink" href="#useful-commands" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">3. </span>Useful commands<a class="headerlink" href="#useful-commands" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="download-fastq-sequencing-data-from-the-sra">
-<h2><span class="section-number">2.1. </span>Download FASTQ sequencing data from the SRA<a class="headerlink" href="#download-fastq-sequencing-data-from-the-sra" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.1. </span>Download FASTQ sequencing data from the SRA<a class="headerlink" href="#download-fastq-sequencing-data-from-the-sra" title="Permalink to this headline">¶</a></h2>
 <p>To download <code class="docutils literal notranslate"><span class="pre">fastq</span></code> sequences deposited in the Sequence Read Archive (SRA) of the NCBI we wil use <strong>SRA Tools</strong>. You can install <a class="reference external" href="https://anaconda.org/bioconda/sra-tools">SRA Tools with Conda</a>.</p>
 <p>Go to the <a class="reference external" href="https://www.ncbi.nlm.nih.gov/sra">SRA</a> website and search the accession number of the study you interested in (e.g. PRJEB30331).
 A list of all the sequences deposited under that accession number is returned, click on <strong>Send results to run selector</strong>.
@@ -188,7 +189,7 @@ To download the sequences type the following command:</p>
 </div>
 </div>
 <div class="section" id="download-referece-sequences-from-the-ncbi">
-<h2><span class="section-number">2.2. </span>Download referece sequences from the NCBI<a class="headerlink" href="#download-referece-sequences-from-the-ncbi" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.2. </span>Download referece sequences from the NCBI<a class="headerlink" href="#download-referece-sequences-from-the-ncbi" title="Permalink to this headline">¶</a></h2>
 <p>Download the <code class="docutils literal notranslate"><span class="pre">assembly_summary.txt</span></code> file from the RefSeq database for the taxonomic group of interest. You can download assemblies of different groups:</p>
 <p><a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/assembly_summary.txt">ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/assembly_summary.txt</a>
 <a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/assembly_summary.txt">ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/assembly_summary.txt</a>
@@ -254,10 +255,10 @@ Otherwise you can  explore the complete genomes and the latest assemblies for a 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="3_Slurm_HPC.html" class="btn btn-neutral float-right" title="3. Working on HPC with Slurm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="3_Slurm_HPC.html" class="btn btn-neutral float-right" title="4. Working on HPC with Slurm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="1_ListTools.html" class="btn btn-neutral float-left" title="1. List of Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="2_Terminal_setup.html" class="btn btn-neutral float-left" title="2. First step to set-up your machine" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

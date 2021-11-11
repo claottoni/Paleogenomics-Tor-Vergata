@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. Quality filtering of reads &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+  <title>5. Quality filtering of reads &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5. Metagenomic screening of shotgun data" href="4_Metagenomics_v2.html" />
-    <link rel="prev" title="3. Working on HPC with Slurm" href="3_Slurm_HPC.html" /> 
+    <link rel="next" title="6. Metagenomic screening of shotgun data" href="4_Metagenomics_v2.html" />
+    <link rel="prev" title="4. Working on HPC with Slurm" href="3_Slurm_HPC.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,19 +84,20 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">2. Useful commands</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">3. Working on HPC with Slurm</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Quality filtering of reads</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#reads-quality-control">4.1. Reads quality control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#reads-quality-filtering">4.2. Reads quality filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Terminal_setup.html">2. First step to set-up your machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">3. Useful commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">4. Working on HPC with Slurm</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Quality filtering of reads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reads-quality-control">5.1. Reads quality control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reads-quality-filtering">5.2. Reads quality filtering</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">5. Metagenomic screening of shotgun data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">6. Alignment of reads to a reference genome</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">7. Variant calling and visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">8. Filtering, annotating and combining SNPs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">9. Hands-on</a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">10. Material from previous courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">6. Metagenomic screening of shotgun data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">7. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">8. Variant calling and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">9. Filtering, annotating and combining SNPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">10. Hands-on</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">11. Material from previous courses</a></li>
 </ul>
 
             
@@ -143,7 +144,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">4. </span>Quality filtering of reads</li>
+      <li><span class="section-number">5. </span>Quality filtering of reads</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -163,9 +164,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="quality-filtering-of-reads">
-<h1><span class="section-number">4. </span>Quality filtering of reads<a class="headerlink" href="#quality-filtering-of-reads" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">5. </span>Quality filtering of reads<a class="headerlink" href="#quality-filtering-of-reads" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="reads-quality-control">
-<h2><span class="section-number">4.1. </span>Reads quality control<a class="headerlink" href="#reads-quality-control" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.1. </span>Reads quality control<a class="headerlink" href="#reads-quality-control" title="Permalink to this headline">¶</a></h2>
 <p>The reads generated by a sequencing platform are delivered in <code class="docutils literal notranslate"><span class="pre">fastq</span></code> format. The first step of the analysis of raw sequences is the quality-control.
 To do that, we will use <a class="reference external" href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>, which provides a modular set of analyses that you can use to have a first impression of whether your data has any problems of which you should be aware before doing any further analysis.
 To run FastQC type the following command:</p>
@@ -202,7 +203,7 @@ To run FastQC type the following command:</p>
 </div>
 </div>
 <div class="section" id="reads-quality-filtering">
-<h2><span class="section-number">4.2. </span>Reads quality filtering<a class="headerlink" href="#reads-quality-filtering" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.2. </span>Reads quality filtering<a class="headerlink" href="#reads-quality-filtering" title="Permalink to this headline">¶</a></h2>
 <p>Reads filtering is a crucial step as it will affect all downstream analyses. One of the important things to do is to trim the adapters that were used during the preparation of the genomic libraries.
 For this step we will use the program <a class="reference external" href="https://github.com/MikkelSchubert/adapterremoval">AdapterRemoval</a>, which performs adapter trimming of sequencing reads and subsequent merging (collapse) of paired-end reads with negative insert sizes (an overlap between two sequencing reads derived from a single DNA fragment) into a single collapsed read.
 We will analyse the DNA sequences of an ancient sample sequenced in <strong>single-end</strong>. With this command, the trimmed reads are written to <code class="docutils literal notranslate"><span class="pre">output_single.truncated.gz</span></code>, the discarded FASTQ reads are written to <code class="docutils literal notranslate"><span class="pre">output_single.discarded.gz</span></code>, and settings and summary statistics are written to <code class="docutils literal notranslate"><span class="pre">output_single.settings</span></code>.</p>
@@ -285,10 +286,10 @@ Finally, the <code class="docutils literal notranslate"><span class="pre">output
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="4_Metagenomics_v2.html" class="btn btn-neutral float-right" title="5. Metagenomic screening of shotgun data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="4_Metagenomics_v2.html" class="btn btn-neutral float-right" title="6. Metagenomic screening of shotgun data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="3_Slurm_HPC.html" class="btn btn-neutral float-left" title="3. Working on HPC with Slurm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="3_Slurm_HPC.html" class="btn btn-neutral float-left" title="4. Working on HPC with Slurm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

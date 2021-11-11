@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+  <title>2. First step to set-up your machine &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
   
 
   
@@ -20,7 +20,6 @@
   
 
   
-    
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -35,9 +34,10 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-    <script type="text/javascript" src="_static/searchtools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Useful commands" href="2_Useful_commands.html" />
+    <link rel="prev" title="1. List of Tools" href="1_ListTools.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -64,7 +64,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -82,9 +82,13 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_Terminal_setup.html">2. First step to set-up your machine</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. First step to set-up your machine</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-terminal-machine">2.1. Set-up your terminal machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-miniconda-to-work-on-your-local-machine">2.2. Set-up Miniconda to work on your local machine</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">3. Useful commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">4. Working on HPC with Slurm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">5. Quality filtering of reads</a></li>
@@ -140,12 +144,14 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Search</li>
+      <li><span class="section-number">2. </span>First step to set-up your machine</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/2_Terminal_setup.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -157,23 +163,45 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="first-step-to-set-up-your-machine">
+<h1><span class="section-number">2. </span>First step to set-up your machine<a class="headerlink" href="#first-step-to-set-up-your-machine" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="set-up-your-terminal-machine">
+<h2><span class="section-number">2.1. </span>Set-up your terminal machine<a class="headerlink" href="#set-up-your-terminal-machine" title="Permalink to this headline">¶</a></h2>
+<p>If you have a MacBook just open the Terminal app and that’s it!
+If you a have a Windows-based computer you must download the app of <a class="reference external" href="https://www.microsoft.com/it-it/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab">Ubuntu</a> in the Microsoft Store.</p>
+<p>After that you have to enable the use of Linux in Windows:
+- From the Start menu, search “Programmi e funzionalità”.
+- Go to the menu “Attivazione/disattivazione delle funzionalità Windows”.
+- Check the box “Sottosistema Windows per Linux” to enable it (see the figure below).</p>
+<img alt="_images/Sottosistema-Linux.jpg" src="_images/Sottosistema-Linux.jpg" />
+<p>Now you can open the app Ubuntu and use the textual shell <strong>bash</strong> in the terminal.
+<a class="reference external" href="https://drive.google.com/file/d/18v7EoQcg1ff3My4bypvjzkMUiIFrMkT2/view?usp=sharing">Here</a> you can find a quick reference to the basic commands in bash.</p>
+</div>
+<div class="section" id="set-up-miniconda-to-work-on-your-local-machine">
+<h2><span class="section-number">2.2. </span>Set-up Miniconda to work on your local machine<a class="headerlink" href="#set-up-miniconda-to-work-on-your-local-machine" title="Permalink to this headline">¶</a></h2>
+<p>To work locally you will have to install several programs and software packages. This can be done with a package manager <strong>Miniconda</strong>.
+To install Miniconda type the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">repo</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">Miniconda3</span><span class="o">-</span><span class="n">py39_4</span><span class="o">.</span><span class="mf">10.3</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">bash</span> <span class="n">Miniconda3</span><span class="o">-</span><span class="n">py39_4</span><span class="o">.</span><span class="mf">10.3</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</div>
+</div>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="2_Useful_commands.html" class="btn btn-neutral float-right" title="3. Useful commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="1_ListTools.html" class="btn btn-neutral float-left" title="1. List of Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -225,14 +253,7 @@
     </script>
 
     
-  
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
    
-
 
 </body>
 </html>

@@ -19,6 +19,7 @@ Contents
    :numbered:
    
    1_ListTools
+   2_Terminal_setup
    2_Useful_commands
    3_Slurm_HPC
    3_ReadsFiltering
