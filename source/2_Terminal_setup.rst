@@ -37,4 +37,65 @@ To install Miniconda type the following commands:
 Follow the procedure (type always yes if asked) and when asked about executing **conda init** type **yes**. 
 Miniconda automatically install also **Python 3**.
 
- 
+
+********************************
+Create an environment with Conda
+********************************
+
+A conda environment is a directory that contains a specific collection of conda packages that you have installed. For example, you may have one environment with Python 2 and its dependencies, and another environment with Python 3.
+Environments and all programs inside an environment are independent from programs belonging to another environment. 
+Find here more information on Conda `environments`_. 
+
+.. _environments: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#
+
+Here we will create an environment called **bioinf**, where we will install most of the programs that we will use. 
+::
+
+  conda create --name bioinf
+  
+After creating the environment, activate it by typing the following command (and this must be don everytime you want to activate the environment)
+::
+
+  conda activate bioinf
+
+To deactivate the environment
+::
+
+  conda deactivate
+  
+
+***************************************
+Install packages inside the environment
+***************************************
+
+Install FastQC: 
+::
+
+  conda install -c bioconda fastqc
+
+Install BWA: 
+::
+
+  conda install -c bioconda bwa
+
+Install BWA: 
+::
+
+  conda install -c bioconda bwa
+
+Install Picard: 
+::
+
+  conda install -c bioconda picard
+  
+Install Samtools: 
+::
+
+  conda install -c bioconda samtools
+
+If you have troubles try these commands:
+::
+
+  conda config --add channels bioconda
+  conda config --add channels conda-forge
+  conda install samtools==1.11
