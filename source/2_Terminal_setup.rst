@@ -93,7 +93,7 @@ Install Samtools:
 
   conda install -c bioconda samtools
 
-If you have troubles try these commands:
+If you have troubles with the installation of Samtools try these commands:
 ::
 
   conda config --add channels bioconda
