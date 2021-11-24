@@ -99,3 +99,26 @@ If you have troubles with the installation of Samtools try these commands:
   conda config --add channels bioconda
   conda config --add channels conda-forge
   conda install samtools==1.11
+
+Install Dedup: 
+::
+  
+  conda install -c bioconda dedup
+
+You can download the `jar` file of GATK-3.8 by using ``wget`` and the link in the command below. 
+::
+  
+  wget https://drive.google.com/file/d/1NNpQwKgBd7kgsJLh4DpJTldo7nzJvyM1/view?usp=sharing
+
+**********************
+Download sequence data
+**********************
+
+We will use sequences orginating from an ancient human bone (LMP4_2). You can download them again with ``wget`` in a dedicated folder, called ``fastq``, that you will create in your home (type ``cd`` to move to your home). 
+Since a Paired-End sequencing was done, you will download first the forward reads (R1) and then the reverse reads (R2). 
+::
+
+  cd
+  mkdir fastq
+  wget https://drive.google.com/file/d/1NPPig7gwDZD0StqhtaSyqbjPF-_Hjhb2/view?usp=sharing
+  wget https://drive.google.com/file/d/1N9xkDPlJ0tqB5uV4kXKsYN_FDJVBHFCG/view?usp=sharing

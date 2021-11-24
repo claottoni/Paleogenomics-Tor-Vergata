@@ -89,6 +89,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#install-miniconda-to-work-on-your-local-machine">2.2. Install Miniconda to work on your local machine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-an-environment-with-conda">2.3. Create an environment with Conda</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-packages-inside-the-environment">2.4. Install packages inside the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-sequence-data">2.5. Download sequence data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">3. Useful commands</a></li>
@@ -234,6 +235,25 @@ Find here more information on Conda <a class="reference external" href="https://
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">bioconda</span>
 <span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
 <span class="n">conda</span> <span class="n">install</span> <span class="n">samtools</span><span class="o">==</span><span class="mf">1.11</span>
+</pre></div>
+</div>
+<p>Install Dedup:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">bioconda</span> <span class="n">dedup</span>
+</pre></div>
+</div>
+<p>You can download the <cite>jar</cite> file of GATK-3.8 by using <code class="docutils literal notranslate"><span class="pre">wget</span></code> and the link in the command below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>wget https://drive.google.com/file/d/1NNpQwKgBd7kgsJLh4DpJTldo7nzJvyM1/view?usp=sharing
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-sequence-data">
+<h2><span class="section-number">2.5. </span>Download sequence data<a class="headerlink" href="#download-sequence-data" title="Permalink to this headline">¶</a></h2>
+<p>We will use sequences orginating from an ancient human bone (LMP4_2). You can download them again with <code class="docutils literal notranslate"><span class="pre">wget</span></code> in a dedicated folder, called <code class="docutils literal notranslate"><span class="pre">fastq</span></code>, that you will create in your home (type <code class="docutils literal notranslate"><span class="pre">cd</span></code> to move to your home).
+Since a Paired-End sequencing was done, you will download first the forward reads (R1) and then the reverse reads (R2).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd
+mkdir fastq
+wget https://drive.google.com/file/d/1NPPig7gwDZD0StqhtaSyqbjPF-_Hjhb2/view?usp=sharing
+wget https://drive.google.com/file/d/1N9xkDPlJ0tqB5uV4kXKsYN_FDJVBHFCG/view?usp=sharing
 </pre></div>
 </div>
 </div>
