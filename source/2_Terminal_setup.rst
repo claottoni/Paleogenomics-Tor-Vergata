@@ -6,7 +6,9 @@ First step to set-up your machine
 Set-up your terminal machine
 ****************************
 
-If you have a MacBook just open the Terminal app and that's it!
+Set-up for Windows users
+************************
+
 If you a have a Windows-based computer you must download the app of `Ubuntu`_ in the Microsoft Store. 
 
 .. _Ubuntu: https://www.microsoft.com/it-it/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab
@@ -23,19 +25,41 @@ Now you can open the app Ubuntu and use the textual shell **bash** in the termin
 
 .. _Here: https://drive.google.com/file/d/18v7EoQcg1ff3My4bypvjzkMUiIFrMkT2/view?usp=sharing
 
+
+Set-up for Mac OSX users
+************************
+
+Mac OS has already a Terminal app. Open it and make sure that you have the Command Line Tools installed by typing the following command:  
+::
+
+  xcode-select --install
+
+The Command Line Tools package will be installed in your Mac, so that you can use the standard commands to work in the shell. 
+
+
 ***********************************************
 Install Miniconda to work on your local machine
 ***********************************************
 
-To work locally you will have to install several programs and software packages. This can be done with a package manager **Miniconda**. 
-To install Miniconda type the following commands: 
+`Here`_ you can find a quick reference to the basic commands in bash. 
+
+.. _Here: https://drive.google.com/file/d/18v7EoQcg1ff3My4bypvjzkMUiIFrMkT2/view?usp=sharing
+
+To work locally (on your computer) you will have to install several programs and software packages. This can be done with a package manager **Miniconda**. 
+For Windows users, to install Miniconda type the following commands: 
 ::
 
   wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh
   bash Miniconda3-py39_4.10.3-Linux-x86_64.sh
 
-Follow the procedure (type always yes if asked) and when asked about executing **conda init** type **yes**. 
-Miniconda automatically install also **Python 3**.
+for Mac-OS users type: 
+::
+
+  curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+  bash Miniconda3-latest-MacOSX-x86_64.sh
+
+Follow the procedure (type always **yes** if asked) and when asked about executing **conda init** type **yes**. 
+Miniconda automatically installs also **Python 3**.
 
 
 ********************************
@@ -68,15 +92,15 @@ To deactivate the environment
 Install packages inside the environment
 ***************************************
 
+You will install most of the programs that we will use in the **bioinf** environment, so first of all activate the environment. 
+::
+  
+  conda activate bioinf
+
 Install FastQC: 
 ::
 
   conda install -c bioconda fastqc
-
-Install BWA: 
-::
-
-  conda install -c bioconda bwa
 
 Install BWA: 
 ::
@@ -105,20 +129,8 @@ Install Dedup:
   
   conda install -c bioconda dedup
 
-You can download the `jar` file of GATK-3.8 by using ``wget`` and the link in the command below. 
-::
-  
-  wget https://drive.google.com/file/d/1NNpQwKgBd7kgsJLh4DpJTldo7nzJvyM1/view?usp=sharing
+We will provide a version of **GATK 3.8** (file ``GenomeAnalysisTK.jar``). 
+Download the `IGV Genome browser`_ on you computer, just press the link and download the version for your computed (Mac-OS or Windows). 
 
-**********************
-Download sequence data
-**********************
+.. _IGV Genome browser: https://software.broadinstitute.org/software/igv/download
 
-We will use sequences orginating from an ancient human bone (LMP4_2). You can download them again with ``wget`` in a dedicated folder, called ``fastq``, that you will create in your home (type ``cd`` to move to your home). 
-Since a Paired-End sequencing was done, you will download first the forward reads (R1) and then the reverse reads (R2). 
-::
-
-  cd
-  mkdir fastq
-  wget https://drive.google.com/file/d/1NPPig7gwDZD0StqhtaSyqbjPF-_Hjhb2/view?usp=sharing
-  wget https://drive.google.com/file/d/1N9xkDPlJ0tqB5uV4kXKsYN_FDJVBHFCG/view?usp=sharing
