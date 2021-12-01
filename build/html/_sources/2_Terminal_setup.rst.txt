@@ -101,6 +101,11 @@ Install FastQC:
 ::
 
   conda install -c bioconda fastqc
+  
+Install Adapter Removal
+::
+  
+  conda install -c bioconda adapterremoval
 
 Install BWA: 
 ::
