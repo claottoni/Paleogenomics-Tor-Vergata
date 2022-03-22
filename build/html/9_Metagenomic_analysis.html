@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10. Analysis of Metagenomic data &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="11. Hands-on" href="8_HandsOn.html" />
+    <link rel="prev" title="9. Filtering, annotating and combining SNPs" href="7_Filtering_SNPs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Paleogenomics at Tor Vergata
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Terminal_setup.html">2. First step to set-up your machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">3. Useful commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">4. Working on HPC with Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">5. Quality filtering of reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">6. Metagenomic screening of shotgun data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">7. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">8. Variant calling and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">9. Filtering, annotating and combining SNPs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Analysis of Metagenomic data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prepare-abundance-tables-for-downstream-analyses">10.1. Prepare abundance tables for downstream analyses</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parse-the-kraken-bracken-outputs-to-abundance-tables">10.1.1. Parse the kraken/bracken outputs to abundance tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#normalization-of-the-abundance-table-for-genome-length">10.1.2. Normalization of the abundance table for genome length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#retrieve-full-taxonomic-ranks-of-the-abundance-table">10.1.3. Retrieve full taxonomic ranks of the abundance table</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sourcetracker">10.2. Sourcetracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analyses-with-phyloseq">10.3. Analyses with Phyloseq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#importing-abundance-tables-in-phyloseq">10.3.1. Importing abundance tables in Phyloseq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#barplot-of-taxa-abundances">10.3.2. Barplot of taxa abundances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multidimensional-scaling-principal-coordinate-analysis">10.3.3. Multidimensional Scaling (Principal Coordinate Analysis)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#differential-taxonomic-abundances-with-deseq2">10.3.4. Differential taxonomic abundances with DESeq2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">11. Hands-on</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">12. Material from previous courses</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Paleogenomics at Tor Vergata</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">10. </span>Analysis of Metagenomic data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/9_Metagenomic_analysis.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="analysis-of-metagenomic-data">
+<h1><span class="section-number">10. </span>Analysis of Metagenomic data<a class="headerlink" href="#analysis-of-metagenomic-data" title="Permalink to this headline"></a></h1>
+<p>Here we analyse shotgun sequence data from dental calculus. After filtering and collapsing the reads, classify the reads of each sample with Kraken2 and estimate the abudances with Bracken.
+After that, you can use R to run analyses and create charts from the abundance tables generated with Bracken.</p>
+<section id="prepare-abundance-tables-for-downstream-analyses">
+<h2><span class="section-number">10.1. </span>Prepare abundance tables for downstream analyses<a class="headerlink" href="#prepare-abundance-tables-for-downstream-analyses" title="Permalink to this headline"></a></h2>
+<section id="parse-the-kraken-bracken-outputs-to-abundance-tables">
+<h3><span class="section-number">10.1.1. </span>Parse the kraken/bracken outputs to abundance tables<a class="headerlink" href="#parse-the-kraken-bracken-outputs-to-abundance-tables" title="Permalink to this headline"></a></h3>
+<p>Run the <code class="docutils literal notranslate"><span class="pre">brackenToAbundanceTable_v2.R</span></code> R script to merge the species aundances of all the samples in one table. The script needs as argument the path to the folder containing the bracken results.
+Move to the bracken results folder and type the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brackenToAbundanceTable_v2</span><span class="o">.</span><span class="n">R</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>The script will generate the abundance tables, <code class="docutils literal notranslate"><span class="pre">taxa_abundance_bracken_names_IDs.txt</span></code>, which contains the species names and the NCBI IDs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can generate abundance tables for various datasets (with bracken files contained in dedicated folders) in different folders and rename the final tables based on the folder (i.e. dataset) name. Try the following commands in the the folder containing all the datasets-subfolders:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>for i in $(find -name &quot;*names_IDs.txt&quot; -type f | sort); do tag=$(basename $(dirname &quot;$i&quot;)); cp $i ${FOLDER}/${tag}_abundance_bracken_names_IDs.txt; done
+</pre></div>
+</div>
+</div>
+<p>Then use the <code class="docutils literal notranslate"><span class="pre">abundanceTablesMerger_v2.R</span></code> script to merge all the tables to obtain one comprehensive table (<code class="docutils literal notranslate"><span class="pre">abundance_table_IDs.merged</span></code>) that you will use for downstream analyses. Remember to rename each file based on the specific dataset before pooling them:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">abundanceTablesMerger_v2</span><span class="o">.</span><span class="n">R</span> <span class="o">*.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</section>
+<section id="normalization-of-the-abundance-table-for-genome-length">
+<h3><span class="section-number">10.1.2. </span>Normalization of the abundance table for genome length<a class="headerlink" href="#normalization-of-the-abundance-table-for-genome-length" title="Permalink to this headline"></a></h3>
+<p>Since the Kraken database was built from complete Bacterial, Archaeal and Viral genomes, we must make a normalization for the genome leghts of each species. This normalization is important when we want to analyse relative taxa abundances to characterise full microbiomes.
+To do that will use a Python <a class="reference external" href="https://github.com/claottoni/toolbox/tree/main/gL-nomalizer">script</a> that takes three arguments:</p>
+<blockquote>
+<div></div></blockquote>
+<ol class="arabic simple">
+<li><p>The abundance table with names</p></li>
+<li><p>The table of genome lengths (parsed from the NCBI genome <a class="reference external" href="https://www.ncbi.nlm.nih.gov/genome/browse/#!/prokaryotes/">browser</a>)</p></li>
+<li><p>The name of the output file</p></li>
+</ol>
+<blockquote>
+<div></div></blockquote>
+<p>The script searches the <strong>names</strong> of the species in the file with the list of genome lengths of species in the NCBI and divides the abundance of each species by the length of the assembly available in the NCBI.
+Run the normalization with <code class="docutils literal notranslate"><span class="pre">gL-normalizer-lite_v2.py</span></code> and type the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">gL</span><span class="o">-</span><span class="n">normalizer</span><span class="o">-</span><span class="n">lite_v2</span><span class="o">.</span><span class="n">py</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span> <span class="n">prokaryotes_viruses_organelles</span><span class="o">.</span><span class="n">table</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span>
+</pre></div>
+</div>
+<p>The output table reports the <strong>Species</strong>, the <strong>NCBI IDs</strong>, the <strong>Assembly stage</strong> of the genome in NCBI, the <strong>Length in Megabases</strong>, the kind of <strong>Match</strong>, exact, species (when a peculiar strain is not found in the list of lenghts), and genus (when a species is not found).</p>
+</section>
+<section id="retrieve-full-taxonomic-ranks-of-the-abundance-table">
+<h3><span class="section-number">10.1.3. </span>Retrieve full taxonomic ranks of the abundance table<a class="headerlink" href="#retrieve-full-taxonomic-ranks-of-the-abundance-table" title="Permalink to this headline"></a></h3>
+<p>In the next step, you will retrieve the full taxonomic ranks for the species of your abundance table. To do that you must have the program <a class="reference external" href="https://github.com/linzhi2013/taxonomy_ranks">Taxaranks</a> installed.</p>
+<blockquote>
+<div></div></blockquote>
+<p>Run the following script, which incorporates Taxaranks, to attach the full taxonomy to every species ID.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">getFullTaxaranks</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">i</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span>
+</pre></div>
+</div>
+<p>The script generates the following files:</p>
+<ol class="arabic simple">
+<li><p>a <code class="docutils literal notranslate"><span class="pre">file.taxonomy</span></code> - the full taxonomic ranks (from Kingdom) of the species entries.</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">file.taxonomy.err</span></code> - the species for which no taxonomic ranks could be found.</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">file.taxonomy.final</span></code> - full taxonomy ranks are included in the original abundance table.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">file.taxonomy.err</span></code> should be empty in principle. If not, then the ful taxonomic ranks could not be retrieved for the species listed. In that case, try to update the NCBI taxonomy database as reported in the Taxaranks website.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Depending on the composition of the Kraken DB that you used, you may want to remove unwanted taxa. To do that use <code class="docutils literal notranslate"><span class="pre">grep</span></code>, for example to remove Eukaryota and Viruses:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span> <span class="o">-</span><span class="n">v</span> <span class="s2">&quot;Viruses\|Eukaryota\|Fungi&quot;</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">taxonomy</span><span class="o">.</span><span class="n">final</span> <span class="o">&gt;</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">Archaea_Bacteria</span>
+</pre></div>
+</div>
+<p>Then, you can generate a new table including only species names (without Eukaryota and Viruses)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cut</span> <span class="o">-</span><span class="n">f</span> <span class="mi">20</span><span class="o">-</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">Archaea_Bacteria</span> <span class="o">&gt;</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">Archaea_Bacteria</span><span class="o">.</span><span class="n">species</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="sourcetracker">
+<h2><span class="section-number">10.2. </span>Sourcetracker<a class="headerlink" href="#sourcetracker" title="Permalink to this headline"></a></h2>
+<p>First you must prepare the sourcetracker table, in which the NCBI taxonomic IDs and the abundance values (as integers) are used.
+You can parse the table from the genome length normalized abudance table with the R script <code class="docutils literal notranslate"><span class="pre">makeIntegers.R</span></code>, which will generate a <code class="docutils literal notranslate"><span class="pre">filename.int</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Rscript</span> <span class="n">makeIntegers</span><span class="o">.</span><span class="n">R</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span>
+</pre></div>
+</div>
+<p>Then you can add the header typical of the sourcetracker format by tweaking the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sed</span> <span class="s1">&#39;1s/^/#Constructed manually</span><span class="se">\n</span><span class="s1">#OTU id</span><span class="se">\t</span><span class="s1">/&#39;</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">int</span> <span class="o">&gt;</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">int</span><span class="o">.</span><span class="n">sourcetracker</span>
+</pre></div>
+</div>
+<p>After preparing the abundance table, prepare the <strong>mapping file</strong> according to the required <a class="reference external" href="https://github.com/danknights/sourcetracker/blob/master/data/metadata.txt">layout</a>.
+In the <strong>SourceSink</strong> column, mark as <code class="docutils literal notranslate"><span class="pre">sink</span></code> the input samples to be tested, and as <code class="docutils literal notranslate"><span class="pre">source</span></code> the reference microbiome samples (e.g. soil, skin, laboratory controls microbiomes).</p>
+<blockquote>
+<div></div></blockquote>
+<p><a class="reference external" href="https://github.com/danknights/sourcetracker">Sourcetracker</a> is a tool used to predict the source of microbial communities in a set of input samples (i.e., the sink samples). More info in the <a class="reference external" href="https://www.nature.com/articles/nmeth.1650">publication</a>.</p>
+<blockquote>
+<div></div></blockquote>
+<p>Run sourcetracker using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Rscript</span> <span class="n">sourcetracker_for_qiime</span><span class="o">.</span><span class="n">r</span> <span class="o">-</span><span class="n">i</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">int</span><span class="o">.</span><span class="n">sourcetracker</span> <span class="o">-</span><span class="n">m</span> <span class="n">mapping_file</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">o</span> <span class="n">output_directory</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The names of the samples in the mapping file (first column) must match those in the abundance table!</p>
+</div>
+</section>
+<section id="analyses-with-phyloseq">
+<h2><span class="section-number">10.3. </span>Analyses with Phyloseq<a class="headerlink" href="#analyses-with-phyloseq" title="Permalink to this headline"></a></h2>
+<p>We will use the R package <code class="docutils literal notranslate"><span class="pre">Phyloseq</span></code> to explore the microbiome data in the normalized abundance table. Once imported in R, the table can be tweaked to focus on a subset of samples.
+Install Phyloseq from <a class="reference external" href="https://bioconductor.org/packages/release/bioc/html/phyloseq.html">Bioconductor</a>:</p>
+<blockquote>
+<div></div></blockquote>
+<section id="importing-abundance-tables-in-phyloseq">
+<h3><span class="section-number">10.3.1. </span>Importing abundance tables in Phyloseq<a class="headerlink" href="#importing-abundance-tables-in-phyloseq" title="Permalink to this headline"></a></h3>
+<p>Activate the following libraries:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">phyloseq</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">vegan</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Phyloseq works with <code class="docutils literal notranslate"><span class="pre">biom</span></code> objects that store all the required information: abundance of taxa, sample metadata, taxonomy
+First you can import the otu table with taxa abundances, and tweak it to remove unwanted columns (the first three resulting from the genome length normalization).</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">otu</span> <span class="o">=</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;abundance_table_IDs.merged.norm&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">))</span>
+<span class="n">otu.final</span> <span class="o">=</span> <span class="p">(</span><span class="n">otu</span><span class="p">[,</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">)])</span>
+<span class="c1"># make the matrix values as numeric</span>
+<span class="nf">class</span><span class="p">(</span><span class="n">otu.final</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;numeric&quot;</span>
+</pre></div>
+</div>
+<p>Then you can import the taxonomy file generated by Taxaranks and the <code class="docutils literal notranslate"><span class="pre">getFullTaxaranks.sh</span></code> script (above) and tweak it to remove unwanted columns (1=user_taxa, and 19=species, which is already reported in column 2)</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">taxonomy</span> <span class="o">=</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;abundance_table_IDs.merged.taxonomy&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">))</span>
+<span class="n">taxonomy.final</span> <span class="o">=</span> <span class="p">(</span><span class="n">taxonomy</span><span class="p">[,</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">19</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p>Finally generate the biom object with phyloseq.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">phyloseq</span><span class="p">)</span>
+<span class="c1"># assing otu and tax tables</span>
+<span class="n">OTU</span> <span class="o">=</span> <span class="nf">otu_table</span><span class="p">(</span><span class="n">otu.final</span><span class="p">,</span> <span class="n">taxa_are_rows</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">TAX</span> <span class="o">=</span> <span class="nf">tax_table</span><span class="p">(</span><span class="n">taxonomy.final</span><span class="p">)</span>
+<span class="n">my_biom</span> <span class="o">=</span> <span class="nf">phyloseq</span><span class="p">(</span><span class="n">OTU</span><span class="p">,</span> <span class="n">TAX</span><span class="p">)</span>
+<span class="c1"># import mapping file with metadata</span>
+<span class="n">biom_metadata</span> <span class="o">&lt;-</span> <span class="nf">import_qiime_sample_data</span><span class="p">(</span><span class="s">&quot;map_file_full_dataset_Mar2022.txt&quot;</span><span class="p">)</span>
+<span class="c1"># merge data</span>
+<span class="n">my_biom</span> <span class="o">&lt;-</span> <span class="nf">merge_phyloseq</span><span class="p">(</span><span class="n">my_biom</span><span class="p">,</span> <span class="n">biom_metadata</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here some commands to explore the biom object:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># check sample names:</span>
+<span class="nf">sample_data</span><span class="p">(</span><span class="n">my_biom</span><span class="p">)</span>
+<span class="c1"># check taxa:</span>
+<span class="nf">tax_table</span><span class="p">(</span><span class="n">my_biom</span><span class="p">)</span>
+<span class="c1"># check rank names:</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">my_biom</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>If needed, it is convenient to rename the taxa columns more appropriately (instead of Rank1 etc.)</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">my_biom</span><span class="p">))</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Kingdom&quot;</span><span class="p">,</span> <span class="s">&quot;Phylum&quot;</span><span class="p">,</span> <span class="s">&quot;Class&quot;</span><span class="p">,</span> <span class="s">&quot;Order&quot;</span><span class="p">,</span> <span class="s">&quot;Family&quot;</span><span class="p">,</span> <span class="s">&quot;Genus&quot;</span><span class="p">,</span> <span class="s">&quot;Species&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">my_biom</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Remove low-abundance taxa below a desired threshold (most commonly 0.02% is chosen).</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">minTotRelAbun</span> <span class="o">=</span> <span class="m">0.0002</span>
+<span class="n">keepTaxa</span> <span class="o">=</span> <span class="nf">taxa_names</span><span class="p">(</span><span class="n">my_biom</span><span class="p">)[</span><span class="nf">which</span><span class="p">((</span><span class="n">x</span> <span class="o">/</span> <span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">minTotRelAbun</span><span class="p">)]</span>
+<span class="n">my_biom_flt</span> <span class="o">=</span> <span class="nf">prune_taxa</span><span class="p">(</span><span class="n">keepTaxa</span><span class="p">,</span> <span class="n">my_biom</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next, convert the absolute abundance  values in relative abundance.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">my_biom_rel</span> <span class="o">=</span> <span class="nf">transform_sample_counts</span><span class="p">(</span><span class="n">my_biom</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span> <span class="o">/</span> <span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="barplot-of-taxa-abundances">
+<h3><span class="section-number">10.3.2. </span>Barplot of taxa abundances<a class="headerlink" href="#barplot-of-taxa-abundances" title="Permalink to this headline"></a></h3>
+</section>
+<section id="multidimensional-scaling-principal-coordinate-analysis">
+<h3><span class="section-number">10.3.3. </span>Multidimensional Scaling (Principal Coordinate Analysis)<a class="headerlink" href="#multidimensional-scaling-principal-coordinate-analysis" title="Permalink to this headline"></a></h3>
+</section>
+<section id="differential-taxonomic-abundances-with-deseq2">
+<h3><span class="section-number">10.3.4. </span>Differential taxonomic abundances with DESeq2<a class="headerlink" href="#differential-taxonomic-abundances-with-deseq2" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="7_Filtering_SNPs.html" class="btn btn-neutral float-left" title="9. Filtering, annotating and combining SNPs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="8_HandsOn.html" class="btn btn-neutral float-right" title="11. Hands-on" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Claudio Ottoni.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

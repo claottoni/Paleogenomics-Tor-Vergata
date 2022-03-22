@@ -27,6 +27,7 @@ Contents
    5_ReadsMapping_v2
    6_VariantsCall
    7_Filtering_SNPs
+   9_Metagenomic_analysis.rst
    8_HandsOn
    9_old_material
 

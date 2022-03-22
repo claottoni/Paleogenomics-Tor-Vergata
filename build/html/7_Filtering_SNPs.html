@@ -1,68 +1,34 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>9. Filtering, annotating and combining SNPs &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="10. Hands-on" href="8_HandsOn.html" />
     <link rel="prev" title="8. Variant calling and visualization" href="6_VariantsCall.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Paleogenomics at Tor Vergata
-          
-
-          
+            <a href="index.html" class="icon icon-home"> Paleogenomics at Tor Vergata
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -70,18 +36,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_Terminal_setup.html">2. First step to set-up your machine</a></li>
@@ -101,71 +56,32 @@
 <li class="toctree-l1"><a class="reference internal" href="9_old_material.html">11. Material from previous courses</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Paleogenomics at Tor Vergata</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li><span class="section-number">9. </span>Filtering, annotating and combining SNPs</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/7_Filtering_SNPs.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="filtering-annotating-and-combining-snps">
-<h1><span class="section-number">9. </span>Filtering, annotating and combining SNPs<a class="headerlink" href="#filtering-annotating-and-combining-snps" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="filtering-annotating-and-combining-snps">
+<h1><span class="section-number">9. </span>Filtering, annotating and combining SNPs<a class="headerlink" href="#filtering-annotating-and-combining-snps" title="Permalink to this headline"></a></h1>
 <p>To investigate the genetic variants in the <code class="docutils literal notranslate"><span class="pre">vcf</span></code> files we will use the program <a class="reference external" href="https://github.com/Amine-Namouchi/snpToolkit">snpToolkit</a>.
 The <code class="docutils literal notranslate"><span class="pre">-h</span></code> option will display the following message:</p>
 <blockquote>
@@ -190,8 +106,8 @@ optional arguments:
 </pre></div>
 </div>
 <p>Five options are possible: <code class="docutils literal notranslate"><span class="pre">explore</span></code>, <code class="docutils literal notranslate"><span class="pre">annotate</span></code>, <code class="docutils literal notranslate"><span class="pre">combine</span></code>, <code class="docutils literal notranslate"><span class="pre">viz</span></code>, <code class="docutils literal notranslate"><span class="pre">expand</span></code>.</p>
-<div class="section" id="snps-filtering-and-annotion">
-<h2><span class="section-number">9.1. </span>SNPs filtering and annotion<a class="headerlink" href="#snps-filtering-and-annotion" title="Permalink to this headline">¶</a></h2>
+<section id="snps-filtering-and-annotion">
+<h2><span class="section-number">9.1. </span>SNPs filtering and annotion<a class="headerlink" href="#snps-filtering-and-annotion" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">snpToolkit</span> <span class="pre">annotate</span></code> command will display general information about the usage of the program:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snptoolkit annotate -h
 usage: snptoolkit annotate <span class="o">[</span>-h<span class="o">]</span> -i IDENTIFIER -g GENBANK <span class="o">[</span>-p PROCESSORS<span class="o">]</span> <span class="o">[</span>-f EXCLUDECLOSESNPS<span class="o">]</span> <span class="o">[</span>-q QUALITY<span class="o">]</span> <span class="o">[</span>-d DEPTH<span class="o">]</span> <span class="o">[</span>-r RATIO<span class="o">]</span> <span class="o">[</span>-e EXCLUDE<span class="o">]</span>
@@ -204,18 +120,18 @@ snpToolkit annotate required options:
   -g GENBANK           Pleae provide a genbank file
 
 snpToolkit annotate additional options:
-  -p PROCESSORS        number of vcf files to be annotated in parallel default value <span class="o">[</span><span class="m">1</span><span class="o">]</span>
-  -f EXCLUDECLOSESNPS  exclude SNPs <span class="k">if</span> the distance between them is lower <span class="k">then</span> the specified window size in bp
+  -p PROCESSORS        number of vcf files to be annotated <span class="k">in</span> parallel default value <span class="o">[</span><span class="m">1</span><span class="o">]</span>
+  -f EXCLUDECLOSESNPS  exclude SNPs <span class="k">if</span> the distance between them is lower <span class="k">then</span> the specified window size <span class="k">in</span> bp
   -q QUALITY           quality score to consider as a cutoff <span class="k">for</span> variant calling. default value <span class="o">[</span><span class="m">20</span><span class="o">]</span>
   -d DEPTH             minimum depth caverage. default value <span class="o">[</span><span class="m">3</span><span class="o">]</span>
-  -r RATIO             minimum ratio that correspond to the number of reads that has the mutated allele / total depth in that particular position. default
+  -r RATIO             minimum ratio that correspond to the number of reads that has the mutated allele / total depth <span class="k">in</span> that particular position. default
                       value <span class="o">[</span><span class="m">0</span><span class="o">]</span>
-  -e EXCLUDE           provide a tab file with genomic regions to exclude in this format: region start stop. region must correspond to the same name<span class="o">(</span>s<span class="o">)</span> of
-                      chromsome and plasmids as in the genbank file
+  -e EXCLUDE           provide a tab file with genomic regions to exclude <span class="k">in</span> this format: region start stop. region must correspond to the same name<span class="o">(</span>s<span class="o">)</span> of
+                      chromsome and plasmids as <span class="k">in</span> the genbank file
 </pre></div>
 </div>
 <p>Here is a simple example on how to use snpToolkit:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snptoolkit</span> <span class="n">annotate</span> <span class="o">-</span><span class="n">i</span> <span class="n">vcf</span> <span class="o">-</span><span class="n">g</span> <span class="n">GCF_000009065</span><span class="o">.</span><span class="mi">1</span><span class="n">_ASM906v1_genomic</span><span class="o">.</span><span class="n">gbff</span> <span class="o">-</span><span class="n">d</span> <span class="mi">3</span> <span class="o">-</span><span class="n">q</span> <span class="mi">20</span> <span class="o">-</span><span class="n">r</span> <span class="mf">0.9</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snptoolkit</span> <span class="n">annotate</span> <span class="o">-</span><span class="n">i</span> <span class="n">vcf</span> <span class="o">-</span><span class="n">g</span> <span class="n">GCF_000009065</span><span class="mf">.1</span><span class="n">_ASM906v1_genomic</span><span class="o">.</span><span class="n">gbff</span> <span class="o">-</span><span class="n">d</span> <span class="mi">3</span> <span class="o">-</span><span class="n">q</span> <span class="mi">20</span> <span class="o">-</span><span class="n">r</span> <span class="mf">0.9</span>
 </pre></div>
 </div>
 <p>snpToolkit can automatically recogninze <code class="docutils literal notranslate"><span class="pre">vcf</span></code> files generated with the following programs: <code class="docutils literal notranslate"><span class="pre">samtools</span> <span class="pre">mpileup</span></code>, <code class="docutils literal notranslate"><span class="pre">gatk</span> <span class="pre">HaplotyCaller</span></code> and <code class="docutils literal notranslate"><span class="pre">freeBayes</span></code>. The <code class="docutils literal notranslate"><span class="pre">vcf</span></code> files could be gzipped or not. In the command line above, snpToolkit will filter and annotate all SNPs in the <code class="docutils literal notranslate"><span class="pre">vcf</span></code> file(s) that fullfil the following criteria: <code class="docutils literal notranslate"><span class="pre">quality</span> <span class="pre">&gt;=</span> <span class="pre">30</span></code>, <code class="docutils literal notranslate"><span class="pre">depth</span> <span class="pre">of</span> <span class="pre">coverage</span> <span class="pre">&gt;=</span> <span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">ratio</span> <span class="pre">&gt;=</span> <span class="pre">0.9</span></code>.</p>
@@ -321,9 +237,9 @@ The SNPs annotation is organized in tab delimited table. The columns of this tab
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="compare-and-combine-multiple-annotation-files">
-<h2><span class="section-number">9.2. </span>Compare and combine multiple annotation files<a class="headerlink" href="#compare-and-combine-multiple-annotation-files" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="compare-and-combine-multiple-annotation-files">
+<h2><span class="section-number">9.2. </span>Compare and combine multiple annotation files<a class="headerlink" href="#compare-and-combine-multiple-annotation-files" title="Permalink to this headline"></a></h2>
 <p>After generating a set of output files, you can run <code class="docutils literal notranslate"><span class="pre">snpToolkit</span> <span class="pre">combine</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ snptoolkit combine  -h
 usage: snptoolkit combine [-h] --location LOCATION [-r RATIO] [--bam BAMFILTER BAMFILTER BAMFILTER] [--snps {ns,s,all,inter}] [-e EXCLUDE]
@@ -351,7 +267,7 @@ snpToolkit additional options:
 </ol>
 </div></blockquote>
 <p>To combine the snps from different samples in one alignment <code class="docutils literal notranslate"><span class="pre">fasta</span></code> file you type the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snptoolkit</span> <span class="n">combine</span> <span class="o">--</span><span class="n">loc</span> <span class="n">NC_003143</span><span class="o">.</span><span class="mi">1</span> <span class="o">-</span><span class="n">r</span> <span class="mf">0.9</span> <span class="o">--</span><span class="n">bam</span> <span class="mi">2</span> <span class="mf">1.0</span> <span class="o">../</span><span class="n">bam</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snptoolkit</span> <span class="n">combine</span> <span class="o">--</span><span class="n">loc</span> <span class="n">NC_003143</span><span class="mf">.1</span> <span class="o">-</span><span class="n">r</span> <span class="mf">0.9</span> <span class="o">--</span><span class="n">bam</span> <span class="mi">2</span> <span class="mf">1.0</span> <span class="o">../</span><span class="n">bam</span>
 </pre></div>
 </div>
 <p>As we will be working with ancient DNA, a small fraction of your genome could be covered. In this case we will use the option <code class="docutils literal notranslate"><span class="pre">--bam</span></code> to indicate the path to the folder containing the <code class="docutils literal notranslate"><span class="pre">bam</span></code> files.
@@ -445,9 +361,9 @@ ATCGGGTATGCCAATGCGT
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">fasta</span></code> output file will be used to generate a maximum likelihood tree using <code class="docutils literal notranslate"><span class="pre">IQ-TREE</span></code></p>
-</div>
-<div class="section" id="phylogenetic-tree-reconstruction">
-<h2><span class="section-number">9.3. </span>Phylogenetic tree reconstruction<a class="headerlink" href="#phylogenetic-tree-reconstruction" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="phylogenetic-tree-reconstruction">
+<h2><span class="section-number">9.3. </span>Phylogenetic tree reconstruction<a class="headerlink" href="#phylogenetic-tree-reconstruction" title="Permalink to this headline"></a></h2>
 <p>There are several tools to build phylogenetic trees. All of these tools, use an alignment file as input file. Now that we have generated an alignment file in <code class="docutils literal notranslate"><span class="pre">fasta</span></code> format, we will use <code class="docutils literal notranslate"><span class="pre">IQ-TREE</span></code> to build a maximum likelihood tree.
 We use <code class="docutils literal notranslate"><span class="pre">IQ-TREE</span></code> for several reasons:</p>
 <ul class="simple">
@@ -484,75 +400,49 @@ We use <code class="docutils literal notranslate"><span class="pre">IQ-TREE</spa
 <p>The phylogenetic tree generated can be visualized using <code class="docutils literal notranslate"><span class="pre">Figtree</span></code>, <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree">download</a> it in your local machine and load the <code class="docutils literal notranslate"><span class="pre">treefile</span></code> output from IQ-TREE to visualize the tree.</p>
 <blockquote>
 <div></div></blockquote>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="8_HandsOn.html" class="btn btn-neutral float-right" title="10. Hands-on" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="6_VariantsCall.html" class="btn btn-neutral float-left" title="8. Variant calling and visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="6_VariantsCall.html" class="btn btn-neutral float-left" title="8. Variant calling and visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="8_HandsOn.html" class="btn btn-neutral float-right" title="10. Hands-on" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2021, Claudio Ottoni
-
-    </p>
+    <p>&#169; Copyright 2021, Claudio Ottoni.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>

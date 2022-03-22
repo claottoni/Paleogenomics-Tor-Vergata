@@ -1,68 +1,34 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>7. Alignment of reads to a reference genome &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="8. Variant calling and visualization" href="6_VariantsCall.html" />
     <link rel="prev" title="6. Metagenomic screening of shotgun data" href="4_Metagenomics_v2.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Paleogenomics at Tor Vergata
-          
-
-          
+            <a href="index.html" class="icon icon-home"> Paleogenomics at Tor Vergata
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -70,18 +36,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_Terminal_setup.html">2. First step to set-up your machine</a></li>
@@ -123,80 +78,41 @@
 <li class="toctree-l1"><a class="reference internal" href="9_old_material.html">11. Material from previous courses</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Paleogenomics at Tor Vergata</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li><span class="section-number">7. </span>Alignment of reads to a reference genome</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/5_ReadsMapping_v2.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="alignment-of-reads-to-a-reference-genome">
-<h1><span class="section-number">7. </span>Alignment of reads to a reference genome<a class="headerlink" href="#alignment-of-reads-to-a-reference-genome" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="alignment-of-reads-to-a-reference-genome">
+<h1><span class="section-number">7. </span>Alignment of reads to a reference genome<a class="headerlink" href="#alignment-of-reads-to-a-reference-genome" title="Permalink to this headline"></a></h1>
 <p>The metagenomic screenig of the shotgun library detected reads assigned to <em>Yersinia pestis</em>. The following step is to ascertain that these molecules are authentic.
 You can do that by mapping your pre-processed <code class="docutils literal notranslate"><span class="pre">fastq</span></code> files (merged and trimmed) to the <em>Yersinia pestis</em> CO92 strain reference sequence, available in the <a class="reference external" href="https://www.ncbi.nlm.nih.gov/genome/?term=Yersinia%20pestis">RefSeq NCBI</a> database.
 Here, in order to obtain an optimal coverage for the subsequent variant call, we will run the alignment on a different <code class="docutils literal notranslate"><span class="pre">fastq</span></code> file that we prepared to simulate an enriched library.</p>
 <blockquote>
 <div></div></blockquote>
-<div class="section" id="preparation-of-the-reference-sequence">
-<h2><span class="section-number">7.1. </span>Preparation of the reference sequence<a class="headerlink" href="#preparation-of-the-reference-sequence" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="index-the-reference-sequence-with-bwa">
-<h3><span class="section-number">7.1.1. </span>Index the reference sequence with bwa<a class="headerlink" href="#index-the-reference-sequence-with-bwa" title="Permalink to this headline">¶</a></h3>
+<section id="preparation-of-the-reference-sequence">
+<h2><span class="section-number">7.1. </span>Preparation of the reference sequence<a class="headerlink" href="#preparation-of-the-reference-sequence" title="Permalink to this headline"></a></h2>
+<section id="index-the-reference-sequence-with-bwa">
+<h3><span class="section-number">7.1.1. </span>Index the reference sequence with bwa<a class="headerlink" href="#index-the-reference-sequence-with-bwa" title="Permalink to this headline"></a></h3>
 <p>To align the reads to the reference sequence we will use the program <a class="reference external" href="https://github.com/lh3/bwa">BWA</a>, in particular the <code class="docutils literal notranslate"><span class="pre">BWA</span> <span class="pre">aln</span></code> algorithm. BWA first needs to construct the <strong>FM-index</strong> for the reference genome, with the command <code class="docutils literal notranslate"><span class="pre">BWA</span> <span class="pre">index</span></code>. FM-indexing in Burrows-Wheeler transform is used to efficiently find the number of occurrences of a pattern within a compressed text, as well as locate the position of each occurrence. It is an essential step for querying the DNA reads to the reference sequence. This command generates five files with different extensions: <code class="docutils literal notranslate"><span class="pre">amb</span></code>, <code class="docutils literal notranslate"><span class="pre">ann</span></code>, <code class="docutils literal notranslate"><span class="pre">bwt</span></code>, <code class="docutils literal notranslate"><span class="pre">pac</span></code>, <code class="docutils literal notranslate"><span class="pre">sa</span></code>.</p>
 <blockquote>
 <div></div></blockquote>
@@ -207,9 +123,9 @@ Here, in order to obtain an optimal coverage for the subsequent variant call, we
 <p class="admonition-title">Note</p>
 <p>The option <code class="docutils literal notranslate"><span class="pre">-a</span></code> indicates the algorithm to use for constructing the index. For genomes smaller than &lt; 2 Gb use the <code class="docutils literal notranslate"><span class="pre">is</span></code> algorithm. For larger genomes (&gt;2 Gb), use the <code class="docutils literal notranslate"><span class="pre">bwtsw</span></code> algorithm.</p>
 </div>
-</div>
-<div class="section" id="create-a-reference-dictionary">
-<h3><span class="section-number">7.1.2. </span>Create a reference dictionary<a class="headerlink" href="#create-a-reference-dictionary" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="create-a-reference-dictionary">
+<h3><span class="section-number">7.1.2. </span>Create a reference dictionary<a class="headerlink" href="#create-a-reference-dictionary" title="Permalink to this headline"></a></h3>
 <p>A dictionary file (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) is necessary to run later in the pipeline <code class="docutils literal notranslate"><span class="pre">GATK</span> <span class="pre">RealignerTargetCreator</span></code>. A sequence dictionary contains the sequence name, sequence length, genome assembly identifier, and other information about the sequences. To create the <code class="docutils literal notranslate"><span class="pre">dict</span></code> file we use <a class="reference external" href="https://broadinstitute.github.io/picard/">Picard</a>.</p>
 <blockquote>
 <div></div></blockquote>
@@ -223,21 +139,21 @@ Here, in order to obtain an optimal coverage for the subsequent variant call, we
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="index-the-reference-sequence-with-samtools">
-<h3><span class="section-number">7.1.3. </span>Index the reference sequence with Samtools<a class="headerlink" href="#index-the-reference-sequence-with-samtools" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="index-the-reference-sequence-with-samtools">
+<h3><span class="section-number">7.1.3. </span>Index the reference sequence with Samtools<a class="headerlink" href="#index-the-reference-sequence-with-samtools" title="Permalink to this headline"></a></h3>
 <p>The reference sequence has to be indexed in order to run later in the pipeline <code class="docutils literal notranslate"><span class="pre">GATK</span> <span class="pre">IndelRealigner</span></code>. To do that, we will use <a class="reference external" href="http://www.htslib.org/">Samtools</a>, in particular the tool <code class="docutils literal notranslate"><span class="pre">samtools</span> <span class="pre">faidx</span></code>, which enables efficient access to arbitrary regions within the reference sequence. The index file typically has the same filename as the corresponding reference sequece, with the extension <code class="docutils literal notranslate"><span class="pre">fai</span></code> appended.</p>
 <blockquote>
 <div></div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">faidx</span> <span class="n">reference</span><span class="o">.</span><span class="n">fasta</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="alignment-of-the-reads-to-the-reference-sequence">
-<h2><span class="section-number">7.2. </span>Alignment of the reads to the reference sequence<a class="headerlink" href="#alignment-of-the-reads-to-the-reference-sequence" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="alignment-of-pre-processed-reads-to-the-reference-genome-with-bwa-aln">
-<h3><span class="section-number">7.2.1. </span>Alignment of pre-processed reads to the reference genome with BWA aln<a class="headerlink" href="#alignment-of-pre-processed-reads-to-the-reference-genome-with-bwa-aln" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="alignment-of-the-reads-to-the-reference-sequence">
+<h2><span class="section-number">7.2. </span>Alignment of the reads to the reference sequence<a class="headerlink" href="#alignment-of-the-reads-to-the-reference-sequence" title="Permalink to this headline"></a></h2>
+<section id="alignment-of-pre-processed-reads-to-the-reference-genome-with-bwa-aln">
+<h3><span class="section-number">7.2.1. </span>Alignment of pre-processed reads to the reference genome with BWA aln<a class="headerlink" href="#alignment-of-pre-processed-reads-to-the-reference-genome-with-bwa-aln" title="Permalink to this headline"></a></h3>
 <p>To align the reads to the reference genome we will use <code class="docutils literal notranslate"><span class="pre">BWA</span> <span class="pre">aln</span></code>, which supports an end-to-end alignment of reads to the reference sequence. The alternative algorithm, <code class="docutils literal notranslate"><span class="pre">BWA</span> <span class="pre">mem</span></code> supports also local (portion of the reads) and chimeric alignments (resulting in a larger number of mapped reads than <code class="docutils literal notranslate"><span class="pre">BWA</span> <span class="pre">aln</span></code>). <code class="docutils literal notranslate"><span class="pre">BWA</span> <span class="pre">aln</span></code> is more suitable for aliging short reads, like expected for ancient DNA samples. The following comand will generate a <code class="docutils literal notranslate"><span class="pre">sai</span></code> file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bwa</span> <span class="n">aln</span> <span class="n">reference</span><span class="o">.</span><span class="n">fasta</span> <span class="n">filename</span><span class="o">.</span><span class="n">fastq</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">n</span> <span class="mf">0.1</span> <span class="o">-</span><span class="n">l</span> <span class="mi">1000</span> <span class="o">&gt;</span> <span class="n">filename</span><span class="o">.</span><span class="n">sai</span>
 </pre></div>
@@ -276,9 +192,9 @@ Here, in order to obtain an optimal coverage for the subsequent variant call, we
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bwa</span> <span class="n">samse</span> <span class="n">reference</span><span class="o">.</span><span class="n">fasta</span> <span class="n">filename</span><span class="o">.</span><span class="n">sai</span> <span class="n">filename</span><span class="o">.</span><span class="n">fastq</span><span class="o">.</span><span class="n">gz</span> <span class="o">&gt;</span> <span class="n">filename</span><span class="o">.</span><span class="n">sam</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="converting-sam-file-to-bam-file">
-<h3><span class="section-number">7.2.2. </span>Converting sam file to bam file<a class="headerlink" href="#converting-sam-file-to-bam-file" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="converting-sam-file-to-bam-file">
+<h3><span class="section-number">7.2.2. </span>Converting sam file to bam file<a class="headerlink" href="#converting-sam-file-to-bam-file" title="Permalink to this headline"></a></h3>
 <p>For the downstream analyses we will work with the binary (more compact) version of the <code class="docutils literal notranslate"><span class="pre">sam</span></code> file, called <code class="docutils literal notranslate"><span class="pre">bam</span></code>. To convert the <code class="docutils literal notranslate"><span class="pre">sam</span></code> file in <code class="docutils literal notranslate"><span class="pre">bam</span></code> we will use <code class="docutils literal notranslate"><span class="pre">Samtools</span> <span class="pre">view</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">view</span> <span class="o">-</span><span class="n">Sb</span> <span class="n">filename</span><span class="o">.</span><span class="n">sam</span> <span class="o">&gt;</span> <span class="n">filename</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
@@ -302,9 +218,9 @@ Here, in order to obtain an optimal coverage for the subsequent variant call, we
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">view</span> <span class="o">-</span><span class="n">H</span> <span class="n">filename</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="sorting-and-indexing-the-bam-file">
-<h3><span class="section-number">7.2.3. </span>Sorting and indexing the bam file<a class="headerlink" href="#sorting-and-indexing-the-bam-file" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="sorting-and-indexing-the-bam-file">
+<h3><span class="section-number">7.2.3. </span>Sorting and indexing the bam file<a class="headerlink" href="#sorting-and-indexing-the-bam-file" title="Permalink to this headline"></a></h3>
 <p>To go on with the analysis, we have to sort the reads aligned in the <code class="docutils literal notranslate"><span class="pre">bam</span></code> file by leftmost coordinates (or by read name when the option <code class="docutils literal notranslate"><span class="pre">-n</span></code> is used) with <code class="docutils literal notranslate"><span class="pre">Samtools</span> <span class="pre">sort</span></code>. The option <code class="docutils literal notranslate"><span class="pre">-o</span></code> is used to provide an output file name:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">sort</span> <span class="n">filename</span><span class="o">.</span><span class="n">bam</span> <span class="o">-</span><span class="n">o</span> <span class="n">filename</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
@@ -313,9 +229,9 @@ Here, in order to obtain an optimal coverage for the subsequent variant call, we
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">index</span> <span class="n">filename</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="adding-read-group-tags-and-indexing-bam-files">
-<h3><span class="section-number">7.2.4. </span>Adding Read Group tags and indexing bam files<a class="headerlink" href="#adding-read-group-tags-and-indexing-bam-files" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="adding-read-group-tags-and-indexing-bam-files">
+<h3><span class="section-number">7.2.4. </span>Adding Read Group tags and indexing bam files<a class="headerlink" href="#adding-read-group-tags-and-indexing-bam-files" title="Permalink to this headline"></a></h3>
 <p>A number of predefined tags may be appropriately assigned to specific set of reads in order to distinguish samples, libraries and other technical features. To do that we will use Picard. You may want to use <code class="docutils literal notranslate"><span class="pre">RGLB</span></code> (library ID) and <code class="docutils literal notranslate"><span class="pre">RGSM</span></code> (sample ID) tags at your own convenience based on the experimental design. Remember to call Picard from the path of the <code class="docutils literal notranslate"><span class="pre">jar</span></code> file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">picard</span> <span class="n">AddOrReplaceReadGroups</span> <span class="n">INPUT</span><span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">bam</span> <span class="n">OUTPUT</span><span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">RG</span><span class="o">.</span><span class="n">bam</span> <span class="n">RGID</span><span class="o">=</span><span class="n">rg_id</span> <span class="n">RGLB</span><span class="o">=</span><span class="n">lib_id</span> <span class="n">RGPL</span><span class="o">=</span><span class="n">platform</span> <span class="n">RGPU</span><span class="o">=</span><span class="n">plat_unit</span> <span class="n">RGSM</span><span class="o">=</span><span class="n">sam_id</span> <span class="n">VALIDATION_STRINGENCY</span><span class="o">=</span><span class="n">LENIENT</span>
 </pre></div>
@@ -335,9 +251,9 @@ Here, in order to obtain an optimal coverage for the subsequent variant call, we
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">index</span> <span class="n">filename</span><span class="o">.</span><span class="n">RG</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="removing-duplicates">
-<h3><span class="section-number">7.2.5. </span>Removing duplicates<a class="headerlink" href="#removing-duplicates" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="removing-duplicates">
+<h3><span class="section-number">7.2.5. </span>Removing duplicates<a class="headerlink" href="#removing-duplicates" title="Permalink to this headline"></a></h3>
 <p>Amplification through PCR of genomic libraries leads to duplication formation (reads originating from a single fragment of DNA).
 To remove duplicates we will use DeDup, which is specifically designed for ultra-short DNA (e.g. ancient DNA) paired-end and merged sequence data.
 The issue with ultra-short DNA is that during the typical sequencing chemistry cycles the entire molecule will be sequenced and therefore we will find both ends.
@@ -390,9 +306,9 @@ DeDup generates a <code class="docutils literal notranslate"><span class="pre">b
 <span class="n">samtools</span> <span class="n">index</span> <span class="n">filename_rmdup_sort</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="local-realignment-of-reads">
-<h3><span class="section-number">7.2.6. </span>Local realignment of reads<a class="headerlink" href="#local-realignment-of-reads" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="local-realignment-of-reads">
+<h3><span class="section-number">7.2.6. </span>Local realignment of reads<a class="headerlink" href="#local-realignment-of-reads" title="Permalink to this headline"></a></h3>
 <p>The presence of insertions or deletions (indels) in the genome may be responsible of misalignments and bases mismatches that are easily mistaken as SNPs. For this reason, we locally realign reads to minimize the number of mispatches around the indels. The realignment process is done in two steps using two different tools of GATK called with the -T option. We first detect the intervals which need to be realigned with the <code class="docutils literal notranslate"><span class="pre">GATK</span> <span class="pre">RealignerTargetCreator</span></code>, and save the list of these intevals in a file that we name <code class="docutils literal notranslate"><span class="pre">target.intervals</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gatk</span> <span class="o">-</span><span class="n">T</span> <span class="n">RealignerTargetCreator</span> <span class="o">-</span><span class="n">R</span> <span class="n">reference</span><span class="o">.</span><span class="n">fasta</span> <span class="o">-</span><span class="n">I</span> <span class="n">filename_rmdup</span><span class="o">.</span><span class="n">bam</span> <span class="o">-</span><span class="n">o</span> <span class="n">target</span><span class="o">.</span><span class="n">intervals</span>
 </pre></div>
@@ -424,9 +340,9 @@ DeDup generates a <code class="docutils literal notranslate"><span class="pre">b
 <span class="n">samtools</span> <span class="n">index</span> <span class="n">filename</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="generate-flagstat-file">
-<h3><span class="section-number">7.2.7. </span>Generate flagstat file<a class="headerlink" href="#generate-flagstat-file" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="generate-flagstat-file">
+<h3><span class="section-number">7.2.7. </span>Generate flagstat file<a class="headerlink" href="#generate-flagstat-file" title="Permalink to this headline"></a></h3>
 <p>We can generate a file with useful information about our alignment with <code class="docutils literal notranslate"><span class="pre">Samtools</span> <span class="pre">flagstat</span></code>. This file is a final summary report of the bitwise <code class="docutils literal notranslate"><span class="pre">FLAG</span></code> fields assigned to the reads in the <code class="docutils literal notranslate"><span class="pre">sam</span></code> file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">flagstat</span> <span class="n">filename</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">bam</span> <span class="o">&gt;</span> <span class="n">flagstat_filename</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
@@ -441,15 +357,15 @@ DeDup generates a <code class="docutils literal notranslate"><span class="pre">b
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="visualization-of-reads-alignment">
-<h3><span class="section-number">7.2.8. </span>Visualization of reads alignment<a class="headerlink" href="#visualization-of-reads-alignment" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="visualization-of-reads-alignment">
+<h3><span class="section-number">7.2.8. </span>Visualization of reads alignment<a class="headerlink" href="#visualization-of-reads-alignment" title="Permalink to this headline"></a></h3>
 <p>Once generated the final <code class="docutils literal notranslate"><span class="pre">bam</span></code> file,  you can compare the <code class="docutils literal notranslate"><span class="pre">bam</span></code> files before and after the refinement and polishing process (duplicates removal, realignment around indels and sorting). To do so, we will use the program <code class="docutils literal notranslate"><span class="pre">IGV</span></code>, in which we will first load the reference fasta file from <em>Genomes –&gt; Load genome from file</em> and then we will add one (or more) bam files with <em>File –&gt; Load from file</em>:</p>
 <img alt="_images/igv-bam_bam.png" src="_images/igv-bam_bam.png" />
-</div>
-</div>
-<div class="section" id="create-mapping-summary-reports">
-<h2><span class="section-number">7.3. </span>Create mapping summary reports<a class="headerlink" href="#create-mapping-summary-reports" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="create-mapping-summary-reports">
+<h2><span class="section-number">7.3. </span>Create mapping summary reports<a class="headerlink" href="#create-mapping-summary-reports" title="Permalink to this headline"></a></h2>
 <p>We will use <code class="docutils literal notranslate"><span class="pre">Qualimap</span></code> to create summary reports from the generated <code class="docutils literal notranslate"><span class="pre">bam</span></code> files. As mentioned in the website, <code class="docutils literal notranslate"><span class="pre">Qualimap</span></code> examines sequencing alignment data in <code class="docutils literal notranslate"><span class="pre">sam/bam</span></code> files according to the features of the mapped reads and provides an overall view of the data that helps to detect biases in the sequencing and/or mapping of the data and eases decision-making for further analysis.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qualimap</span> <span class="n">bamqc</span> <span class="o">-</span><span class="n">c</span> <span class="o">-</span><span class="n">bam</span> <span class="nb">input</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
@@ -463,16 +379,16 @@ DeDup generates a <code class="docutils literal notranslate"><span class="pre">b
 <p>A list of programs that generate output files recognized by <code class="docutils literal notranslate"><span class="pre">MultiQC</span></code> are availble here: <a class="reference external" href="https://github.com/ewels/MultiQC">https://github.com/ewels/MultiQC</a></p>
 <p>Multiqc will create a summary report in <code class="docutils literal notranslate"><span class="pre">html</span></code> format that will let you compare all the summary reports for each of your samples:</p>
 <img alt="_images/multiqc.png" src="_images/multiqc.png" />
-</div>
-<div class="section" id="alignment-of-reads-to-circular-reference-genomes">
-<h2><span class="section-number">7.4. </span>Alignment of reads to circular reference genomes<a class="headerlink" href="#alignment-of-reads-to-circular-reference-genomes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="alignment-of-reads-to-circular-reference-genomes">
+<h2><span class="section-number">7.4. </span>Alignment of reads to circular reference genomes<a class="headerlink" href="#alignment-of-reads-to-circular-reference-genomes" title="Permalink to this headline"></a></h2>
 <p>The mtDNA and most of the bacterial genomes are circular. However, their sequence is represented as linear when the alignment of reads is done. This poses limitations to our ability of mapping the reads at the two ends of the linearized genome.
 The tool <a class="reference external" href="https://github.com/apeltzer/CircularMapper/blob/master/docs/contents/userguide.rst">CircularMapper</a> circumvents these limitations by extending the end of the linearized reference genome by a number of nucleotides from the beginning of the sequence. This ‘simulates’ the contiguity of the circular sequence at the two ends of the linearized genome, facilitating the alignment of the reads in those regions and consequently achieving more even coverages at the two ends.
 You can install <a class="reference external" href="https://anaconda.org/bioconda/circularmapper">CircularMapper with Conda</a></p>
 <blockquote>
 <div></div></blockquote>
-<div class="section" id="create-an-extended-reference-sequence">
-<h3><span class="section-number">7.4.1. </span>Create an extended reference sequence<a class="headerlink" href="#create-an-extended-reference-sequence" title="Permalink to this headline">¶</a></h3>
+<section id="create-an-extended-reference-sequence">
+<h3><span class="section-number">7.4.1. </span>Create an extended reference sequence<a class="headerlink" href="#create-an-extended-reference-sequence" title="Permalink to this headline"></a></h3>
 <p>You can first check the header of your referece sequence (e.g. the human mtDNA reference sequence), to copy the name reported in the header (right after the <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> symbol, in this example NC_012920.1).
 If you are using the full human genome, you can grep the headers of the various chromosomes and refer specifically to the name of the mtDNA to extend its sequence (e.g. use the option <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">chrMT</span></code>).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">head</span> <span class="n">human_mt</span><span class="o">.</span><span class="n">fasta</span>
@@ -480,7 +396,7 @@ If you are using the full human genome, you can grep the headers of the various 
 </pre></div>
 </div>
 <p>Then, you can run the <code class="docutils literal notranslate"><span class="pre">circulargenerator</span></code> command of CircularMapper to extend the end of the reference sequence with 200 nucleotides from its beginning. A file <code class="docutils literal notranslate"><span class="pre">human_mt_200.fasta</span></code> will be generated.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circulargenerator</span> <span class="o">-</span><span class="n">e</span> <span class="mi">200</span> <span class="o">-</span><span class="n">i</span> <span class="n">human_mt</span><span class="o">.</span><span class="n">fasta</span> <span class="o">-</span><span class="n">s</span> <span class="n">NC_012920</span><span class="o">.</span><span class="mi">1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">circulargenerator</span> <span class="o">-</span><span class="n">e</span> <span class="mi">200</span> <span class="o">-</span><span class="n">i</span> <span class="n">human_mt</span><span class="o">.</span><span class="n">fasta</span> <span class="o">-</span><span class="n">s</span> <span class="n">NC_012920</span><span class="mf">.1</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -505,9 +421,9 @@ If you are using the full human genome, you can grep the headers of the various 
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="realign-reads-to-original-reference-sequence">
-<h3><span class="section-number">7.4.2. </span>Realign reads to original reference sequence<a class="headerlink" href="#realign-reads-to-original-reference-sequence" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="realign-reads-to-original-reference-sequence">
+<h3><span class="section-number">7.4.2. </span>Realign reads to original reference sequence<a class="headerlink" href="#realign-reads-to-original-reference-sequence" title="Permalink to this headline"></a></h3>
 <p>Once generated the extended reference sequence, you can use it to align the reads with <code class="docutils literal notranslate"><span class="pre">bwa</span> <span class="pre">aln</span></code> and <code class="docutils literal notranslate"><span class="pre">bwa</span> <span class="pre">samse</span></code> as described in the section <a class="reference internal" href="#alignment-of-pre-processed-reads-to-the-reference-genome-with-bwa-aln">Alignment of pre-processed reads to the reference genome with BWA aln</a>. To keep note of the fact that an extended reference is used, you could include in the name of the sam file the elongation factor (e.g. <code class="docutils literal notranslate"><span class="pre">filename_elongated200.bam</span></code>, or similar)
 After running <code class="docutils literal notranslate"><span class="pre">bwa</span> <span class="pre">samse</span></code> and once obtained the <code class="docutils literal notranslate"><span class="pre">sam</span></code> alignment file, you must readjust the mapped reads (which now span the circular portion of the genome) to the original reference sequence (the not-extended file) by running the <code class="docutils literal notranslate"><span class="pre">realignsamfile</span></code> command of CircularMapper.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">realignsamfile</span> <span class="o">-</span><span class="n">e</span> <span class="mi">200</span> <span class="o">-</span><span class="n">i</span> <span class="n">filename</span><span class="o">.</span><span class="n">sam</span> <span class="o">-</span><span class="n">r</span> <span class="n">human_mt</span><span class="o">.</span><span class="n">fasta</span>
@@ -547,10 +463,10 @@ After running <code class="docutils literal notranslate"><span class="pre">bwa</
 </pre></div>
 </div>
 <p>You can then move forward with the other steps described for bam refinement from the step <a class="reference internal" href="#adding-read-group-tags-and-indexing-bam-files">Adding Read Group tags and indexing bam files</a></p>
-</div>
-</div>
-<div class="section" id="damage-analysis-and-quality-rescaling-of-the-bam-file">
-<h2><span class="section-number">7.5. </span>Damage analysis and quality rescaling of the BAM file<a class="headerlink" href="#damage-analysis-and-quality-rescaling-of-the-bam-file" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="damage-analysis-and-quality-rescaling-of-the-bam-file">
+<h2><span class="section-number">7.5. </span>Damage analysis and quality rescaling of the BAM file<a class="headerlink" href="#damage-analysis-and-quality-rescaling-of-the-bam-file" title="Permalink to this headline"></a></h2>
 <p>To authenticate our analysis we will assess the <em>post-mortem</em> damage of the reads aligned to the reference sequence. We can track the <em>post-portem</em> damage accumulated by DNA molecules in the form of fragmentation due to depurination and cytosine deamination, which generates the typical pattern of <strong>C-&gt;T</strong> and <strong>G-&gt;A</strong> variation at the 5’- and 3’-end of the DNA molecules. To assess the <em>post-mortem</em> damage patterns in our <code class="docutils literal notranslate"><span class="pre">bam</span></code> file we will use <code class="docutils literal notranslate"><span class="pre">mapDamage</span></code>, which analyses the size distribution of the reads and the base composition of the genomic regions located up- and downstream of each read, generating various plots and summary tables. To start the analysis we need the final <code class="docutils literal notranslate"><span class="pre">bam</span></code> and the reference sequence:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mapDamage</span> <span class="o">-</span><span class="n">i</span> <span class="n">filename</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">bam</span> <span class="o">-</span><span class="n">r</span> <span class="n">reference</span><span class="o">.</span><span class="n">fasta</span>
 </pre></div>
@@ -574,9 +490,9 @@ A new rescaled <code class="docutils literal notranslate"><span class="pre">bam<
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samtools</span> <span class="n">index</span> <span class="n">filename</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">sort</span><span class="o">.</span><span class="n">rescaled</span><span class="o">.</span><span class="n">bam</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="edit-distance">
-<h2><span class="section-number">7.6. </span>Edit Distance<a class="headerlink" href="#edit-distance" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="edit-distance">
+<h2><span class="section-number">7.6. </span>Edit Distance<a class="headerlink" href="#edit-distance" title="Permalink to this headline"></a></h2>
 <p>The edit distance defines the number of nucleotide changes that have to be made to one read sequence for it to be identical to the reference sequence.
 To be more confident about the quality and authenticity of your sequencing data, you need to align your reads againt your reference sequence and the genome of a closely related species.
 Here we will align our <code class="docutils literal notranslate"><span class="pre">fastq</span></code> file against the <a class="reference external" href="https://www.ncbi.nlm.nih.gov/genome/?term=Yersinia+pseudotuberculosis">Yersinia pseudotuberculosis</a> genome, following all the steps from 4.1 to 4.4.
@@ -615,75 +531,49 @@ The edit distance must be lower when aligning the reads to the reference sequenc
 </tr>
 </tbody>
 </table>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="6_VariantsCall.html" class="btn btn-neutral float-right" title="8. Variant calling and visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="4_Metagenomics_v2.html" class="btn btn-neutral float-left" title="6. Metagenomic screening of shotgun data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="4_Metagenomics_v2.html" class="btn btn-neutral float-left" title="6. Metagenomic screening of shotgun data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="6_VariantsCall.html" class="btn btn-neutral float-right" title="8. Variant calling and visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2021, Claudio Ottoni
-
-    </p>
+    <p>&#169; Copyright 2021, Claudio Ottoni.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>
