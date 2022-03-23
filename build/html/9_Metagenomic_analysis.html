@@ -58,7 +58,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#analyses-with-phyloseq">10.3. Analyses with Phyloseq</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#importing-abundance-tables-in-phyloseq">10.3.1. Importing abundance tables in Phyloseq</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#barplot-of-taxa-abundances">10.3.2. Barplot of taxa abundances</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#multidimensional-scaling-principal-coordinate-analysis">10.3.3. Multidimensional Scaling (Principal Coordinate Analysis)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#principal-coordinate-analysis-multidimensional-scaling">10.3.3. Principal Coordinate Analysis (Multidimensional Scaling)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#differential-taxonomic-abundances-with-deseq2">10.3.4. Differential taxonomic abundances with DESeq2</a></li>
 </ul>
 </li>
@@ -172,6 +172,9 @@ Run the normalization with <code class="docutils literal notranslate"><span clas
 </section>
 <section id="sourcetracker">
 <h2><span class="section-number">10.2. </span>Sourcetracker<a class="headerlink" href="#sourcetracker" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://github.com/danknights/sourcetracker">Sourcetracker</a> is a tool used to predict the source of microbial communities in a set of input samples (i.e., the sink samples). More info in the <a class="reference external" href="https://www.nature.com/articles/nmeth.1650">publication</a>.</p>
+<blockquote>
+<div></div></blockquote>
 <p>First you must prepare the sourcetracker table, in which the NCBI taxonomic IDs and the abundance values (as integers) are used.
 You can parse the table from the genome length normalized abudance table with the R script <code class="docutils literal notranslate"><span class="pre">makeIntegers.R</span></code>, which will generate a <code class="docutils literal notranslate"><span class="pre">filename.int</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Rscript</span> <span class="n">makeIntegers</span><span class="o">.</span><span class="n">R</span> <span class="n">abundance_table_IDs</span><span class="o">.</span><span class="n">merged</span><span class="o">.</span><span class="n">norm</span>
@@ -182,10 +185,8 @@ You can parse the table from the genome length normalized abudance table with th
 </pre></div>
 </div>
 <p>After preparing the abundance table, prepare the <strong>mapping file</strong> according to the required <a class="reference external" href="https://github.com/danknights/sourcetracker/blob/master/data/metadata.txt">layout</a>.
-In the <strong>SourceSink</strong> column, mark as <code class="docutils literal notranslate"><span class="pre">sink</span></code> the input samples to be tested, and as <code class="docutils literal notranslate"><span class="pre">source</span></code> the reference microbiome samples (e.g. soil, skin, laboratory controls microbiomes).</p>
-<blockquote>
-<div></div></blockquote>
-<p><a class="reference external" href="https://github.com/danknights/sourcetracker">Sourcetracker</a> is a tool used to predict the source of microbial communities in a set of input samples (i.e., the sink samples). More info in the <a class="reference external" href="https://www.nature.com/articles/nmeth.1650">publication</a>.</p>
+In the <strong>SourceSink</strong> column, mark as <code class="docutils literal notranslate"><span class="pre">sink</span></code> the input samples to be tested, and as <code class="docutils literal notranslate"><span class="pre">source</span></code> the reference microbiome samples (e.g. soil, skin, laboratory controls microbiomes).
+Here is a <a class="reference external" href="https://docs.google.com/spreadsheets/d/18DmeiKz0nlG3TiqXciVZLiPUREh_BhlE/edit?usp=sharing&amp;ouid=116430744637066257064&amp;rtpof=true&amp;sd=true">dataset</a> of microbiomes with metadata and a template mapping file to be used for the analysis in our lab.</p>
 <blockquote>
 <div></div></blockquote>
 <p>Run sourcetracker using the following command:</p>
@@ -200,7 +201,7 @@ In the <strong>SourceSink</strong> column, mark as <code class="docutils literal
 <section id="analyses-with-phyloseq">
 <h2><span class="section-number">10.3. </span>Analyses with Phyloseq<a class="headerlink" href="#analyses-with-phyloseq" title="Permalink to this headline"></a></h2>
 <p>We will use the R package <code class="docutils literal notranslate"><span class="pre">Phyloseq</span></code> to explore the microbiome data in the normalized abundance table. Once imported in R, the table can be tweaked to focus on a subset of samples.
-Install Phyloseq from <a class="reference external" href="https://bioconductor.org/packages/release/bioc/html/phyloseq.html">Bioconductor</a>:</p>
+Install Phyloseq from <a class="reference external" href="https://bioconductor.org/packages/release/bioc/html/phyloseq.html">Bioconductor</a>.</p>
 <blockquote>
 <div></div></blockquote>
 <section id="importing-abundance-tables-in-phyloseq">
@@ -225,19 +226,27 @@ First you can import the otu table with taxa abundances, and tweak it to remove 
 <span class="n">taxonomy.final</span> <span class="o">=</span> <span class="p">(</span><span class="n">taxonomy</span><span class="p">[,</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">19</span><span class="p">)])</span>
 </pre></div>
 </div>
-<p>Finally generate the biom object with phyloseq.</p>
+<p>Then you can generate the biom object with phyloseq.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">phyloseq</span><span class="p">)</span>
 <span class="c1"># assing otu and tax tables</span>
 <span class="n">OTU</span> <span class="o">=</span> <span class="nf">otu_table</span><span class="p">(</span><span class="n">otu.final</span><span class="p">,</span> <span class="n">taxa_are_rows</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 <span class="n">TAX</span> <span class="o">=</span> <span class="nf">tax_table</span><span class="p">(</span><span class="n">taxonomy.final</span><span class="p">)</span>
 <span class="n">my_biom</span> <span class="o">=</span> <span class="nf">phyloseq</span><span class="p">(</span><span class="n">OTU</span><span class="p">,</span> <span class="n">TAX</span><span class="p">)</span>
-<span class="c1"># import mapping file with metadata</span>
+</pre></div>
+</div>
+<p>As additional step, you can add to the biom file metadata that will be useful to describe the samples and select them in the downstream analyses (e.g. to work on subset of samples).
+The metadata are stored in a mapping file, a tab-delimited text file where you have in the first column the names of your samples (matching those in your OTU abundance table), and the other columns as many metadata as you want (e.g. sample source, literature ID etc.).
+In the dataset of microbiomes mentioned about you can find metadata to be used for the analysis: <a class="reference external" href="https://docs.google.com/spreadsheets/d/18DmeiKz0nlG3TiqXciVZLiPUREh_BhlE/edit?usp=sharing&amp;ouid=116430744637066257064&amp;rtpof=true&amp;sd=true">Database_metagenomics.xlsx</a></p>
+<blockquote>
+<div></div></blockquote>
+<p>The metadata can be incorporated in your biom file as follows:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># import mapping file with metadata</span>
 <span class="n">biom_metadata</span> <span class="o">&lt;-</span> <span class="nf">import_qiime_sample_data</span><span class="p">(</span><span class="s">&quot;map_file_full_dataset_Mar2022.txt&quot;</span><span class="p">)</span>
 <span class="c1"># merge data</span>
 <span class="n">my_biom</span> <span class="o">&lt;-</span> <span class="nf">merge_phyloseq</span><span class="p">(</span><span class="n">my_biom</span><span class="p">,</span> <span class="n">biom_metadata</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here some commands to explore the biom object:</p>
+<p>Finally, here some commands to explore the biom object:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># check sample names:</span>
 <span class="nf">sample_data</span><span class="p">(</span><span class="n">my_biom</span><span class="p">)</span>
 <span class="c1"># check taxa:</span>
@@ -246,13 +255,19 @@ First you can import the otu table with taxa abundances, and tweak it to remove 
 <span class="nf">colnames</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">my_biom</span><span class="p">))</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If needed, it is convenient to rename the taxa columns more appropriately (instead of Rank1 etc.)</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">my_biom</span><span class="p">))</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Kingdom&quot;</span><span class="p">,</span> <span class="s">&quot;Phylum&quot;</span><span class="p">,</span> <span class="s">&quot;Class&quot;</span><span class="p">,</span> <span class="s">&quot;Order&quot;</span><span class="p">,</span> <span class="s">&quot;Family&quot;</span><span class="p">,</span> <span class="s">&quot;Genus&quot;</span><span class="p">,</span> <span class="s">&quot;Species&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># check the labels used for rank names</span>
 <span class="nf">head</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">my_biom</span><span class="p">))</span>
+<span class="c1"># change them if needed</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">my_biom</span><span class="p">))</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Kingdom&quot;</span><span class="p">,</span> <span class="s">&quot;Phylum&quot;</span><span class="p">,</span> <span class="s">&quot;Class&quot;</span><span class="p">,</span> <span class="s">&quot;Order&quot;</span><span class="p">,</span> <span class="s">&quot;Family&quot;</span><span class="p">,</span> <span class="s">&quot;Genus&quot;</span><span class="p">,</span> <span class="s">&quot;Species&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 <p>Remove low-abundance taxa below a desired threshold (most commonly 0.02% is chosen).</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">minTotRelAbun</span> <span class="o">=</span> <span class="m">0.0002</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nf">taxa_sums</span><span class="p">(</span><span class="n">my_biom</span><span class="p">)</span>
 <span class="n">keepTaxa</span> <span class="o">=</span> <span class="nf">taxa_names</span><span class="p">(</span><span class="n">my_biom</span><span class="p">)[</span><span class="nf">which</span><span class="p">((</span><span class="n">x</span> <span class="o">/</span> <span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">minTotRelAbun</span><span class="p">)]</span>
 <span class="n">my_biom_flt</span> <span class="o">=</span> <span class="nf">prune_taxa</span><span class="p">(</span><span class="n">keepTaxa</span><span class="p">,</span> <span class="n">my_biom</span><span class="p">)</span>
 </pre></div>
@@ -264,12 +279,149 @@ First you can import the otu table with taxa abundances, and tweak it to remove 
 </section>
 <section id="barplot-of-taxa-abundances">
 <h3><span class="section-number">10.3.2. </span>Barplot of taxa abundances<a class="headerlink" href="#barplot-of-taxa-abundances" title="Permalink to this headline"></a></h3>
+<p>We can generate barplots to display the relative abundance of each sample at different taxonomic ranks.
+To do that we will first merge the abundance of the taxa of our table (e.g. species) to a higher taxonomic rank (e.g. Phylum).</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># merge taxa at the Phylum rank with tax_glom (in Phyloseq)</span>
+<span class="n">my_biom_rel_phylum</span> <span class="o">=</span> <span class="nf">tax_glom</span><span class="p">(</span><span class="n">my_biom_rel</span><span class="p">,</span> <span class="s">&quot;Phylum&quot;</span><span class="p">)</span>
+<span class="c1"># plot the relative abundances (you can use ggplot2 themes to improve the chart)</span>
+<span class="nf">plot_bar</span><span class="p">(</span><span class="n">my_biom_rel_phylum</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">&quot;Phylum&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">axis.text.x</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">4</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="m">90</span><span class="p">,</span> <span class="n">hjust</span> <span class="o">=</span> <span class="m">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">tax_glom</span></code> command the label of the rank must match the one that is defined in your original biom file, as reported in the column names of the tax_table command (see above).</p>
+</div>
+<p>Try to generate barplots at different taxonomic ranks (e.g. family).
+To save the plot in the pdf format you can use this command:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dev.print</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="s">&#39;filename.pdf)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also focus your analysis on a subset of samples and use the metadata contained in your original mapping file. It would be convenient to add metadata the way it more convenient to select and compare your samples.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># subsample single group phyla</span>
+<span class="n">subsample</span> <span class="o">=</span> <span class="nf">subset_samples</span><span class="p">(</span><span class="n">my_biom_rel_phylum</span><span class="p">,</span> <span class="n">Group2</span><span class="o">==</span><span class="s">&quot;Portugal calculus&quot;</span><span class="p">)</span>
+<span class="c1"># subsample multiple groups phyla</span>
+<span class="n">subgroup</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Portugal calculus&quot;</span><span class="p">,</span><span class="s">&quot;Espinoso&quot;</span><span class="p">,</span><span class="s">&quot;NTC&quot;</span><span class="p">)</span>
+<span class="n">subsample</span> <span class="o">=</span> <span class="nf">subset_samples</span><span class="p">(</span><span class="n">my_biom_rel_phylum</span><span class="p">,</span> <span class="n">Group2</span> <span class="o">%in%</span> <span class="n">subgroup</span><span class="p">)</span>
+<span class="c1"># barplots in groups with facet_grid</span>
+<span class="nf">plot_bar</span><span class="p">(</span><span class="n">subsample</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s">&quot;phylum&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">facet_grid</span><span class="p">(</span><span class="o">~</span><span class="n">Group2</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span> <span class="s">&quot;free_x&quot;</span><span class="p">,</span> <span class="n">space</span> <span class="o">=</span> <span class="s">&quot;free_x&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">axis.text.x</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">6</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="m">90</span><span class="p">,</span> <span class="n">hjust</span> <span class="o">=</span> <span class="m">1</span><span class="p">))</span>
+</pre></div>
+</div>
 </section>
-<section id="multidimensional-scaling-principal-coordinate-analysis">
-<h3><span class="section-number">10.3.3. </span>Multidimensional Scaling (Principal Coordinate Analysis)<a class="headerlink" href="#multidimensional-scaling-principal-coordinate-analysis" title="Permalink to this headline"></a></h3>
+<section id="principal-coordinate-analysis-multidimensional-scaling">
+<h3><span class="section-number">10.3.3. </span>Principal Coordinate Analysis (Multidimensional Scaling)<a class="headerlink" href="#principal-coordinate-analysis-multidimensional-scaling" title="Permalink to this headline"></a></h3>
+<p>The Principal Coordinate Analysis (PCoA), also referred to as non-metric Multidimensional Scaling (nMDS) is a multivariate reduction method performed on distance (or dissimilarity) indexes. Here we will use the Bray-Curtis dissimilarity.
+You can read more about the nMDS and so-called ordination methods here: <a class="reference external" href="https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/">link1</a>, <a class="reference external" href="https://ourcodingclub.github.io/tutorials/ordination/">link2</a></p>
+<blockquote>
+<div></div></blockquote>
+<p>To make the MDS you can focus on a subset of samples in your species abundance table and run the following commands:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># subsample multiple groups phyla</span>
+<span class="n">subgroup</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Portugal calculus&quot;</span><span class="p">,</span><span class="s">&quot;Espinoso&quot;</span><span class="p">,</span><span class="s">&quot;Prehistoric human&quot;</span><span class="p">,</span><span class="s">&quot;NTC&quot;</span><span class="p">,</span><span class="s">&quot;Soil&quot;</span><span class="p">,</span><span class="s">&quot;Skin&quot;</span><span class="p">,</span><span class="s">&quot;Gut&quot;</span><span class="p">)</span>
+<span class="n">subsample</span> <span class="o">=</span> <span class="nf">subset_samples</span><span class="p">(</span><span class="n">my_biom_rel</span><span class="p">,</span> <span class="n">Group2</span> <span class="o">%in%</span> <span class="n">subgroup</span><span class="p">)</span>
+<span class="c1"># calculate Bray-Curtis (BC) dissimilarities</span>
+<span class="n">distBC</span> <span class="o">=</span> <span class="nf">distance</span><span class="p">(</span><span class="n">subsample</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">&quot;bray&quot;</span><span class="p">)</span>
+<span class="c1"># make PCoA ordination (MDS) with BC dissimilarities</span>
+<span class="n">ordBC</span> <span class="o">=</span> <span class="nf">ordinate</span><span class="p">(</span><span class="n">subsample</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">&quot;PCoA&quot;</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">distBC</span><span class="p">)</span>
+<span class="c1"># two-dimension plot PCoA (MDS) setting the colors of the points automatically as defined in the metadata &quot;Group2&quot;.</span>
+<span class="nf">plot_ordination</span><span class="p">(</span><span class="n">subsample</span><span class="p">,</span> <span class="n">ordBC</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;Group2&quot;</span><span class="p">)</span>
+
+<span class="c1"># you could play with more plotting options and customizations with ggplot2</span>
+<span class="nf">plot_ordination</span><span class="p">(</span><span class="n">my_biom_rel</span><span class="p">,</span> <span class="n">ordBC</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;Group2&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">geom_point</span><span class="p">(</span><span class="n">mapping</span> <span class="o">=</span> <span class="nf">aes</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">xxx</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="n">yyy</span><span class="p">)))</span> <span class="o">+</span> <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;PCoA: Bray-Curtis&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can repeat the analysis at a higher taxonomic ranks (e.g. genus) and see the difference in the plot.</p>
 </section>
 <section id="differential-taxonomic-abundances-with-deseq2">
 <h3><span class="section-number">10.3.4. </span>Differential taxonomic abundances with DESeq2<a class="headerlink" href="#differential-taxonomic-abundances-with-deseq2" title="Permalink to this headline"></a></h3>
+<p>A common goal of microbiome studies is to identify differentially abundant taxa (species, genera etc.) between different groups of samples.
+One of the tools used to do that is DESeq2, which was originally developed to identify differentially expressed genes in RNAseq data, but it commonly adopted also in microbiome studies. You can read more about DESeq2 in the <a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8">original publication</a> and in the <a class="reference external" href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">dedicated page</a> of Bioconductor.
+You can install <a class="reference external" href="https://bioconductor.org/packages/release/bioc/html/phyloseq.html">DESeq2 from Bioconductor</a>.</p>
+<blockquote>
+<div></div></blockquote>
+<p>Run DESeq2 on the raw abundace data (<a class="reference external" href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#why-un-normalized-counts">here is why</a>), filtered for the low-abundance taxa . You can choose to work on a subset of sample, as done above.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">DESeq2</span><span class="p">)</span>
+<span class="c1"># subsample multiple groups phyla</span>
+<span class="n">subgroup</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Portugal calculus&quot;</span><span class="p">,</span><span class="s">&quot;Prehistoric human&quot;</span><span class="p">,</span><span class="s">&quot;NTC&quot;</span><span class="p">,</span><span class="s">&quot;Soil&quot;</span><span class="p">,</span><span class="s">&quot;Skin&quot;</span><span class="p">,</span><span class="s">&quot;Gut&quot;</span><span class="p">)</span>
+<span class="n">subsample</span> <span class="o">=</span> <span class="nf">subset_samples</span><span class="p">(</span><span class="n">my_biom_flt</span><span class="p">,</span> <span class="n">Group2</span> <span class="o">%in%</span> <span class="n">subgroup</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>DESeq2 does not tolerate zero-counts, for this reason an offset (+1) is commonly applied to remove all zeroes from your table.
+After that, run DESeq2 on your table and contrat two sets of samples to find differential taxa abundances.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a +1 offset to run Deseq2 (which does not tolerate zero counts)</span>
+<span class="nf">otu_table</span><span class="p">(</span><span class="n">subsample</span><span class="p">)</span> <span class="o">=</span> <span class="nf">otu_table</span><span class="p">(</span><span class="n">subsample</span><span class="p">)</span><span class="m">+1</span>
+<span class="c1"># make deseq object from phyloseq object</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="nf">phyloseq_to_deseq2</span><span class="p">(</span><span class="n">subsample</span><span class="p">,</span> <span class="o">~</span> <span class="n">Group2</span><span class="p">)</span>
+<span class="c1"># Run DESeq2</span>
+<span class="n">dds.data</span> <span class="o">=</span> <span class="nf">DESeq</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="c1"># With the &#39;contrast&#39; function you screen two different set of samples (based on your metadata) for differential taxa.</span>
+<span class="n">res</span> <span class="o">=</span> <span class="nf">results</span><span class="p">(</span><span class="n">dds.data</span><span class="p">,</span> <span class="n">contrast</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Group2&quot;</span><span class="p">,</span><span class="s">&quot;Portugal calculus&quot;</span><span class="p">,</span><span class="s">&quot;NTC&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Then you can explore your results, filter and sort the differential taxa detected based on a False Dicovery Rate (FDR) threshold (e.g. set to 0.01), the log2-fold-change and the base mean. Read more about the <a class="reference external" href="https://www.biostars.org/p/209118/">FDR threshold here</a>.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># sort based on p-value adjusted:</span>
+<span class="n">resOrdered</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">res</span><span class="o">$</span><span class="n">padj</span><span class="p">,</span> <span class="n">na.last</span><span class="o">=</span><span class="kc">NA</span><span class="p">),</span> <span class="p">]</span>
+<span class="c1"># set a threshold value for the False Discovery Rate (FDR):</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="m">0.01</span>
+<span class="c1"># get only significant taxa based on p-value adjusted (the FDR):</span>
+<span class="n">resSig</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">resOrdered</span><span class="p">,</span> <span class="n">padj</span> <span class="o">&lt;</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="c1"># sort significant values based on the log-fold-change:</span>
+<span class="n">resfc</span> <span class="o">=</span> <span class="n">resSig</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">resSig</span><span class="o">$</span><span class="n">log2FoldChange</span><span class="p">),]</span>
+<span class="c1"># sort significant values based on abundance:</span>
+<span class="n">resbm</span> <span class="o">=</span> <span class="n">resSig</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">resSig</span><span class="o">$</span><span class="n">baseMean</span><span class="p">),]</span>
+<span class="c1"># save the the tables</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">resbm</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="s">&quot;/path/table.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">col.names</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A positive log2-fold-change for a comparison of A vs B means that the OTU in A is more abundant than in B (and viceversa).
+For example, a log2-fold-change of −1 means that in A the OTU is of 2^−1 = 0.5 less abundant than in B.</p>
+</div>
+<p>You can plot the log2-fold-changes to visualize for example the number of differential species belonging to different genera (or phyla) in the two groups contrasted, highlitingh the phylum.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate a data frame to handle the data</span>
+<span class="n">resSigMod</span> <span class="o">=</span> <span class="nf">cbind</span><span class="p">(</span><span class="nf">as</span><span class="p">(</span><span class="n">resSig</span><span class="p">,</span> <span class="s">&quot;data.frame&quot;</span><span class="p">),</span> <span class="nf">as</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">subsample</span><span class="p">)[</span><span class="nf">rownames</span><span class="p">(</span><span class="n">resSig</span><span class="p">),</span> <span class="p">],</span> <span class="s">&quot;matrix&quot;</span><span class="p">))</span>
+<span class="c1"># Plot log-fold-changes of otus based on Genus</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">resSigMod</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">genus</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">log2FoldChange</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">phylum</span><span class="p">))</span> <span class="o">+</span>
+    <span class="nf">geom_jitter</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="m">0.2</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">5</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="m">-90</span><span class="p">,</span> <span class="n">hjust</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">vjust</span><span class="o">=</span><span class="m">0.5</span><span class="p">))</span>
+<span class="c1"># Plot log-fold-changes of tus based on Phylum</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">resSigMod</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">phylum</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">log2FoldChange</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">phylum</span><span class="p">))</span> <span class="o">+</span>
+    <span class="nf">geom_jitter</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="m">0.2</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="m">-90</span><span class="p">,</span> <span class="n">hjust</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">vjust</span><span class="o">=</span><span class="m">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You can also generate a heatmap of the transformed abundance data. For visualization or clustering purposes it might be useful to work with transformed versions of the count data.
+Various <a class="reference external" href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#data-transformations-and-visualization">transformations</a> may be applied on the data:
+1) ntd: Log transformation of the the data
+2) vsd: Variance Stabilizing Transformation
+3) rld: Regularized log transformation</p>
+<blockquote>
+<div></div></blockquote>
+<p>When dealing with many samples it is useful to use the vst. To make the various transformatinos run the folowing commands:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># variance stabilizing transformation</span>
+<span class="n">vsd</span> <span class="o">=</span> <span class="nf">varianceStabilizingTransformation</span><span class="p">(</span><span class="n">dds.data</span><span class="p">,</span> <span class="n">blind</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="c1"># log transformation</span>
+<span class="n">ntd</span> <span class="o">&lt;-</span> <span class="nf">normTransform</span><span class="p">(</span><span class="n">dds.data</span><span class="p">)</span>
+<span class="c1"># regularized log transformation</span>
+<span class="n">rld</span> <span class="o">&lt;-</span> <span class="nf">rlog</span><span class="p">(</span><span class="n">dds.data</span><span class="p">,</span> <span class="n">blind</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We will plot the heatmap of the transformed data only for a reduced number of taxa (with decreasing counts).</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="s">&quot;pheatmap&quot;</span><span class="p">)</span>
+<span class="c1">#adjust max number of taxa to display.</span>
+<span class="n">select</span> <span class="o">&lt;-</span> <span class="nf">order</span><span class="p">(</span><span class="nf">rowMeans</span><span class="p">(</span><span class="nf">counts</span><span class="p">(</span><span class="n">dds.data</span><span class="p">,</span><span class="n">normalized</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)),</span>
+                <span class="n">decreasing</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">]</span>
+<span class="c1"># create a dataframe importing using the metadata (e.g. Group2) and incorporating the taxa names as row names.</span>
+<span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">dds.data</span><span class="p">)[,</span><span class="s">&quot;Group2&quot;</span><span class="p">])</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">subsample</span><span class="o">@</span><span class="n">otu_table</span><span class="p">)</span>
+<span class="c1"># plot heatmap (on ntd transformation)</span>
+<span class="nf">pheatmap</span><span class="p">(</span><span class="nf">assay</span><span class="p">(</span><span class="n">vsd</span><span class="p">)[</span><span class="n">select</span><span class="p">,],</span> <span class="n">cluster_rows</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">show_rownames</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span>
+         <span class="n">cluster_cols</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">annotation_col</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 </section>
 </section>
