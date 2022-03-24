@@ -18,7 +18,6 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="11. Hands-on" href="8_HandsOn.html" />
     <link rel="prev" title="9. Filtering, annotating and combining SNPs" href="7_Filtering_SNPs.html" /> 
 </head>
 
@@ -59,13 +58,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#importing-abundance-tables-in-phyloseq">10.3.1. Importing abundance tables in Phyloseq</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#barplot-of-taxa-abundances">10.3.2. Barplot of taxa abundances</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#principal-coordinate-analysis-multidimensional-scaling">10.3.3. Principal Coordinate Analysis (Multidimensional Scaling)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#differential-taxonomic-abundances-with-deseq2">10.3.4. Differential taxonomic abundances with DESeq2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#non-metric-multidimensional-scaling">10.3.4. Non-Metric Multidimensional Scaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#differential-taxonomic-abundances-with-deseq2">10.3.5. Differential taxonomic abundances with DESeq2</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">11. Hands-on</a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">12. Material from previous courses</a></li>
 </ul>
 
         </div>
@@ -309,8 +307,8 @@ To save the plot in the pdf format you can use this command:</p>
 </section>
 <section id="principal-coordinate-analysis-multidimensional-scaling">
 <h3><span class="section-number">10.3.3. </span>Principal Coordinate Analysis (Multidimensional Scaling)<a class="headerlink" href="#principal-coordinate-analysis-multidimensional-scaling" title="Permalink to this headline"></a></h3>
-<p>The Principal Coordinate Analysis (PCoA), also referred to as non-metric Multidimensional Scaling (nMDS) is a multivariate reduction method performed on distance (or dissimilarity) indexes. Here we will use the Bray-Curtis dissimilarity.
-You can read more about the nMDS and so-called ordination methods here: <a class="reference external" href="https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/">link1</a>, <a class="reference external" href="https://ourcodingclub.github.io/tutorials/ordination/">link2</a></p>
+<p>The Principal Coordinate Analysis (PCoA), also referred to as metric Multidimensional Scaling (MDS) is a multivariate reduction method performed on distance (or dissimilarity) indexes. Here we will use the Bray-Curtis dissimilarity.
+Read more about the MDS and so-called <a class="reference external" href="https://ourcodingclub.github.io/tutorials/ordination/">ordination methods</a></p>
 <blockquote>
 <div></div></blockquote>
 <p>To make the MDS you can focus on a subset of samples in your species abundance table and run the following commands:</p>
@@ -330,8 +328,31 @@ You can read more about the nMDS and so-called ordination methods here: <a class
 </div>
 <p>You can repeat the analysis at a higher taxonomic ranks (e.g. genus) and see the difference in the plot.</p>
 </section>
+<section id="non-metric-multidimensional-scaling">
+<h3><span class="section-number">10.3.4. </span>Non-Metric Multidimensional Scaling<a class="headerlink" href="#non-metric-multidimensional-scaling" title="Permalink to this headline"></a></h3>
+<p>Unlike other ordination techniques that rely on (primarily Euclidean) distances, such as Principal Coordinates Analysis, nMDS uses rank orders (so not the abundances).
+The use of ranks omits some of the issues associated with using absolute distance (e.g., sensitivity to transformation), and as a result is much more flexible technique that accepts a variety of types of data. (It’s also where the “non-metric” part of the name comes from.)
+To begin, NMDS requires a distance matrix, or a matrix of dissimilarities. Raw Euclidean distances are not ideal for this purpose: they’re sensitive to total abundances. Consequently, ecologists use the Bray-Curtis dissimilarity calculation.
+NMDS arranges points to maximize rank-order correlation between real-world distance and ordination space distance.
+You can read more on the nMDS in the blogs curated by ecologists: <a class="reference external" href="https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/">link1</a> <a class="reference external" href="https://archetypalecology.wordpress.com/2018/02/18/non-metric-multidimensional-scaling-nmds-what-how/">link2</a></p>
+<blockquote>
+<div></div></blockquote>
+<p>The technique uses a <em>trial and error</em> to find the best positioning in dimensional space. Goodness-of-fit is measured by <strong>stress</strong> – a measure of rank-order disagreement between observed and fitted distances.
+You can follow the same steps as above, just change the ordinatiom method supported in the command.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># subsample multiple groups phyla</span>
+<span class="n">subgroup</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Portugal calculus&quot;</span><span class="p">,</span><span class="s">&quot;Espinoso&quot;</span><span class="p">,</span><span class="s">&quot;Prehistoric human&quot;</span><span class="p">,</span><span class="s">&quot;NTC&quot;</span><span class="p">,</span><span class="s">&quot;Soil&quot;</span><span class="p">,</span><span class="s">&quot;Skin&quot;</span><span class="p">,</span><span class="s">&quot;Gut&quot;</span><span class="p">)</span>
+<span class="n">subsample</span> <span class="o">=</span> <span class="nf">subset_samples</span><span class="p">(</span><span class="n">my_biom_rel</span><span class="p">,</span> <span class="n">Group2</span> <span class="o">%in%</span> <span class="n">subgroup</span><span class="p">)</span>
+<span class="c1"># calculate Bray-Curtis (BC) dissimilarities</span>
+<span class="n">distBC</span> <span class="o">=</span> <span class="nf">distance</span><span class="p">(</span><span class="n">subsample</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">&quot;bray&quot;</span><span class="p">)</span>
+<span class="c1"># make PCoA ordination (MDS) with BC dissimilarities</span>
+<span class="n">ordBC</span> <span class="o">=</span> <span class="nf">ordinate</span><span class="p">(</span><span class="n">subsample</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">&quot;NMDS&quot;</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">distBC</span><span class="p">)</span>
+<span class="c1"># two-dimension plot PCoA (MDS) setting the colors of the points automatically as defined in the metadata &quot;Group2&quot;.</span>
+<span class="nf">plot_ordination</span><span class="p">(</span><span class="n">subsample</span><span class="p">,</span> <span class="n">ordBC</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;Group2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 <section id="differential-taxonomic-abundances-with-deseq2">
-<h3><span class="section-number">10.3.4. </span>Differential taxonomic abundances with DESeq2<a class="headerlink" href="#differential-taxonomic-abundances-with-deseq2" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">10.3.5. </span>Differential taxonomic abundances with DESeq2<a class="headerlink" href="#differential-taxonomic-abundances-with-deseq2" title="Permalink to this headline"></a></h3>
 <p>A common goal of microbiome studies is to identify differentially abundant taxa (species, genera etc.) between different groups of samples.
 One of the tools used to do that is DESeq2, which was originally developed to identify differentially expressed genes in RNAseq data, but it commonly adopted also in microbiome studies. You can read more about DESeq2 in the <a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8">original publication</a> and in the <a class="reference external" href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">dedicated page</a> of Bioconductor.
 You can install <a class="reference external" href="https://bioconductor.org/packages/release/bioc/html/phyloseq.html">DESeq2 from Bioconductor</a>.</p>
@@ -431,7 +452,6 @@ Various <a class="reference external" href="https://bioconductor.org/packages/de
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="7_Filtering_SNPs.html" class="btn btn-neutral float-left" title="9. Filtering, annotating and combining SNPs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="8_HandsOn.html" class="btn btn-neutral float-right" title="11. Hands-on" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -4,9 +4,13 @@
    contain the root `toctree` directive.
 
 
+.. image:: images/Tor-Vergata_logo_EN_cmyk.png
+
+
 ############################
 Paleogenomics at Tor Vergata
 ############################
+
 
 Tutorial of bioinformatics at the Laboratory of Molecular Anthropology, University of Rome Tor Vergata.  
 
@@ -27,14 +31,8 @@ Contents
    5_ReadsMapping_v2
    6_VariantsCall
    7_Filtering_SNPs
-   9_Metagenomic_analysis.rst
-   8_HandsOn
-   9_old_material
+   9_Metagenomic_analysis
 
-   
-**Course overview**
-
-.. image:: images/Course_workflow.png
 
 
 * :ref:`genindex`

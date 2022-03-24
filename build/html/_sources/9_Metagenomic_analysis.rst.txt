@@ -260,11 +260,10 @@ You can also focus your analysis on a subset of samples and use the metadata con
 
 Principal Coordinate Analysis (Multidimensional Scaling)
 ********************************************************
-The Principal Coordinate Analysis (PCoA), also referred to as non-metric Multidimensional Scaling (nMDS) is a multivariate reduction method performed on distance (or dissimilarity) indexes. Here we will use the Bray-Curtis dissimilarity.
-You can read more about the nMDS and so-called ordination methods here: `link1`_, `link2`_ 
+The Principal Coordinate Analysis (PCoA), also referred to as metric Multidimensional Scaling (MDS) is a multivariate reduction method performed on distance (or dissimilarity) indexes. Here we will use the Bray-Curtis dissimilarity.
+Read more about the MDS and so-called `ordination methods`_
 
-  .. _link1: https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/
-  .. _link2: https://ourcodingclub.github.io/tutorials/ordination/
+  .. _ordination methods: https://ourcodingclub.github.io/tutorials/ordination/
 
 To make the MDS you can focus on a subset of samples in your species abundance table and run the following commands: 
 ::
@@ -283,6 +282,34 @@ To make the MDS you can focus on a subset of samples in your species abundance t
   plot_ordination(my_biom_rel, ordBC, color = "Group2") + geom_point(mapping = aes(size = xxx, shape = factor(yyy))) + ggtitle("PCoA: Bray-Curtis")
 
 You can repeat the analysis at a higher taxonomic ranks (e.g. genus) and see the difference in the plot. 
+
+
+Non-Metric Multidimensional Scaling
+***********************************
+Unlike other ordination techniques that rely on (primarily Euclidean) distances, such as Principal Coordinates Analysis, nMDS uses rank orders (so not the abundances).
+The use of ranks omits some of the issues associated with using absolute distance (e.g., sensitivity to transformation), and as a result is much more flexible technique that accepts a variety of types of data. (It’s also where the “non-metric” part of the name comes from.) 
+To begin, NMDS requires a distance matrix, or a matrix of dissimilarities. Raw Euclidean distances are not ideal for this purpose: they’re sensitive to total abundances. Consequently, ecologists use the Bray-Curtis dissimilarity calculation.
+NMDS arranges points to maximize rank-order correlation between real-world distance and ordination space distance. 
+You can read more on the nMDS in the blogs curated by ecologists: `link1`_ `link2`_
+
+  .. _link1: https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/
+  .. _link2: https://archetypalecology.wordpress.com/2018/02/18/non-metric-multidimensional-scaling-nmds-what-how/
+
+The technique uses a *trial and error* to find the best positioning in dimensional space. Goodness-of-fit is measured by **stress** – a measure of rank-order disagreement between observed and fitted distances. 
+You can follow the same steps as above, just change the ordinatiom method supported in the command. 
+::
+
+  # subsample multiple groups phyla
+  subgroup = c("Portugal calculus","Espinoso","Prehistoric human","NTC","Soil","Skin","Gut")
+  subsample = subset_samples(my_biom_rel, Group2 %in% subgroup)
+  # calculate Bray-Curtis (BC) dissimilarities
+  distBC = distance(subsample, method = "bray")
+  # make PCoA ordination (MDS) with BC dissimilarities
+  ordBC = ordinate(subsample, method = "NMDS", distance = distBC)
+  # two-dimension plot PCoA (MDS) setting the colors of the points automatically as defined in the metadata "Group2".
+  plot_ordination(subsample, ordBC, color = "Group2")
+ 
+
 
 
 Differential taxonomic abundances with DESeq2
