@@ -5,7 +5,7 @@
 
 
 .. image:: images/Tor-Vergata_logo_EN_cmyk.png
-
+  :width: 400
 
 ############################
 Paleogenomics at Tor Vergata
