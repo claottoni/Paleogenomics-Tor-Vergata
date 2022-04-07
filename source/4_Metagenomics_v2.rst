@@ -7,7 +7,7 @@ Metagenomic screening of shotgun data
 Kraken 2
 ********
 
-In this hands-on session we will use Kraken 2 to screen the metagenomic content of an ancient sample. The first version of Kraken (see :ref:`kraken_label`) uses a large indexed and sorted list of k-mer/LCA pairs as its database, which may be problematic for users due to the large memory requirements. For this reason `Kraken 2`_ was developed.
+In this hands-on session we will use Kraken 2 to screen the metagenomic content of an ancient sample. The first version of Kraken uses a large indexed and sorted list of k-mer/LCA pairs as its database, which may be problematic for users due to the large memory requirements. For this reason `Kraken 2`_ was developed.
 Kraken 2 is fast and requires less memory, BUT false positive errors occur in less than 1% of queries (confidence scoring thresholds can be used to call out to detect them).
 The default (or standard) database size is 29 GB (as of Jan. 2018, in Kraken 1 the standard database is about 200 GB!), and you will need slightly more than that in RAM if you want to build it.
 By default, Kraken 2 will attempt to use the dustmasker or  segmasker programs provided as part of NCBI's BLAST suite to mask low-complexity regions.

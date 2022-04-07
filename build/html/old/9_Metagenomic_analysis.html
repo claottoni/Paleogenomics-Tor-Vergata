@@ -296,7 +296,7 @@ To save the plot in the pdf format you can use this command:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dev.print</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="s">&#39;filename.pdf)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You can also focus your analysis on a subset of samples and use the metadata contained in your original mapping file. It would be convenient to add metadata the way it more convenient to select and compare your samples. Here we subsample for some groups of individuals as defined in the metadata column <strong>Group2</strong>.</p>
+<p>You can also focus your analysis on a subset of samples and use the metadata contained in your original mapping file. It would be convenient to add metadata the way it more convenient to select and compare your samples.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># subsample single group phyla</span>
 <span class="n">subsample</span> <span class="o">=</span> <span class="nf">subset_samples</span><span class="p">(</span><span class="n">my_biom_rel_phylum</span><span class="p">,</span> <span class="n">Group2</span><span class="o">==</span><span class="s">&quot;Portugal calculus&quot;</span><span class="p">)</span>
 <span class="c1"># subsample multiple groups phyla</span>
@@ -308,7 +308,7 @@ To save the plot in the pdf format you can use this command:</p>
 </div>
 </section>
 <section id="principal-coordinate-analysis-multidimensional-scaling">
-<span id="pcoa"></span><h3><span class="section-number">10.3.3. </span>Principal Coordinate Analysis (Multidimensional Scaling)<a class="headerlink" href="#principal-coordinate-analysis-multidimensional-scaling" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">10.3.3. </span>Principal Coordinate Analysis (Multidimensional Scaling)<a class="headerlink" href="#principal-coordinate-analysis-multidimensional-scaling" title="Permalink to this headline"></a></h3>
 <p>The Principal Coordinate Analysis (PCoA), also referred to as metric Multidimensional Scaling (MDS) is a multivariate reduction method performed on distance (or dissimilarity) indexes. Here we will use the Bray-Curtis dissimilarity.
 Read more about the MDS and so-called <a class="reference external" href="https://ourcodingclub.github.io/tutorials/ordination/">ordination methods</a></p>
 <blockquote>
@@ -331,7 +331,7 @@ Read more about the MDS and so-called <a class="reference external" href="https:
 <p>You can repeat the analysis at a higher taxonomic ranks (e.g. genus) and see the difference in the plot.</p>
 </section>
 <section id="non-metric-multidimensional-scaling">
-<span id="nmds"></span><h3><span class="section-number">10.3.4. </span>Non-Metric Multidimensional Scaling<a class="headerlink" href="#non-metric-multidimensional-scaling" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">10.3.4. </span>Non-Metric Multidimensional Scaling<a class="headerlink" href="#non-metric-multidimensional-scaling" title="Permalink to this headline"></a></h3>
 <p>Unlike other ordination techniques that rely on (primarily Euclidean) distances, such as Principal Coordinates Analysis, nMDS uses rank orders (so not the abundances).
 The use of ranks omits some of the issues associated with using absolute distance (e.g., sensitivity to transformation), and as a result is much more flexible technique that accepts a variety of types of data. (It’s also where the “non-metric” part of the name comes from.)
 To begin, NMDS requires a distance matrix, or a matrix of dissimilarities. Raw Euclidean distances are not ideal for this purpose: they’re sensitive to total abundances. Consequently, ecologists use the Bray-Curtis dissimilarity calculation.
@@ -451,105 +451,17 @@ Various <a class="reference external" href="https://bioconductor.org/packages/de
 <p>The Principal Component Analysis (PCA) is another multivariate reduction method used for data visualization. You can read more about the general principles of PCA here: <a class="reference external" href="https://builtin.com/data-science/step-step-explanation-principal-component-analysis">link3</a>, <a class="reference external" href="https://archetypalecology.wordpress.com/2018/02/17/principal-component-analysis-in-r/">link4</a></p>
 <blockquote>
 <div></div></blockquote>
-<p>PCA is performed on the abundance data, however an important concept to keep in mind is that <strong>microbiome datasets are compositional</strong> because they have an arbitrary total imposed by the sequencing instrument. This is due to the fact that high-throughput sequencing (HTS) instruments can deliver reads only up to the capacity of the instrument.
+<p>PCA is performed on the abundance data, however an important concept to keep in mind is that microbiome datasets are compositional because they have an arbitrary total imposed by the sequencing instrument. This is due to the fact that high-throughput sequencing (HTS) instruments can deliver reads only up to the capacity of the instrument.
 Thus, the total read count observed in a HTS run is a fixed-size, random sample of the relative abundance of the molecules in the underlying ecosystem (e.g. oral microbiota).
 Several methods applied include count-based strategies (normalized to a constant area or volume, e.g. the sequencing lane output) such as Bray-Curtis dissimilarity, zero-inflated Gaussian models and negative binomial models, but these do not account for the limitations imposed by the instrument and the so-called principle of true indpendence of species in ecology.
 Read more about compositonal data in the paper by <a class="reference external" href="https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full">Gloor et al. (2017)</a>.</p>
 <blockquote>
 <div></div></blockquote>
-<p>Due to the compositional nature of microbiome datasets, the centered log-ratio (clr) transformation introduced by Aitchison (1986) is often used. The clr-transformed values are scale-invariant, which means that the same ratio is expected to be obtained in a sample with few read counts or an identical sample with many read counts, only the precision of the clr estimate is affected.
+<p>Due to the compositional nature of microbiome datasets, the centered log-ratio (clr) transformation introduced by Aitchison (1986) is often used. The clr-transformed values are scale-invariant; that is the same ratio is expected to be obtained in a sample with few read counts or an identical sample with many read counts, only the precision of the clr estimate is affected.
 The clr transformation uses the geometric mean of the sample vector as the reference. In particular, sample vectors undergo a transformation based on the logarithm of the ratio between the individual elements and the geometric mean of the vector:</p>
-<div class="math notranslate nohighlight">
-\[g(x) = \sqrt[D]{x_{i}, ...,  x_{D}}\]</div>
-<p>Log-ratio transformation is applied to each subject vector <em>x</em> with <em>D</em> features (OTUs). Basically, the analysis of clr data will reveal how OTUs behave relative to the per-sample average.</p>
-<div class="math notranslate nohighlight">
-\[clr(x) = [\ln{\frac {x_{i}}{g(x)}},...,\ln{\frac {x_{D}}{g(x)}}]\]</div>
-<p>We will accomplish the PCA of oral microbiota only (while for comparing different microbiota we used the <a class="reference internal" href="#pcoa"><span class="std std-ref">PCoA</span></a>, or the <a class="reference internal" href="#nmds"><span class="std std-ref">nMDS</span></a>).
-For this reason we will subsample the original biom abundance table exclusively for oral groups, for example:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">subgroup</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Human plaque&quot;</span><span class="p">,</span><span class="s">&quot;Chimpanzee&quot;</span><span class="p">,</span><span class="s">&quot;Prehistoric human&quot;</span><span class="p">,</span><span class="s">&quot;Historic human&quot;</span><span class="p">,</span><span class="s">&quot;Modern human&quot;</span><span class="p">)</span>
-<span class="n">subsample</span> <span class="o">=</span> <span class="nf">subset_samples</span><span class="p">(</span><span class="n">my_biom</span><span class="p">,</span> <span class="n">Group2</span> <span class="o">%in%</span> <span class="n">subgroup</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Then, we filter out low-abundance taxa with a mean &lt; 0.02%.</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">minTotRelAbun</span> <span class="o">=</span> <span class="m">0.0002</span>
-<span class="n">x</span> <span class="o">=</span> <span class="nf">taxa_sums</span><span class="p">(</span><span class="n">subsample</span><span class="p">)</span>
-<span class="n">keepTaxa</span> <span class="o">=</span> <span class="nf">taxa_names</span><span class="p">(</span><span class="n">subsample</span><span class="p">)[</span><span class="nf">which</span><span class="p">((</span><span class="n">x</span> <span class="o">/</span> <span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">minTotRelAbun</span><span class="p">)]</span>
-<span class="n">subsample_flt</span> <span class="o">=</span> <span class="nf">prune_taxa</span><span class="p">(</span><span class="n">keepTaxa</span><span class="p">,</span> <span class="n">subsample</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The removal of low-abundance taxa is performed only <strong>after</strong> subsampling the abudance table. Doing this before will keep unwanted taxa that are more common in other microbiota (e.g. soil) and irrelevant for describing oral envrionments (or the specific environment you are analysing with the PCA).</p>
-</div>
-<p>We will do the clr-transformation of the otu table in the biom object with the package <cite>microbiome</cite>. To install the package:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">BiocManager</span><span class="p">)</span>
-<span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;microbiome&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Then activate the library and transform the data with the following command:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">microbiome</span><span class="p">)</span>
-<span class="n">subsample_flt_clr</span> <span class="o">=</span> <span class="nf">transform</span><span class="p">(</span><span class="n">subsample_flt</span><span class="p">,</span><span class="s">&quot;clr&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>To refine the analysis you can remove unwanted samples (e.g. those that appeared to be contaminated from Sourcetracker).</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">remove</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;VK1&quot;</span><span class="p">,</span><span class="s">&quot;CS45&quot;</span><span class="p">,</span><span class="s">&quot;CS47&quot;</span><span class="p">,</span><span class="s">&quot;CS48&quot;</span><span class="p">,</span><span class="s">&quot;Jomon_5&quot;</span><span class="p">)</span>
-<span class="n">subsample_pruned</span> <span class="o">=</span> <span class="nf">prune_samples</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">subsample_flt_clr</span><span class="o">@</span><span class="n">sam_data</span><span class="o">$</span><span class="n">Sample_short</span> <span class="o">%in%</span> <span class="n">remove</span><span class="p">),</span> <span class="n">subsample_flt_clr</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Finally, make the PCA with the command <cite>ordinate</cite>, adopting the ordination method <cite>RDA</cite> (redundancy analysis), which without constraints correspond to the PCA in phyloseq.</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">ord_clr</span> <span class="o">=</span> <span class="nf">ordinate</span><span class="p">(</span><span class="n">subsample_pruned</span><span class="p">,</span> <span class="s">&quot;RDA&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>You can plot the variance associated with each PC:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot_scree</span><span class="p">(</span><span class="n">ord_clr</span><span class="p">)</span> <span class="o">+</span>
-<span class="nf">geom_bar</span><span class="p">(</span><span class="n">stat</span><span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">)</span> <span class="o">+</span>
-<span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;\nAxis&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&quot;Proportion of Variance\n&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>And finally plot the PCA in a 2D chart.</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot_ordination</span><span class="p">(</span><span class="n">subsample_flt_clr</span><span class="p">,</span> <span class="n">ord_clr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;Group2&quot;</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>To display the labels of each symbol:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot_ordination</span><span class="p">(</span><span class="n">subsample_flt_clr</span><span class="p">,</span> <span class="n">ord_clr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;Group2&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;Sample_short&quot;</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>ALTERNATIVE:</strong> Another package used to perform the PCA is <cite>mixOmics</cite>. To install it:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">## install BiocManager if not installed</span>
-<span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="nf">require</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">,</span> <span class="n">quietly</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
-    <span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">)</span>
-<span class="c1">## install mixOmics</span>
-<span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&#39;mixOmics&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Here are the commands to make the PCA with mixOmics. Note the conversion to count-per-million and the +1 offest that is necessary to remove zero-counts (which cannot be handled by the clr-transformation of mixOmics).</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove contaminated samples</span>
-<span class="n">remove</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;VK1&quot;</span><span class="p">,</span><span class="s">&quot;CS45&quot;</span><span class="p">,</span><span class="s">&quot;CS47&quot;</span><span class="p">,</span><span class="s">&quot;CS48&quot;</span><span class="p">,</span><span class="s">&quot;Jomon_5&quot;</span><span class="p">)</span>
-<span class="n">subsample_pruned</span> <span class="o">=</span> <span class="nf">prune_samples</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">subsample_flt</span><span class="o">@</span><span class="n">sam_data</span><span class="o">$</span><span class="n">Sample_short</span> <span class="o">%in%</span> <span class="n">remove</span><span class="p">),</span> <span class="n">subsample_flt</span><span class="p">)</span>
-<span class="c1"># isolate the otu_table of the biom as separate object.</span>
-<span class="n">tab</span> <span class="o">=</span> <span class="nf">otu_table</span><span class="p">(</span><span class="n">subsample_pruned</span><span class="p">)</span>
-<span class="c1"># make on offset (+1) of your count data, after converting them to counts-per-million (to make the offset irrelevant)</span>
-<span class="n">tab_cpm_off</span> <span class="o">=</span> <span class="p">(</span><span class="n">tab</span><span class="o">*</span><span class="m">1000000</span><span class="p">)</span><span class="m">+1</span>
-<span class="n">tab_cpm_off</span> <span class="o">=</span> <span class="nf">t</span><span class="p">(</span><span class="n">tab_cpm_off</span><span class="p">)</span>
-<span class="c1"># create e vector from the metadata that you want to use:</span>
-<span class="n">group</span> <span class="o">=</span> <span class="n">subsample_pruned</span><span class="o">@</span><span class="n">sam_data</span><span class="o">$</span><span class="n">Group2</span>
-<span class="c1"># make the PCA with mixOmics. Note the CLR tranformation called in the command.</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">mixOmics</span><span class="p">)</span>
-<span class="nf">tune.pca</span><span class="p">(</span><span class="n">tab_cpm_off</span><span class="p">,</span> <span class="n">ncomp</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">center</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">logratio</span> <span class="o">=</span> <span class="s">&#39;CLR&#39;</span><span class="p">)</span>
-<span class="n">pca.res</span> <span class="o">&lt;-</span> <span class="nf">pca</span><span class="p">(</span><span class="n">tab_cpm_off</span><span class="p">,</span> <span class="n">ncomp</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">center</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">logratio</span> <span class="o">=</span> <span class="s">&#39;CLR&#39;</span><span class="p">)</span>
-<span class="c1"># PLot PCA</span>
-<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
-<span class="nf">plot</span><span class="p">(</span><span class="n">pca.res</span><span class="o">$</span><span class="n">variates</span><span class="o">$</span><span class="n">X</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span> <span class="n">pca.res</span><span class="o">$</span><span class="n">variates</span><span class="o">$</span><span class="n">X</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;PCA&quot;</span><span class="p">,</span> <span class="n">cex.axis</span><span class="o">=</span><span class="m">0.75</span><span class="p">,</span> <span class="n">cex.lab</span><span class="o">=</span><span class="m">0.75</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;grey&quot;</span><span class="p">)</span>
-<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;grey&quot;</span><span class="p">)</span>
-<span class="c1"># add the points and the symbols (pch) based on the number of groups present in your metadata (those selected when subsampling the oral microbiota)</span>
-<span class="nf">points</span><span class="p">(</span><span class="n">pca.res</span><span class="o">$</span><span class="n">variates</span><span class="o">$</span><span class="n">X</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span> <span class="n">pca.res</span><span class="o">$</span><span class="n">variates</span><span class="o">$</span><span class="n">X</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span> <span class="n">cex</span><span class="o">=</span><span class="m">1.2</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="nf">factor</span><span class="p">(</span><span class="n">group</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="nf">factor</span><span class="p">(</span><span class="n">group</span><span class="p">),</span> <span class="n">pch</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">21</span><span class="p">,</span><span class="m">22</span><span class="p">,</span><span class="m">23</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">)[</span><span class="nf">as.factor</span><span class="p">(</span><span class="n">group</span><span class="p">)],</span> <span class="n">lwd</span><span class="o">=</span><span class="m">0.7</span><span class="p">)</span>
-<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">group</span><span class="p">)),</span> <span class="n">bty</span> <span class="o">=</span> <span class="s">&quot;n&quot;</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="nf">as.factor</span><span class="p">(</span><span class="n">group</span><span class="p">))),</span> <span class="n">pt.cex</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.5</span><span class="p">,</span> <span class="n">pt.bg</span><span class="o">=</span><span class="nf">sort</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="nf">as.factor</span><span class="p">(</span><span class="n">group</span><span class="p">))),</span> <span class="n">pch</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">21</span><span class="p">,</span><span class="m">22</span><span class="p">,</span><span class="m">23</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="n">pt.lwd</span><span class="o">=</span><span class="m">0.6</span><span class="p">)</span>
-<span class="nf">text</span><span class="p">(</span><span class="n">pca.res</span><span class="o">$</span><span class="n">variates</span><span class="o">$</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">subsample_pruned</span><span class="o">@</span><span class="n">sam_data</span><span class="o">$</span><span class="n">Sample_short</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.4</span><span class="p">)</span>
-</pre></div>
-</div>
+<p><span class="math notranslate nohighlight">\(g(x) = \sqrt[D]{x_{i}, ...,  x_{D}}\)</span></p>
+<p>Log-ratio transformation is applied to each subject vector <em>x</em> with <em>D</em> features (OTUs). Bascially, the analysis of clr data will reveal how OTUs behave relative to the per-sample average.</p>
+<p><span class="math notranslate nohighlight">\(clr(x) = [\ln{\frac {x_{i}}{g(x)}},...,\ln{\frac {x_{D}}{g(x)}}]\)</span></p>
 </section>
 </section>
 </section>

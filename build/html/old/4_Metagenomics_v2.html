@@ -62,7 +62,8 @@
 <li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">7. Alignment of reads to a reference genome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">8. Variant calling and visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">9. Filtering, annotating and combining SNPs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="9_Metagenomic_analysis.html">10. Analysis of Metagenomic data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_HandsOn.html">10. Hands-on</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_old_material.html">11. Material from previous courses</a></li>
 </ul>
 
         </div>
@@ -93,7 +94,7 @@
 <h1><span class="section-number">6. </span>Metagenomic screening of shotgun data<a class="headerlink" href="#metagenomic-screening-of-shotgun-data" title="Permalink to this headline"></a></h1>
 <section id="kraken-2">
 <h2><span class="section-number">6.1. </span>Kraken 2<a class="headerlink" href="#kraken-2" title="Permalink to this headline"></a></h2>
-<p>In this hands-on session we will use Kraken 2 to screen the metagenomic content of an ancient sample. The first version of Kraken uses a large indexed and sorted list of k-mer/LCA pairs as its database, which may be problematic for users due to the large memory requirements. For this reason <a class="reference external" href="https://ccb.jhu.edu/software/kraken2/index.shtml">Kraken 2</a> was developed.
+<p>In this hands-on session we will use Kraken 2 to screen the metagenomic content of an ancient sample. The first version of Kraken (see <a class="reference internal" href="9_old_material.html#kraken-label"><span class="std std-ref">Kraken</span></a>) uses a large indexed and sorted list of k-mer/LCA pairs as its database, which may be problematic for users due to the large memory requirements. For this reason <a class="reference external" href="https://ccb.jhu.edu/software/kraken2/index.shtml">Kraken 2</a> was developed.
 Kraken 2 is fast and requires less memory, BUT false positive errors occur in less than 1% of queries (confidence scoring thresholds can be used to call out to detect them).
 The default (or standard) database size is 29 GB (as of Jan. 2018, in Kraken 1 the standard database is about 200 GB!), and you will need slightly more than that in RAM if you want to build it.
 By default, Kraken 2 will attempt to use the dustmasker or  segmasker programs provided as part of NCBI’s BLAST suite to mask low-complexity regions.</p>

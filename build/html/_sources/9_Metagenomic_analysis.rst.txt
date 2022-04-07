@@ -245,7 +245,7 @@ To save the plot in the pdf format you can use this command:
 
   dev.print(pdf, 'filename.pdf)')
 
-You can also focus your analysis on a subset of samples and use the metadata contained in your original mapping file. It would be convenient to add metadata the way it more convenient to select and compare your samples. 
+You can also focus your analysis on a subset of samples and use the metadata contained in your original mapping file. It would be convenient to add metadata the way it more convenient to select and compare your samples. Here we subsample for some groups of individuals as defined in the metadata column **Group2**.
 ::
 
   # subsample single group phyla
@@ -257,6 +257,7 @@ You can also focus your analysis on a subset of samples and use the metadata con
   plot_bar(subsample, fill="phylum") + facet_grid(~Group2, scales= "free_x", space = "free_x") + theme(legend.position="bottom", axis.text.x = element_text(size = 6, angle = 90, hjust = 1))
 
 
+.. _PCoA:
 
 Principal Coordinate Analysis (Multidimensional Scaling)
 ********************************************************
@@ -283,6 +284,8 @@ To make the MDS you can focus on a subset of samples in your species abundance t
 
 You can repeat the analysis at a higher taxonomic ranks (e.g. genus) and see the difference in the plot. 
 
+
+.. _nMDS:
 
 Non-Metric Multidimensional Scaling
 ***********************************
@@ -417,4 +420,126 @@ We will plot the heatmap of the transformed data only for a reduced number of ta
            cluster_cols=FALSE, annotation_col=df, fontsize=4)
 
 
+Principal Component Analysis (PCA)
+**********************************
+The Principal Component Analysis (PCA) is another multivariate reduction method used for data visualization. You can read more about the general principles of PCA here: `link3`_, `link4`_
 
+  .. _link3: https://builtin.com/data-science/step-step-explanation-principal-component-analysis
+  .. _link4: https://archetypalecology.wordpress.com/2018/02/17/principal-component-analysis-in-r/
+  
+PCA is performed on the abundance data, however an important concept to keep in mind is that **microbiome datasets are compositional** because they have an arbitrary total imposed by the sequencing instrument. This is due to the fact that high-throughput sequencing (HTS) instruments can deliver reads only up to the capacity of the instrument.
+Thus, the total read count observed in a HTS run is a fixed-size, random sample of the relative abundance of the molecules in the underlying ecosystem (e.g. oral microbiota). 
+Several methods applied include count-based strategies (normalized to a constant area or volume, e.g. the sequencing lane output) such as Bray-Curtis dissimilarity, zero-inflated Gaussian models and negative binomial models, but these do not account for the limitations imposed by the instrument and the so-called principle of true indpendence of species in ecology. 
+Read more about compositonal data in the paper by `Gloor et al. (2017)`_.
+
+  .. _Gloor et al. (2017): https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full
+  
+Due to the compositional nature of microbiome datasets, the centered log-ratio (clr) transformation introduced by Aitchison (1986) is often used. The clr-transformed values are scale-invariant, which means that the same ratio is expected to be obtained in a sample with few read counts or an identical sample with many read counts, only the precision of the clr estimate is affected. 
+The clr transformation uses the geometric mean of the sample vector as the reference. In particular, sample vectors undergo a transformation based on the logarithm of the ratio between the individual elements and the geometric mean of the vector: 
+
+.. math::
+
+  g(x) = \sqrt[D]{x_{i}, ...,  x_{D}}
+
+Log-ratio transformation is applied to each subject vector *x* with *D* features (OTUs). Basically, the analysis of clr data will reveal how OTUs behave relative to the per-sample average.
+
+.. math::
+
+  clr(x) = [\ln{\frac {x_{i}}{g(x)}},...,\ln{\frac {x_{D}}{g(x)}}]
+
+
+We will accomplish the PCA of oral microbiota only (while for comparing different microbiota we used the :ref:`PCoA<PCoA>`, or the :ref:`nMDS<nMDS>`). 
+For this reason we will subsample the original biom abundance table exclusively for oral groups, for example: 
+::
+
+  subgroup = c("Human plaque","Chimpanzee","Prehistoric human","Historic human","Modern human")
+  subsample = subset_samples(my_biom, Group2 %in% subgroup)
+
+Then, we filter out low-abundance taxa with a mean < 0.02%. 
+::
+
+  minTotRelAbun = 0.0002
+  x = taxa_sums(subsample)
+  keepTaxa = taxa_names(subsample)[which((x / sum(x)) > minTotRelAbun)]
+  subsample_flt = prune_taxa(keepTaxa, subsample)
+
+.. warning::
+  The removal of low-abundance taxa is performed only **after** subsampling the abudance table. Doing this before will keep unwanted taxa that are more common in other microbiota (e.g. soil) and irrelevant for describing oral envrionments (or the specific environment you are analysing with the PCA).  
+
+We will do the clr-transformation of the otu table in the biom object with the package `microbiome`. To install the package: 
+::
+
+  library(BiocManager)
+  BiocManager::install("microbiome")
+
+Then activate the library and transform the data with the following command: 
+::
+  
+  library(microbiome)
+  subsample_flt_clr = transform(subsample_flt,"clr")
+
+To refine the analysis you can remove unwanted samples (e.g. those that appeared to be contaminated from Sourcetracker). 
+::
+
+  remove = c("VK1","CS45","CS47","CS48","Jomon_5")
+  subsample_pruned = prune_samples(!(subsample_flt_clr@sam_data$Sample_short %in% remove), subsample_flt_clr)
+
+Finally, make the PCA with the command `ordinate`, adopting the ordination method `RDA` (redundancy analysis), which without constraints correspond to the PCA in phyloseq. 
+::
+
+  ord_clr = ordinate(subsample_pruned, "RDA")
+
+You can plot the variance associated with each PC: 
+::
+  
+  plot_scree(ord_clr) + 
+  geom_bar(stat="identity", fill = "blue") +
+  labs(x = "\nAxis", y = "Proportion of Variance\n")
+  
+And finally plot the PCA in a 2D chart. 
+::
+
+  plot_ordination(subsample_flt_clr, ord_clr, color="Group2") + 
+    geom_point(size = 2)
+ 
+To display the labels of each symbol: 
+::
+
+  plot_ordination(subsample_flt_clr, ord_clr, color="Group2", label="Sample_short") + 
+    geom_point(size = 2)
+
+**ALTERNATIVE:** Another package used to perform the PCA is `mixOmics`. To install it: 
+::
+
+  ## install BiocManager if not installed 
+  if (!require("BiocManager", quietly = TRUE))
+      install.packages("BiocManager")
+  ## install mixOmics 
+  BiocManager::install('mixOmics')
+
+Here are the commands to make the PCA with mixOmics. Note the conversion to count-per-million and the +1 offest that is necessary to remove zero-counts (which cannot be handled by the clr-transformation of mixOmics).
+::
+
+  # remove contaminated samples
+  remove = c("VK1","CS45","CS47","CS48","Jomon_5")
+  subsample_pruned = prune_samples(!(subsample_flt@sam_data$Sample_short %in% remove), subsample_flt)
+  # isolate the otu_table of the biom as separate object. 
+  tab = otu_table(subsample_pruned)
+  # make on offset (+1) of your count data, after converting them to counts-per-million (to make the offset irrelevant) 
+  tab_cpm_off = (tab*1000000)+1
+  tab_cpm_off = t(tab_cpm_off)
+  # create e vector from the metadata that you want to use:
+  group = subsample_pruned@sam_data$Group2
+  # make the PCA with mixOmics. Note the CLR tranformation called in the command. 
+  library(mixOmics)
+  tune.pca(tab_cpm_off, ncomp = 10, center = TRUE, scale = FALSE, logratio = 'CLR')
+  pca.res <- pca(tab_cpm_off, ncomp = 10, center = TRUE, scale = FALSE, logratio = 'CLR')
+  # PLot PCA 
+  par(mfrow = c(1, 1))
+  plot(pca.res$variates$X[,1], pca.res$variates$X[,2], type="n", main="PCA", cex.axis=0.75, cex.lab=0.75, xlab="", ylab="")
+  abline(v=0, lty=3, col="grey")
+  abline(h=0, lty=3, col="grey")
+  # add the points and the symbols (pch) based on the number of groups present in your metadata (those selected when subsampling the oral microbiota)
+  points(pca.res$variates$X[,1], pca.res$variates$X[,2], cex=1.2, bg=factor(group), col=factor(group), pch = c(21,22,23,3,4)[as.factor(group)], lwd=0.7)      
+  legend("topleft", legend = sort(unique(group)), bty = "n", col = sort(unique(as.factor(group))), pt.cex=1, cex=0.5, pt.bg=sort(unique(as.factor(group))), pch = c(21,22,23,3,4), pt.lwd=0.6)
+  text(pca.res$variates$X, labels = subsample_pruned@sam_data$Sample_short, cex=0.4)
