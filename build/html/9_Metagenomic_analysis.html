@@ -214,9 +214,9 @@ Install Phyloseq from <a class="reference external" href="https://bioconductor.o
 </pre></div>
 </div>
 <p>Phyloseq works with <code class="docutils literal notranslate"><span class="pre">biom</span></code> objects that store all the required information: abundance of taxa, sample metadata, taxonomy
-First you can import the otu table with taxa abundances, and tweak it to remove unwanted columns (the first three resulting from the genome length normalization).</p>
+First you can import the otu table with taxa abundances, including the species names as row names and removing the unwanted columns (the first four resulting from the genome length normalization).</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">otu</span> <span class="o">=</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;abundance_table_IDs.merged.norm&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">))</span>
-<span class="n">otu.final</span> <span class="o">=</span> <span class="p">(</span><span class="n">otu</span><span class="p">[,</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">)])</span>
+<span class="n">otu.final</span> <span class="o">=</span> <span class="p">(</span><span class="n">otu</span><span class="p">[,</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)])</span>
 <span class="c1"># make the matrix values as numeric</span>
 <span class="nf">class</span><span class="p">(</span><span class="n">otu.final</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;numeric&quot;</span>
 </pre></div>
@@ -273,7 +273,7 @@ In the dataset of microbiomes mentioned about you can find metadata to be used f
 </pre></div>
 </div>
 <p>Next, convert the absolute abundance  values in relative abundance.</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">my_biom_rel</span> <span class="o">=</span> <span class="nf">transform_sample_counts</span><span class="p">(</span><span class="n">my_biom</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span> <span class="o">/</span> <span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">my_biom_rel</span> <span class="o">=</span> <span class="nf">transform_sample_counts</span><span class="p">(</span><span class="n">my_biom_flt</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span> <span class="o">/</span> <span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>

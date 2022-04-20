@@ -154,11 +154,11 @@ Activate the following libraries:
   library(vegan)
 
 Phyloseq works with ``biom`` objects that store all the required information: abundance of taxa, sample metadata, taxonomy
-First you can import the otu table with taxa abundances, and tweak it to remove unwanted columns (the first three resulting from the genome length normalization). 
+First you can import the otu table with taxa abundances, including the species names as row names and removing the unwanted columns (the first four resulting from the genome length normalization). 
 ::
 
   otu = as.matrix(read.delim("abundance_table_IDs.merged.norm", header=T, fill=T, row.names=1, sep="\t"))
-  otu.final = (otu[,-c(1:3)])
+  otu.final = (otu[,-c(1:4)])
   # make the matrix values as numeric
   class(otu.final) <- "numeric"
 
@@ -222,7 +222,7 @@ Remove low-abundance taxa below a desired threshold (most commonly 0.02% is chos
 Next, convert the absolute abundance  values in relative abundance. 
 ::
 
-  my_biom_rel = transform_sample_counts(my_biom, function(x) x / sum(x))
+  my_biom_rel = transform_sample_counts(my_biom_flt, function(x) x / sum(x))
 
 
 Barplot of taxa abundances
