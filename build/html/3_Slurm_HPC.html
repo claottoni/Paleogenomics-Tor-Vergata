@@ -161,8 +161,8 @@ In Galileo we distinguish <strong>programming profiles</strong>, which contain o
 </ul>
 </div></blockquote>
 <p>To load and unload a profile or a specific module:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">profile</span> <span class="n">bioinf</span>
-<span class="n">module</span> <span class="n">unload</span> <span class="n">profile</span> <span class="n">bioinf</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">profile</span><span class="o">/</span><span class="n">bioinf</span>
+<span class="n">module</span> <span class="n">unload</span> <span class="n">profile</span><span class="o">/</span><span class="n">bioinf</span>
 </pre></div>
 </div>
 <p>To list the modules loaded in the environment:</p>
@@ -236,7 +236,7 @@ echo $CHR_1                 # to visualize the value assigned
 </div>
 <p>Then we continue by activating the modules necessary to run the job:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Module(s) loading</span>
-<span class="n">module</span> <span class="n">load</span> <span class="n">autoload</span> <span class="n">profile</span><span class="o">/</span><span class="n">bioinf</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">profile</span><span class="o">/</span><span class="n">bioinf</span>
 <span class="n">module</span> <span class="n">load</span> <span class="n">autoload</span> <span class="n">fastqc</span>
 </pre></div>
 </div>

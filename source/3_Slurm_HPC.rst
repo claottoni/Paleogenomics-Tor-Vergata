@@ -88,8 +88,8 @@ and **production profiles**, which contain only libraries, tools and application
 To load and unload a profile or a specific module: 
 ::
   
-  module load profile bioinf
-  module unload profile bioinf
+  module load profile/bioinf
+  module unload profile/bioinf
 
 To list the modules loaded in the environment: 
 ::
@@ -172,7 +172,7 @@ Then we continue by activating the modules necessary to run the job:
 ::
   
   # Module(s) loading
-  module load autoload profile/bioinf
+  module load profile/bioinf
   module load autoload fastqc
   
 After that we can define specific variables, for example to define the samples that will be processed. Once the variable is assigned at this initial stage, we can use that all over the commands and the scripts that compose the slurm job (in this case a very easy fastqc command).

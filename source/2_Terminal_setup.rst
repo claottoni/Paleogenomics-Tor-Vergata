@@ -134,6 +134,12 @@ Install Dedup:
   
   conda install -c bioconda dedup
 
+Install Qualimap: 
+::
+  
+  conda install -c bioconda qualimap
+
+
 We will provide a version of **GATK 3.8** (file ``GenomeAnalysisTK.jar``). 
 Download the `IGV Genome browser`_ on you computer, just press the link and download the version for your computed (Mac-OS or Windows). 
 
