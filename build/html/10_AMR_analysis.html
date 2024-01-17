@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11. Antimicrobial Resistance (AMR) analysis &mdash; Paleogenomics at Tor Vergata 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="10. Analysis of Metagenomic data" href="9_Metagenomic_analysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Paleogenomics at Tor Vergata
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1_ListTools.html">1. List of Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Terminal_setup.html">2. First step to set-up your machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_Useful_commands.html">3. Useful commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_Slurm_HPC.html">4. Working on HPC with Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ReadsFiltering.html">5. Quality filtering of reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Metagenomics_v2.html">6. Metagenomic screening of shotgun data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_ReadsMapping_v2.html">7. Alignment of reads to a reference genome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_VariantsCall.html">8. Variant calling and visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_Filtering_SNPs.html">9. Filtering, annotating and combining SNPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_Metagenomic_analysis.html">10. Analysis of Metagenomic data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">11. Antimicrobial Resistance (AMR) analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#build-the-card-database">11.1. Build the CARD database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-the-database-of-housekeeping-hk-genes">11.2. Build the database of housekeeping (HK) genes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrogate-the-card-and-housekeeping-genes-databases">11.3. Interrogate the CARD and Housekeeping genes databases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#normalization-of-data">11.4. Normalization of data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#amr-data-analysis-in-r">11.5. AMR data analysis in R</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Paleogenomics at Tor Vergata</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">11. </span>Antimicrobial Resistance (AMR) analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/10_AMR_analysis.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="antimicrobial-resistance-amr-analysis">
+<h1><span class="section-number">11. </span>Antimicrobial Resistance (AMR) analysis<a class="headerlink" href="#antimicrobial-resistance-amr-analysis" title="Permalink to this headline"></a></h1>
+<p>Antimicrobial resistance (AMR) is present in host-associated oral microbiomes, and metagenomic analysis of ancient dental calculus recently demonstrated that it occurs in natural environments and in ancient human and animal samples.
+For the analysis we will use the <a class="reference external" href="https://card.mcmaster.ca">Comprehensive Antibiotic Resistance Database</a> (CARD). The CARD is a rigorously curated collection of characterized, peer-reviewed resistance determinants and associated antibiotics, organized by the Antibiotic Resistance Ontology (ARO) and AMR gene detection models.</p>
+<blockquote>
+<div></div></blockquote>
+<section id="build-the-card-database">
+<h2><span class="section-number">11.1. </span>Build the CARD database<a class="headerlink" href="#build-the-card-database" title="Permalink to this headline"></a></h2>
+<p>First, you have to download the CARD database. Make a dedicated folder, download the database into it the db and decompress it. The command below downloads the latest version of the database.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir card_aro_db
+<span class="nb">cd</span> card_aro_db
+wget -c https://card.mcmaster.ca/latest/data -O card_db.tar.bz2
+tar -xf data.tar.bz2
+</pre></div>
+</div>
+<p>Of the files extracted, the one to use for building the database is the <code class="docutils literal notranslate"><span class="pre">nucleotide_fasta_protein_homolog_model.fasta</span></code>. This file contains sequences of antimicrobial resistance genes that do not include mutation as a determinant of resistance - these data are appropriate for BLAST analysis of metagenomic data or searches excluding secondary screening for resistance mutations.
+In contrast, the “protein variant” model includes reference wild type sequences used for mapping SNPs conferring antimicrobial resistance - without secondary mutation screening, analyses using these data will include false positives for antibiotic resistant gene variants or mutants.</p>
+<p>Then, it is suggested to replace the empty spaces in the file with underscores, so as to keep sequence IDs as single string (hence, the full info about the hits in the following blastn analysis).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed <span class="s1">&#39;s/ /_/g&#39;</span> nucleotide_fasta_protein_homolog_model.fasta &gt; nucleotide_fasta_protein_homolog_model.fasta_mod.fasta
+</pre></div>
+</div>
+<p>Finally, we build the database with <a class="reference external" href="https://www.ncbi.nlm.nih.gov/books/NBK279690/">Blast+</a>. The database is created inside a folder named <code class="docutils literal notranslate"><span class="pre">card_nucl_db</span></code>.
+If you work in G100, you can generate the db in the login node, as the operation is quite fast.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># In Galileo100 Blast+ is available by activating the dedicated modules.</span>
+module load profile/bioinf
+module load autoload blast+
+<span class="c1"># Generate the CARD database.</span>
+makeblastdb -in nucleotide_fasta_protein_homolog_model.fasta_mod.fasta -dbtype nucl -out card_nucl_db
+</pre></div>
+</div>
+<p>The db generated consists of seven files all named with the prefix given in the <code class="docutils literal notranslate"><span class="pre">-out</span></code> option of the makeblastdb command.</p>
+</section>
+<section id="build-the-database-of-housekeeping-hk-genes">
+<h2><span class="section-number">11.2. </span>Build the database of housekeeping (HK) genes<a class="headerlink" href="#build-the-database-of-housekeeping-hk-genes" title="Permalink to this headline"></a></h2>
+<p>To account for potential taphonomic conditions leading to preservation biases across samples of different chronology, we will use blastn to align the reads against the nucleotide sequences of three microbial housekeeping genes (recA, rpoB, gyrB) deposited in the NCBI.
+We first download the sequences with the tools <code class="docutils literal notranslate"><span class="pre">esearch</span></code> and <code class="docutils literal notranslate"><span class="pre">efetch</span></code> of <a class="reference external" href="https://www.ncbi.nlm.nih.gov/books/NBK179288/">EDirect</a> and concatenate them in one fasta file that we will use to build the database.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download the sequences of the housekeeping genes</span>
+esearch -db nucleotide -query <span class="s1">&#39;&quot;recA&quot;[Protein name]&#39;</span> <span class="p">|</span> efetch -format fasta &gt; recA_nu.fasta
+esearch -db nucleotide -query <span class="s1">&#39;&quot;rpoB&quot;[Protein name]&#39;</span> <span class="p">|</span> efetch -format fasta &gt; rpoB_nu.fasta
+esearch -db nucleotide -query <span class="s1">&#39;&quot;gyrB&quot;[Protein name]&#39;</span> <span class="p">|</span> efetch -format fasta &gt; gyrB_nu.fasta
+cat recA_nu.fasta rpoB_nu.fasta gyrB_nu.fasta &gt;&gt; recA_rpoB_gyrB_nu.fasta
+<span class="c1"># Generate the HK database.</span>
+makeblastdb -in recA_rpoB_gyrB_nu.fasta -dbtype nucl -out recA_rpoB_gyrB_nu
+</pre></div>
+</div>
+<p>Just like the CARD db, the HK db generated consists of seven files all named with the prefix given in the <code class="docutils literal notranslate"><span class="pre">-out</span></code> option of the makeblastdb command.</p>
+</section>
+<section id="interrogate-the-card-and-housekeeping-genes-databases">
+<h2><span class="section-number">11.3. </span>Interrogate the CARD and Housekeeping genes databases<a class="headerlink" href="#interrogate-the-card-and-housekeeping-genes-databases" title="Permalink to this headline"></a></h2>
+<p>Before interrogating the databases it is important to isolate from the fastq files that we are analysing the reads classified as Bacteria in Kraken2. To do that we will use <code class="docutils literal notranslate"><span class="pre">extract_kraken_reads.py</span></code> from <a class="reference external" href="https://github.com/jenniferlu717/KrakenTools">KrakenTools</a>.
+The reads are extracted as fasta files. To run the following commands, make sure that the <code class="docutils literal notranslate"><span class="pre">.collapsed.gz</span></code> and the <code class="docutils literal notranslate"><span class="pre">.krk</span></code> files have the same name.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">KRK</span><span class="o">=</span>/path/to/kraken/output
+<span class="nv">OUTPUT</span><span class="o">=</span>/path/to/output_fasta_files
+<span class="k">for</span> i <span class="k">in</span> *.collapsed.gz<span class="p">;</span>
+<span class="k">do</span>
+  <span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span><span class="k">)</span>
+  <span class="nv">fname</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">%.collapsed.gz</span><span class="si">}</span><span class="s2">&quot;</span>
+  extract_kraken_reads.py -k <span class="si">${</span><span class="nv">KRK</span><span class="si">}</span>/<span class="si">${</span><span class="nv">fname</span><span class="si">}</span>.krk -s <span class="nv">$i</span> -o <span class="si">${</span><span class="nv">OUTPUT</span><span class="si">}</span>/<span class="si">${</span><span class="nv">fname</span><span class="si">}</span>.bacteria.fasta -t <span class="m">2</span> --include-children -r <span class="si">${</span><span class="nv">KRK</span><span class="si">}</span>/<span class="si">${</span><span class="nv">fname</span><span class="si">}</span>.krk.report
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>Here are some key options of <code class="docutils literal notranslate"><span class="pre">extract_kraken_reads.py</span></code>:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>BCFtools call options</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>-k, –kraken</strong></p></td>
+<td><p>Kraken output file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>-s, -s1, -1, -U</strong></p></td>
+<td><p>FASTA/FASTQ sequence file (may be gzipped).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>-s2, -2</strong></p></td>
+<td><p>FASTA/FASTQ sequence file (for paired reads, may be gzipped).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>-o</strong></p></td>
+<td><p>output FASTA/Q file with extracted seqs.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>–include-children</strong></p></td>
+<td><p>include reads classified at more specific levels than specified taxonomy ID levels (optional).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>–include-parents</strong></p></td>
+<td><p>include reads classified at all taxonomy levels between root and the specified taxonomy ID levels (optional).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>-r, –report</strong></p></td>
+<td><p>Kraken report file (required if specifying –include-children or –include-parents).</p></td>
+</tr>
+</tbody>
+</table>
+<p>Finally, we interrogate the two databases with <code class="docutils literal notranslate"><span class="pre">blastn</span></code> using the fasta files as query sequences. First the CARD db and then the HK db.
+To run these commands, you can make a list of all the fasta files to process in a file that you can call <cite>samples_fasta.txt</cite>, and loop through the fasta files.
+It is a recommended to usa a tag so as to distinguish in the filenames the outputs of the two different databases.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interrogate the Card database</span>
+<span class="nv">DBNAME</span><span class="o">=</span>/path/to/card_nucl_db
+<span class="nv">OUTPUT</span><span class="o">=</span>/path/to/output/amr_analysis
+<span class="nv">TAG</span><span class="o">=</span>card
+
+<span class="k">for</span> FASTA <span class="k">in</span> <span class="k">$(</span>cat samples_fasta.txt<span class="k">)</span>
+<span class="k">do</span>
+  <span class="nv">FILENAME</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&quot;</span><span class="nv">$FASTA</span><span class="s2">&quot;</span><span class="k">)</span>
+  <span class="nv">SAMPLE</span><span class="o">=</span><span class="si">${</span><span class="nv">FILENAME</span><span class="p">%.fasta</span><span class="si">}</span>
+  blastn -query <span class="nv">$FASTA</span> -db <span class="nv">$DBNAME</span> -out <span class="si">${</span><span class="nv">OUTPUT</span><span class="si">}</span>/<span class="si">${</span><span class="nv">SAMPLE</span><span class="si">}</span>.<span class="si">${</span><span class="nv">TAG</span><span class="si">}</span>.blastn.out -outfmt <span class="m">6</span>
+<span class="k">done</span>
+
+<span class="c1"># Interrogate the HK genes database</span>
+<span class="nv">DBNAME</span><span class="o">=</span>/path/to/recA_rpoB_gyrB_nu
+<span class="nv">OUTPUT</span><span class="o">=</span>/path/to/output/amr_analysis
+<span class="nv">TAG</span><span class="o">=</span>hk
+
+<span class="k">for</span> FASTA <span class="k">in</span> <span class="k">$(</span>cat samples_fasta.txt<span class="k">)</span>
+<span class="k">do</span>
+  <span class="nv">FILENAME</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&quot;</span><span class="nv">$FASTA</span><span class="s2">&quot;</span><span class="k">)</span>
+  <span class="nv">SAMPLE</span><span class="o">=</span><span class="si">${</span><span class="nv">FILENAME</span><span class="p">%.fasta</span><span class="si">}</span>
+  blastn -query <span class="nv">$FASTA</span> -db <span class="nv">$DBNAME</span> -out <span class="si">${</span><span class="nv">OUTPUT</span><span class="si">}</span>/<span class="si">${</span><span class="nv">SAMPLE</span><span class="si">}</span>.<span class="si">${</span><span class="nv">TAG</span><span class="si">}</span>.blastn.out -outfmt <span class="m">6</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>The option <code class="docutils literal notranslate"><span class="pre">-outfmt</span> <span class="pre">6</span></code> indicates that we are generating BLASTn outputs in tabular format. The default output contains 12 tab-delimited columns:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>qseqid - query or source (gene) sequence id</p></li>
+<li><p>sseqid - subject or target (reference genome) sequence id</p></li>
+<li><p>pident - percentage of identical positions</p></li>
+<li><p>length - alignment length (sequence overlap)</p></li>
+<li><p>mismatch - number of mismatches</p></li>
+<li><p>gapopen - number of gap openings</p></li>
+<li><p>qstart - start of alignment in query</p></li>
+<li><p>qend - end of alignment in query</p></li>
+<li><p>sstart - start of alignment in subject</p></li>
+<li><p>send - end of alignment in subject</p></li>
+<li><p>evalue - <a class="reference external" href="https://www.metagenomics.wiki/tools/blast/evalue">expected value</a></p></li>
+<li><p>bitscore - <a class="reference external" href="https://www.metagenomics.wiki/tools/blast/evalue#h.4wxezjs2qtog">bit score</a></p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="normalization-of-data">
+<h2><span class="section-number">11.4. </span>Normalization of data<a class="headerlink" href="#normalization-of-data" title="Permalink to this headline"></a></h2>
+<p>First of all we used a custom python script <cite>aro_blastn_parser_v2.py</cite> (available in a dedicated <a class="reference external" href="https://github.com/claottoni/toolbox">repository</a> of Github) to parse the results of the blastn analysis against the HK db in one table. The number of hits normalized for the sequencing depth is also reported in the table.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>amr_blastn_parser_v2.py *.blastn.out &gt; hits_hk_genes.txt
+</pre></div>
+</div>
+<p>Then, we retrieve the <a class="reference external" href="https://card.mcmaster.ca/aro/list">Antibiotic Resistance Ontology</a> (ARO) categories for the hits in the card database by using the <code class="docutils literal notranslate"><span class="pre">aro_index.tsv</span></code> fila downloaded together with the CARD database. We generate a file <code class="docutils literal notranslate"><span class="pre">.index</span></code> for each sample with the custom script <code class="docutils literal notranslate"><span class="pre">aro_blastn_parser.py</span></code>.
+We can use the code below to loop through all the output files of blastn.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ARO_INDEX</span><span class="o">=</span>/path/to/card_nucl_db/aro_index.tsv
+<span class="k">for</span> i <span class="k">in</span> <span class="k">$(</span>find -name <span class="s2">&quot;*aro.blastn.out&quot;</span> -type f<span class="k">)</span>
+<span class="k">do</span>
+  <span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span><span class="k">)</span>
+  <span class="nv">fname</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">%.out</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="nb">echo</span> <span class="s2">&quot;parsing </span><span class="nv">$i</span><span class="s2">&quot;</span>
+  aro_blastn_parser.py <span class="nv">$i</span> <span class="nv">$ARO_INDEX</span> &gt; <span class="k">$(</span>dirname <span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span><span class="k">)</span>/<span class="si">${</span><span class="nv">fname</span><span class="si">}</span>.out.index
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>Multiple hits for each sequence may be reported in the blastn output and they are sorted by decreasing bitscore (last column). We use the following command to sort and uniq the read-names so as to parse a table where only the first read (in case of multiple hits) with the highest bitscore will be returned.
+The final table contains two columns, the read name and the ARO category.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> i <span class="k">in</span> <span class="k">$(</span>find -name <span class="s2">&quot;*.out.index&quot;</span> -type f<span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="nv">$i</span><span class="p">;</span> sort -u -k1,1 <span class="nv">$i</span> <span class="p">|</span> awk -F<span class="s1">&#39;\t&#39;</span> <span class="s1">&#39;BEGIN{OFS=&quot;\t&quot;}{print $1,$4}&#39;</span> &gt; <span class="si">${</span><span class="nv">i</span><span class="si">}</span>.uniq<span class="p">;</span> <span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="amr-data-analysis-in-r">
+<h2><span class="section-number">11.5. </span>AMR data analysis in R<a class="headerlink" href="#amr-data-analysis-in-r" title="Permalink to this headline"></a></h2>
+<p>The following analyses are done in R. First, we parse the <cite>.uniq</cite> files of all the samples in one comprehensive abundance table reporting the number hits for each sample.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">&lt;-</span> <span class="nf">list.files</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s">&quot;*.uniq$&quot;</span><span class="p">,</span> <span class="n">full.names</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="n">files</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="nf">exists</span><span class="p">(</span><span class="s">&quot;tabfinal&quot;</span><span class="p">)){</span>
+    <span class="n">tab</span><span class="o">=</span><span class="nf">read.delim</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">)</span>
+    <span class="n">tabfinal</span> <span class="o">=</span> <span class="nf">table</span><span class="p">(</span><span class="n">tab</span><span class="o">$</span><span class="n">V2</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;parsing &quot;</span><span class="p">,</span> <span class="n">files</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">)]))</span>
+    <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+  <span class="c1"># merge all the others</span>
+  <span class="n">tab</span><span class="o">=</span><span class="nf">read.delim</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">)</span>
+  <span class="n">tabfinal</span> <span class="o">=</span> <span class="nf">merge</span><span class="p">(</span><span class="n">tabfinal</span><span class="p">,</span> <span class="nf">table</span><span class="p">(</span><span class="n">tab</span><span class="o">$</span><span class="n">V2</span><span class="p">),</span> <span class="n">by</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">all</span><span class="o">=</span><span class="bp">T</span><span class="p">)}</span>
+  <span class="c1">#print(paste0(&quot;parsing &quot;, i)</span>
+<span class="p">}</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">tabfinal</span><span class="p">)</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;gene&quot;</span><span class="p">,</span> <span class="n">files</span><span class="p">)</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="n">tabfinal</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&#39;hits_amr_genes.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">,</span> <span class="n">col.names</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">quote</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now that the hits abundance of all the samples against each database are parsed in two tables, we can import them in order to normalize the number of hits in the card database (AMR genes) with the number of hits in the housekeeping genes database.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the tables.</span>
+<span class="n">amr_genes</span> <span class="o">=</span> <span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;hits_amr_genes.txt&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">)</span>
+<span class="n">hk3_genes</span> <span class="o">=</span> <span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;hits_hk_genes.txt&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">)</span>
+<span class="c1"># adjust the layout in the amr_genes table.</span>
+<span class="n">amr_genes</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">amr_genes</span><span class="p">)]</span> <span class="o">&lt;-</span> <span class="m">0</span>
+<span class="n">amr_genes.final</span> <span class="o">=</span> <span class="n">amr_genes</span>
+<span class="nf">row.names</span><span class="p">(</span><span class="n">amr_genes.final</span><span class="p">)</span> <span class="o">=</span> <span class="n">amr_genes.final</span><span class="p">[,</span><span class="m">1</span><span class="p">]</span>
+<span class="n">amr_genes.final</span> <span class="o">=</span> <span class="n">amr_genes.final</span><span class="p">[,</span><span class="m">-1</span><span class="p">]</span>
+<span class="c1"># transpose the amr genes table</span>
+<span class="n">amr_genes.final</span> <span class="o">=</span> <span class="nf">t</span><span class="p">(</span><span class="n">amr_genes.final</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure that the order of the samples in the two tables is exactly the same, if not the results of the normalization will be inconsistent!</p>
+</div>
+<p>Finally we normalize the hits in the AMR genes db with those in HK genes db hits and create a dataframe. Note that the normalized abundance is reported as counts per million (cpm)</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">amr_genes.final.norm</span> <span class="o">=</span> <span class="n">amr_genes.final</span><span class="o">/</span><span class="n">hk3_genes.sorted</span><span class="o">$</span><span class="n">Hits</span><span class="o">*</span><span class="m">1000000</span>
+<span class="n">amr_genes.final.norm</span> <span class="o">=</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">amr_genes.final.norm</span><span class="p">)</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="n">amr_genes.final.norm</span><span class="p">,</span> <span class="s">&quot;dataset_AMR_hk3norm_cpm.tsv&quot;</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">col.names</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can add metadata such as chronological groups or other group identifiers as columns in the dataframe. You can create a vector with the data listed in the same order as the samples, or you can create a file with the data listed as column(s) (column1=Sample, column2=Group).</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># option 1: create a vector</span>
+<span class="n">amr_genes.final.norm</span><span class="o">$</span><span class="n">group</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;group1&quot;</span><span class="p">,</span><span class="s">&quot;group2&quot;</span><span class="p">,</span><span class="s">&quot;group3&quot;</span><span class="p">,</span><span class="s">&quot;etc&quot;</span><span class="p">)</span>
+<span class="c1"># option 2: generate a metadata file (tab-delimited)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;metadata.txt&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">amr_genes.final.norm</span><span class="o">$</span><span class="n">group</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">$</span><span class="n">Group</span>
+</pre></div>
+</div>
+<p>To identify ARO gene families significantly different among the groups we use a Wilcoxon Rank Sum Tests with Benjamini &amp; Hochberg adjusted P-values by selecting the columns in the dataframe corresponding to the gene families (in the example here from column 1 to 33).</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># make wilcoxon test</span>
+<span class="n">wilcox</span> <span class="o">=</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">amr_genes.final.norm</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">33</span><span class="p">)],</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="nf">pairwise.wilcox.test</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">amr_genes.final.norm</span><span class="o">$</span><span class="n">group</span><span class="p">,</span> <span class="n">p.adjust.method</span> <span class="o">=</span> <span class="s">&quot;BH&quot;</span><span class="p">))</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">plyr</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="nf">ldply</span><span class="p">(</span><span class="n">wilcox</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="o">$</span><span class="n">p.value</span><span class="p">)</span>
+<span class="c1"># save table</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s">&quot;dataset_wilcox_test_hk3_norm_full.tsv&quot;</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">col.names</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can generate a multipanel plot with the results using ggplot. First we’ll prepare the data with <code class="docutils literal notranslate"><span class="pre">pivot_longer</span></code>, which will be used to select the gene families to plot (in the example below we plot all the gene families from the first, “ABC-F ATP-binding cassette ribosomal protection protein”, to the last “Rm3 family beta-lactamase” ).</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="c1"># Run pivot longer to prepare the data by including all the gene families to display in the plot.</span>
+<span class="n">df.long</span> <span class="o">&lt;-</span> <span class="n">amr_genes.final.norm</span> <span class="o">%&gt;%</span>
+  <span class="nf">pivot_longer</span><span class="p">(</span><span class="s">&quot;ABC-F ATP-binding cassette ribosomal protection protein&quot;</span><span class="o">:</span><span class="s">&quot;Rm3 family beta-lactamase&quot;</span><span class="p">,</span> <span class="n">names_to</span> <span class="o">=</span> <span class="s">&#39;variable&#39;</span><span class="p">,</span> <span class="n">values_to</span> <span class="o">=</span> <span class="s">&#39;value&#39;</span><span class="p">)</span>
+<span class="c1"># we changed the order for displaying the charts</span>
+<span class="n">df.long</span><span class="o">$</span><span class="n">group</span> <span class="o">&lt;-</span> <span class="nf">factor</span><span class="p">(</span><span class="n">df.long</span><span class="o">$</span><span class="n">group</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;NTC&quot;</span><span class="p">,</span> <span class="s">&quot;Peterborough&quot;</span><span class="p">,</span> <span class="s">&quot;Ireland-Medieval&quot;</span><span class="p">,</span> <span class="s">&quot;UK-18-19th_c.&quot;</span><span class="p">,</span> <span class="s">&quot;Modern&quot;</span><span class="p">))</span>
+<span class="c1"># generate the multipanel plots</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df.long</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">group</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">value</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">group</span><span class="p">))</span> <span class="o">+</span>
+  <span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">lwd</span><span class="o">=</span><span class="m">0.1</span><span class="p">,</span>
+  <span class="n">outlier.size</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span>
+  <span class="n">outlier.stroke</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span>
+  <span class="n">strip.text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">5</span><span class="p">),</span>
+  <span class="n">legend.title</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">colour</span> <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">7</span><span class="p">,</span> <span class="n">face</span> <span class="o">=</span> <span class="s">&quot;bold&quot;</span><span class="p">),</span>
+  <span class="n">legend.text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">colour</span> <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">6</span><span class="p">),</span>
+  <span class="n">axis.line</span> <span class="o">=</span> <span class="nf">element_line</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">0.1</span><span class="p">),</span>
+  <span class="n">axis.ticks</span> <span class="o">=</span> <span class="nf">element_line</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">0.1</span><span class="p">),</span>
+  <span class="n">axis.title.x</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span>
+  <span class="n">axis.text.y</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">4</span><span class="p">),</span>         <span class="c1">#color=&quot;#993333&quot;, face=&quot;bold&quot;, angle=45</span>
+  <span class="n">axis.title.y</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span> <span class="n">size</span> <span class="o">=</span> <span class="m">12</span><span class="p">,</span> <span class="n">face</span> <span class="o">=</span> <span class="s">&quot;bold&quot;</span> <span class="p">))</span> <span class="o">+</span>
+  <span class="c1">#axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +</span>
+  <span class="nf">facet_wrap</span><span class="p">(</span><span class="n">facets</span> <span class="o">=</span> <span class="o">~</span><span class="n">variable</span><span class="p">,</span> <span class="n">scales</span> <span class="o">=</span> <span class="s">&#39;free&#39;</span><span class="p">,</span>
+  <span class="c1">#nrow=8,</span>
+  <span class="n">ncol</span><span class="o">=</span><span class="m">5</span>
+  <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="9_Metagenomic_analysis.html" class="btn btn-neutral float-left" title="10. Analysis of Metagenomic data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Claudio Ottoni.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

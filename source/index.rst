@@ -32,6 +32,7 @@ Contents
    6_VariantsCall
    7_Filtering_SNPs
    9_Metagenomic_analysis
+   10_AMR_analysis
 
 
 
